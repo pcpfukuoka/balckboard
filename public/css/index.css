@@ -256,7 +256,7 @@ html, body, #container {
 	-ms-animation-name: bounceInDown;
 	-o-animation-name: bounceInDown;
 	animation-name: bounceInDown;
-	
+
 	-webkit-animation-timing-function: ease-in;
 	-moz-animation-timing-function: ease-in;
 	-ms-animation-timing-function: ease-in;
@@ -274,7 +274,7 @@ html, body, #container {
      -ms-animation-duration: 1s;
      -o-animation-duration: 1s;
      animation-duration: 1s;
-	 
+
 }
 
 
@@ -340,7 +340,7 @@ html, body, #container {
 	-ms-animation-name: bounceInDown2;
 	-o-animation-name: bounceInDown2;
 	animation-name: bounceInDown2;
-	
+
 	-webkit-animation-timing-function: ease-in;
 	-moz-animation-timing-function: ease-in;
 	-ms-animation-timing-function: ease-in;
@@ -358,7 +358,7 @@ html, body, #container {
      -ms-animation-duration: 1.3s;
      -o-animation-duration: 1.3s;
      animation-duration: 1.3s;
-	 
+
 }
 
 
@@ -424,7 +424,7 @@ html, body, #container {
 	-ms-animation-name: bounceInDown3;
 	-o-animation-name: bounceInDown3;
 	animation-name: bounceInDown3;
-	
+
 	-webkit-animation-timing-function: ease-in;
 	-moz-animation-timing-function: ease-in;
 	-ms-animation-timing-function: ease-in;
