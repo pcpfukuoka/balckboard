@@ -1,21 +1,21 @@
 onAppReady(function(param) {
-	
+
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
 	]);
 	if(msg.length > 0){ alert(msg.join('\n')); }
 
-	
+
 	clock();
-	
+
 	// show images
 	var imgLoadTimer = setTimeout(function(){
 		$('.fadeIn').fadeIn(8000);
 		clearTimeout(imgLoadTimer);
 		imgLoadTimer = null;
 	}, 2000);
-	
+
 	var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
 	var loadedImages = param.loadedImages;
@@ -32,7 +32,7 @@ onAppReady(function(param) {
 	var prevY = 0;
 	var lineWidth = 4;
 	var color = "white";
-
+	/*
 	// Write today's date to chalkboard
 	$(function() {
 		var now = new Date;
@@ -41,7 +41,7 @@ onAppReady(function(param) {
 		$('#monthOnBoard').text(month);
 		$('#dateOnBoard').text(date);
 	});
-	
+	*/
 	var effects = {
 		_audio: {},
 		play: function(type){
@@ -63,7 +63,7 @@ onAppReady(function(param) {
 	};
 	effects._init();
 	effects.play('chimes');
-	
+
 	/*
 	 * extra code
 	 */
@@ -103,11 +103,11 @@ onAppReady(function(param) {
 			secret1.play();
 		}
 	});
-	
-	
+
+
 	/**
 	 * Get the relative position on canvas from position on screen.
-	 * 
+	 *
 	 * @param {Number}
 	 *            x position on screen
 	 * @param {Number}
@@ -123,7 +123,7 @@ onAppReady(function(param) {
 	}
 
 	/**
-	 * Functions of the user's action.
+	 * ユーザーがイベントを発生させた場合の処理
 	 */
 	var COMMAND_OPS = {
 		clear: function(param, share) {
@@ -135,6 +135,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
+
 		mouseMove : function(param, share) {
 			if (!share) {
 				return;
@@ -144,6 +145,7 @@ onAppReady(function(param) {
 				param : param
 			});
 		},
+
 		erase : function(param, share) {
 			// Currently, start parameter is not used.
 			var end = param.end;
@@ -175,18 +177,21 @@ onAppReady(function(param) {
 		}
 	};
 	// UIEvent handling ==========================
+	//キャンバス上書き始めた場合した場合
 	canvas.mousedown(function(e) {
 		drawing = true;
 		var pos = posOnCanvas(e.pageX, e.pageY);
 		prevX = pos.x;
 		prevY = pos.y;
-		
+
 		if(!eracing){ effects.play('chalkMouseDown'); }
 	});
+	//キャンバス上に書くのが終了した場合
 	canvas.mouseup(function(e) {
 		drawing = false;
 		e.stopPropagation();
 	});
+	//キャンバスの上でマウスが動いた場合にpx位置を取得
 	canvas.mousemove(function(e) {
 		var curPos = posOnCanvas(e.pageX, e.pageY);
 		var currentX = curPos.x;
@@ -247,7 +252,7 @@ onAppReady(function(param) {
 
 	/**
 	 * Send command to server.
-	 * 
+	 *
 	 * @param {Object}
 	 *            command
 	 */
@@ -316,7 +321,7 @@ onAppReady(function(param) {
 			socket.emit('command', command);
 		}
 	})();
-	
+
 	function clock(){
 		var canvas = $('#clock-hands');
 		var ctx = canvas[0].getContext('2d');
@@ -328,13 +333,13 @@ onAppReady(function(param) {
 			h: canvas.height()
 		};
 		conf.r = Math.min(conf.x, conf.y) / 0.9;
-		
+
 		var interval = setInterval(display, 1000);
-		
+
 		function display(){
 			// clear canvas
 			ctx.clearRect(0, 0, conf.w, conf.h);
-			
+
 			var now = new Date();
 			var time = {
 				h: now.getHours() % 12,
@@ -360,16 +365,16 @@ onAppReady(function(param) {
 				width: 1,
 				color: '#666666'
 			}
-			
+
 			drawHand(hour);
 			drawHand(minute);
 			drawHand(second);
 		}
-		
+
 		function drawHand(hand){
 			var x = conf.x + hand.height * Math.cos(hand.angle);
 			var y = conf.y - hand.height * Math.sin(hand.angle);
-			
+
 			ctx.strokeStyle = hand.color;
 			ctx.lineWidth = hand.width;
 			ctx.lineCap = 'round';
