@@ -4,10 +4,11 @@ onAppReady(function(param) {
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
 	]);
-	if(msg.length > 0){ alert(msg.join('\n')); }
+	if(msg.length > 0){
+		alert(msg.join('\n')); }
 
 
-	clock();
+	//clock();
 
 	// show images
 	var imgLoadTimer = setTimeout(function(){
@@ -26,6 +27,7 @@ onAppReady(function(param) {
 		green : ctx.createPattern(loadedImages[3], 'repeat'),
 		yellow : ctx.createPattern(loadedImages[4], 'repeat')
 	};
+	//書く前の初期値設定
 	var drawing = false;
 	var eracing = false;
 	var prevX = 0;
@@ -67,6 +69,7 @@ onAppReady(function(param) {
 	/*
 	 * extra code
 	 */
+	/*
 	$('#clock-hands').click(function(){
 		var _self = this;
 		var cnt = $(this).data('cnt') || 0;
@@ -103,10 +106,10 @@ onAppReady(function(param) {
 			secret1.play();
 		}
 	});
-
+	*/
 
 	/**
-	 * Get the relative position on canvas from position on screen.
+	 * 画面の位置からキャンバスの相対位置を取得します
 	 *
 	 * @param {Number}
 	 *            x position on screen
@@ -114,6 +117,7 @@ onAppReady(function(param) {
 	 *            y position on screen
 	 * @returns {Object} Position object which contains x, y properties.
 	 */
+	//キャンバスの相対位置を取得
 	function posOnCanvas(x, y) {
 		var canvasPos = canvas.offset();
 		return {
@@ -124,6 +128,7 @@ onAppReady(function(param) {
 
 	/**
 	 * ユーザーがイベントを発生させた場合の処理
+	 * COMMAND_OPS=連想配列：添え字ごとに処理を格納
 	 */
 	var COMMAND_OPS = {
 		clear: function(param, share) {
@@ -158,7 +163,8 @@ onAppReady(function(param) {
 			}
 		},
 		drawLine : function(param, share) {
-			var start = param.start, end = param.end;
+			var start = param.start;
+			var end = param.end;
 			ctx.strokeStyle = LINE_PATTERNS[param.color];
 			ctx.lineWidth = lineWidth;
 			ctx.lineJoin = "round";
@@ -178,8 +184,9 @@ onAppReady(function(param) {
 	};
 	// UIEvent handling ==========================
 	//キャンバス上書き始めた場合した場合
-	canvas.mousedown(function(e) {
+	canvas.mouedowsn(function(e) {
 		drawing = true;
+		//現在位置を取得
 		var pos = posOnCanvas(e.pageX, e.pageY);
 		prevX = pos.x;
 		prevY = pos.y;
@@ -204,10 +211,13 @@ onAppReady(function(param) {
 			eracing : eracing
 		}, true);
 		if (!drawing) {
+			//描画フラグがfalseの場合描画処理を終了させる
 			return;
 		}
 		if (eracing) {
+			//黒板消しフラグがtrueの時の処理
 			COMMAND_OPS.erase({
+				//startの座標とendの座標を設定しeraseの中にある関数を実行
 				start : {
 					x : prevX,
 					y : prevY
@@ -233,19 +243,26 @@ onAppReady(function(param) {
 		prevX = currentX;
 		prevY = currentY;
 	});
-
+	//マウスが離された場合
 	$(document).mouseup(function(e) {
+		//描画フラグをfalseに変更
 		drawing = false;
 		$("#colorPalette .color").last().click();
 	});
+	canvas.
+	//チョークボタンをクリックされた場合の処理
 	$("#colorPalette .color").click(
 			function(e) {
+				//黒板消しフラグをfalseにする
 				eracing = false;
+				//選択されているチョークの色をcolorに格納
 				color = $(this).data("color");
 				canvas.css("cursor", "url(images/pointer_" + color
 						+ ".cur), pointer");
 			}).last().click();
+	//黒板消しをクリックされた場合の処理
 	$("#eraser").click(function(e) {
+		//黒板消しフラグをtrueにする
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
@@ -322,6 +339,7 @@ onAppReady(function(param) {
 		}
 	})();
 
+	/*
 	function clock(){
 		var canvas = $('#clock-hands');
 		var ctx = canvas[0].getContext('2d');
@@ -335,7 +353,7 @@ onAppReady(function(param) {
 		conf.r = Math.min(conf.x, conf.y) / 0.9;
 
 		var interval = setInterval(display, 1000);
-
+		*/
 		function display(){
 			// clear canvas
 			ctx.clearRect(0, 0, conf.w, conf.h);
