@@ -1,6 +1,7 @@
 var express = require('express');
-var app = express.createServer();
-var io = require('socket.io').listen(app);
+var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 //	  io.set('transports', [
 //	      'websocket'
@@ -38,15 +39,15 @@ function storeCommand(command) {
 }
 
 var sockets = io.of('/chalkboard').on('connection', function(socket) {
-	// 累積したコマンドをクライアントに向けて送る
+	// 邏ｯ遨阪＠縺溘さ繝槭Φ繝峨ｒ繧ｯ繝ｩ繧､繧｢繝ｳ繝医↓蜷代¢縺ｦ騾√ｋ
 	socket.emit('init', commands);
 	socket.on('command', function(command) {
 		command.sessionId = socket.id;
-		// mouseMoveイベントは保存しない
+		// mouseMove繧､繝吶Φ繝医�菫晏ｭ倥＠縺ｪ縺�
 		if (command.type !== 'mouseMove') {
 			storeCommand(command);
 		}
-		// キャンバスをクリアする際、コマンド履歴も全てクリア
+		// 繧ｭ繝｣繝ｳ繝舌せ繧偵け繝ｪ繧｢縺吶ｋ髫帙�繧ｳ繝槭Φ繝牙ｱ･豁ｴ繧ょ�縺ｦ繧ｯ繝ｪ繧｢
 		if (command.type === 'clear') {
 			commands = [];
 		}
