@@ -1,0 +1,9 @@
+{
+   "name": "websocket-blackboard",
+   "version": "0.0.0",
+   "description": "",
+   "dependencies": {
+   	"express": "2.5.6",
+	"socket.io": "0.8.7"
+   }
+}
