@@ -197,9 +197,9 @@ onAppReady(function(param) {
 		prevX = mouseX;
 		prevY = mouseY;
 
-		if(!eracing){ effects.play('calkMouseDown')}
-	})
-	//キャンバス上書き始めた場合した場合
+		if(!eracing){ effects.play('calkMouseDown');}
+
+		//キャンバス上書き始めた場合した場合
 	canvas.mousedown(function(e) {
 		drawing = true;
 		//現在位置を取得
@@ -266,12 +266,12 @@ onAppReady(function(param) {
 					x : currentX,
 					y : currentY
 				}
-			}, true)
+			}, true);
 		}
 		prevX = currentX;
 		prevY = currentY;
 	});
-		}
+		});
 	//キャンバスの上でマウスが動いた場合にpx位置を取得
 	canvas.mouseMove(function(e) {
 		var curPos = posOnCanvas(e.pageX, e.pageY);
@@ -312,7 +312,7 @@ onAppReady(function(param) {
 					x : currentX,
 					y : currentY
 				}
-			}, true)
+			}, true);
 		}
 		prevX = currentX;
 		prevY = currentY;
@@ -436,10 +436,10 @@ onAppReady(function(param) {
 
 		sendCommand = function(command) {
 			socket.emit('command', command);
-		}
+		};
 	})();
 
-	/*
+
 	function clock(){
 		var canvas = $('#clock-hands');
 		var ctx = canvas[0].getContext('2d');
@@ -453,7 +453,7 @@ onAppReady(function(param) {
 		conf.r = Math.min(conf.x, conf.y) / 0.9;
 
 		var interval = setInterval(display, 1000);
-		*/
+
 		function display(){
 			// clear canvas
 			ctx.clearRect(0, 0, conf.w, conf.h);
@@ -463,7 +463,7 @@ onAppReady(function(param) {
 				h: now.getHours() % 12,
 				m: now.getMinutes(),
 				s: now.getSeconds()
-			}
+			};
 			// hour-hand
 			var hour = {
 				angle: Math.PI * 2 * ( 3 - ( time.h + time.m / 60)) /12,
@@ -482,7 +482,7 @@ onAppReady(function(param) {
 				height: conf.r * 0.6,
 				width: 1,
 				color: '#666666'
-			}
+			};
 
 			drawHand(hour);
 			drawHand(minute);
