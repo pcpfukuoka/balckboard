@@ -1,4 +1,8 @@
 onAppReady(function(param) {
+	//スマホ用イベントの追加
+	document.addEventListener("touchmove");
+	document.addEventListener("touchend");
+	document.addEventListener("touchstart");
 
 	var msg = modernizr([
 		'canvas', 'websockets',
@@ -183,8 +187,20 @@ onAppReady(function(param) {
 		}
 	};
 	// UIEvent handling ==========================
+	//キャンバス上にスマホから書き始めた場合
+
+	canvas.touchstart(function(e){
+		drawing = true;
+		//現在位置を取得
+		mouseX = event.touches[0].pageX; //B 最初にタッチされた指のX座標
+        mouseY = event.touches[0].pageY; //C 最初にタッチされた指のY座標
+		prevX = mouseX;
+		prevY = mouseY;
+
+		if(!eracing){ effects.play('calkMouseDown')}
+	})
 	//キャンバス上書き始めた場合した場合
-	canvas.mouedowsn(function(e) {
+	canvas.mousedown(function(e) {
 		drawing = true;
 		//現在位置を取得
 		var pos = posOnCanvas(e.pageX, e.pageY);
@@ -193,13 +209,71 @@ onAppReady(function(param) {
 
 		if(!eracing){ effects.play('chalkMouseDown'); }
 	});
+
+	///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////
+
+	//スマホからキャンバス上に書くのが終了した場合
+	canvas.touchend(function(e) {
+		drawing = false;
+		e.stopPropagation();
+	});
+
 	//キャンバス上に書くのが終了した場合
 	canvas.mouseup(function(e) {
 		drawing = false;
 		e.stopPropagation();
 	});
+
+	////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////
+
+	//スマホからキャンバス上にマウスが動いた場合
+	canvas.touchmove(function(e) {
+		var curPos = posOnCanvas(e.pageX, e.pageY);
+		var currentX = curPos.x;
+		var currentY = curPos.y;
+
+		COMMAND_OPS.mouseMove({
+			x : currentX,
+			y : currentY,
+			color : color,
+			eracing : eracing
+		}, true);
+		if(!drawing){
+			return;
+		}
+		if(eracing){
+			COMMAND_OPS.erase({
+				//startの座標とendの座標を設定しeraseの中にある関数を実行
+				start : {
+					x : prevX,
+					y : prevY
+				},
+				end : {
+					x : currentX,
+					y : currentY
+				}
+			}, true);
+		} else {
+			COMMAND_OPS.drawLine({
+				color : color,
+				start : {
+					x : prevX,
+					y : prevY
+				},
+				end : {
+					x : currentX,
+					y : currentY
+				}
+			}, true)
+		}
+		prevX = currentX;
+		prevY = currentY;
+	});
+		}
 	//キャンバスの上でマウスが動いた場合にpx位置を取得
-	canvas.mousemove(function(e) {
+	canvas.mouseMove(function(e) {
 		var curPos = posOnCanvas(e.pageX, e.pageY);
 		var currentX = curPos.x;
 		var currentY = curPos.y;
@@ -243,13 +317,39 @@ onAppReady(function(param) {
 		prevX = currentX;
 		prevY = currentY;
 	});
+
+	///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////
+
+	//スマホから指がはなれば場合
+	$(document).touchend(function(e) {
+		//描画フラグをfalseに変更
+		drawing = false;
+		$("#colorPalette .color").last().click();
+	});
+
 	//マウスが離された場合
 	$(document).mouseup(function(e) {
 		//描画フラグをfalseに変更
 		drawing = false;
 		$("#colorPalette .color").last().click();
 	});
-	canvas.
+
+	/////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////
+
+	//スマホからチョークボタンをクリックされた場合の処理
+	$("#colorPalette .color").click(
+			function(e) {
+				//黒板消しフラグをfalseにする
+				eracing = false;
+				//選択されているチョークの色をcolorに格納
+				color = $(this).data("color");
+				canvas.css("cursor", "url(images/pointer_" + color
+						+ ".cur), pointer");
+			}).last().click();
+
+
 	//チョークボタンをクリックされた場合の処理
 	$("#colorPalette .color").click(
 			function(e) {
