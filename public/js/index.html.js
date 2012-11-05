@@ -1,9 +1,10 @@
 onAppReady(function(param) {
 	//スマホ用イベントの追加
+	/*
 	document.addEventListener("touchmove");
 	document.addEventListener("touchend");
 	document.addEventListener("touchstart");
-
+	*/
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
@@ -187,6 +188,7 @@ onAppReady(function(param) {
 		}
 	};
 	// UIEvent handling ==========================
+	/*
 	//キャンバス上にスマホから書き始めた場合
 
 	canvas.touchstart(function(e){
@@ -198,6 +200,7 @@ onAppReady(function(param) {
 		prevY = mouseY;
 
 		if(!eracing){ effects.play('calkMouseDown');}
+	*/
 
 		//キャンバス上書き始めた場合した場合
 	canvas.mousedown(function(e) {
@@ -213,11 +216,13 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////
 
+	/*
 	//スマホからキャンバス上に書くのが終了した場合
 	canvas.touchend(function(e) {
 		drawing = false;
 		e.stopPropagation();
 	});
+	*/
 
 	//キャンバス上に書くのが終了した場合
 	canvas.mouseup(function(e) {
@@ -228,6 +233,7 @@ onAppReady(function(param) {
 	////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////
 
+	/*
 	//スマホからキャンバス上にマウスが動いた場合
 	canvas.touchmove(function(e) {
 		var curPos = posOnCanvas(e.pageX, e.pageY);
@@ -272,6 +278,7 @@ onAppReady(function(param) {
 		prevY = currentY;
 	});
 		});
+	*/
 	//キャンバスの上でマウスが動いた場合にpx位置を取得
 	canvas.mouseMove(function(e) {
 		var curPos = posOnCanvas(e.pageX, e.pageY);
@@ -321,13 +328,14 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////
 
+	/*
 	//スマホから指がはなれば場合
 	$(document).touchend(function(e) {
 		//描画フラグをfalseに変更
 		drawing = false;
 		$("#colorPalette .color").last().click();
 	});
-
+	*/
 	//マウスが離された場合
 	$(document).mouseup(function(e) {
 		//描画フラグをfalseに変更
@@ -338,6 +346,7 @@ onAppReady(function(param) {
 	/////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////
 
+	/*
 	//スマホからチョークボタンをクリックされた場合の処理
 	$("#colorPalette .color").click(
 			function(e) {
@@ -349,7 +358,7 @@ onAppReady(function(param) {
 						+ ".cur), pointer");
 			}).last().click();
 
-
+	*/
 	//チョークボタンをクリックされた場合の処理
 	$("#colorPalette .color").click(
 			function(e) {
@@ -360,6 +369,7 @@ onAppReady(function(param) {
 				canvas.css("cursor", "url(images/pointer_" + color
 						+ ".cur), pointer");
 			}).last().click();
+
 	//黒板消しをクリックされた場合の処理
 	$("#eraser").click(function(e) {
 		//黒板消しフラグをtrueにする
