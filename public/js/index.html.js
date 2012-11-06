@@ -1,21 +1,21 @@
 onAppReady(function(param) {
-	
+
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
 	]);
 	if(msg.length > 0){ alert(msg.join('\n')); }
 
-	
+
 	clock();
-	
+
 	// show images
 	var imgLoadTimer = setTimeout(function(){
 		$('.fadeIn').fadeIn(8000);
 		clearTimeout(imgLoadTimer);
 		imgLoadTimer = null;
 	}, 2000);
-	
+
 	var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
 	var loadedImages = param.loadedImages;
@@ -26,6 +26,7 @@ onAppReady(function(param) {
 		green : ctx.createPattern(loadedImages[3], 'repeat'),
 		yellow : ctx.createPattern(loadedImages[4], 'repeat')
 	};
+	//キャンバスの初期値を設定
 	var drawing = false;
 	var eracing = false;
 	var prevX = 0;
@@ -33,7 +34,7 @@ onAppReady(function(param) {
 	var lineWidth = 4;
 	var color = "white";
 
-	// Write today's date to chalkboard
+	// 現在の日付を黒板に書く
 	$(function() {
 		var now = new Date;
 		var month = now.getMonth() + 1;
@@ -41,7 +42,7 @@ onAppReady(function(param) {
 		$('#monthOnBoard').text(month);
 		$('#dateOnBoard').text(date);
 	});
-	
+
 	var effects = {
 		_audio: {},
 		play: function(type){
@@ -63,7 +64,7 @@ onAppReady(function(param) {
 	};
 	effects._init();
 	effects.play('chimes');
-	
+
 	/*
 	 * extra code
 	 */
@@ -103,17 +104,18 @@ onAppReady(function(param) {
 			secret1.play();
 		}
 	});
-	
-	
+
+
 	/**
 	 * Get the relative position on canvas from position on screen.
-	 * 
+	 *
 	 * @param {Number}
 	 *            x position on screen
 	 * @param {Number}
 	 *            y position on screen
 	 * @returns {Object} Position object which contains x, y properties.
 	 */
+	//現在位置を相対的に設定
 	function posOnCanvas(x, y) {
 		var canvasPos = canvas.offset();
 		return {
@@ -123,9 +125,11 @@ onAppReady(function(param) {
 	}
 
 	/**
-	 * Functions of the user's action.
+	 *ユーザーがイベントを発生させた場合の処理
+	 *COMMAND_OPSはイベントごとに処理を格納する連想配列
 	 */
 	var COMMAND_OPS = {
+		//初期の状態
 		clear: function(param, share) {
 			canvas[0].width = canvas[0].width;
 			if (share) {
@@ -135,6 +139,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
+		//マウスが移動した場合
 		mouseMove : function(param, share) {
 			if (!share) {
 				return;
@@ -144,6 +149,7 @@ onAppReady(function(param) {
 				param : param
 			});
 		},
+		//黒板消し
 		erase : function(param, share) {
 			// Currently, start parameter is not used.
 			var end = param.end;
@@ -155,6 +161,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
+		//線を引く
 		drawLine : function(param, share) {
 			var start = param.start, end = param.end;
 			ctx.strokeStyle = LINE_PATTERNS[param.color];
@@ -175,12 +182,17 @@ onAppReady(function(param) {
 		}
 	};
 	// UIEvent handling ==========================
+
+	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
+		//描画フラグをtrueにする
 		drawing = true;
+		//キャンバス上の現在位置をposに格納
 		var pos = posOnCanvas(e.pageX, e.pageY);
+		//posの位置を処理の開始位置（before）として設定
 		prevX = pos.x;
 		prevY = pos.y;
-		
+
 		if(!eracing){ effects.play('chalkMouseDown'); }
 	});
 	canvas.mouseup(function(e) {
@@ -188,7 +200,9 @@ onAppReady(function(param) {
 		e.stopPropagation();
 	});
 	canvas.mousemove(function(e) {
+		//動いた位置をcurPosに格納
 		var curPos = posOnCanvas(e.pageX, e.pageY);
+		//動いた位置を最新の位置であるcurrentに格納
 		var currentX = curPos.x;
 		var currentY = curPos.y;
 
@@ -199,8 +213,10 @@ onAppReady(function(param) {
 			eracing : eracing
 		}, true);
 		if (!drawing) {
+			//描画フラグがfalseの場合はなのもしない
 			return;
 		}
+		//黒板消しの場合
 		if (eracing) {
 			COMMAND_OPS.erase({
 				start : {
@@ -212,6 +228,7 @@ onAppReady(function(param) {
 					y : currentY
 				}
 			}, true);
+		//線を引く場合
 		} else {
 			COMMAND_OPS.drawLine({
 				color : color,
@@ -228,26 +245,32 @@ onAppReady(function(param) {
 		prevX = currentX;
 		prevY = currentY;
 	});
-
+	//キャンバス上から筆が上げられた場合
 	$(document).mouseup(function(e) {
+		//描画フラグをfalseにする
 		drawing = false;
 		$("#colorPalette .color").last().click();
 	});
+	//チョークをクリックされた場合
 	$("#colorPalette .color").click(
 			function(e) {
+				//消しゴムフラグをfalseにする
 				eracing = false;
+				//今の色をcolorに格納
 				color = $(this).data("color");
 				canvas.css("cursor", "url(images/pointer_" + color
 						+ ".cur), pointer");
 			}).last().click();
+	//黒板消しをクリックされた場合
 	$("#eraser").click(function(e) {
+		//黒板消しフラグをtrueにする
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
 
 	/**
-	 * Send command to server.
-	 * 
+	 * ここより下はサーバにデータを送る処理
+	 *
 	 * @param {Object}
 	 *            command
 	 */
@@ -316,7 +339,7 @@ onAppReady(function(param) {
 			socket.emit('command', command);
 		}
 	})();
-	
+
 	function clock(){
 		var canvas = $('#clock-hands');
 		var ctx = canvas[0].getContext('2d');
@@ -328,13 +351,13 @@ onAppReady(function(param) {
 			h: canvas.height()
 		};
 		conf.r = Math.min(conf.x, conf.y) / 0.9;
-		
+
 		var interval = setInterval(display, 1000);
-		
+
 		function display(){
 			// clear canvas
 			ctx.clearRect(0, 0, conf.w, conf.h);
-			
+
 			var now = new Date();
 			var time = {
 				h: now.getHours() % 12,
@@ -360,16 +383,16 @@ onAppReady(function(param) {
 				width: 1,
 				color: '#666666'
 			}
-			
+
 			drawHand(hour);
 			drawHand(minute);
 			drawHand(second);
 		}
-		
+
 		function drawHand(hand){
 			var x = conf.x + hand.height * Math.cos(hand.angle);
 			var y = conf.y - hand.height * Math.sin(hand.angle);
-			
+
 			ctx.strokeStyle = hand.color;
 			ctx.lineWidth = hand.width;
 			ctx.lineCap = 'round';
