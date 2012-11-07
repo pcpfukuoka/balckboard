@@ -63,7 +63,7 @@ onAppReady(function(param) {
 		}
 	};
 	effects._init();
-	effects.play('chimes');
+	//effects.play('chimes');
 
 	/*
 	 * extra code
