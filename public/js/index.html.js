@@ -198,6 +198,7 @@ onAppReady(function(param) {
 
 	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
+		console.log("mousedown");
 		//描画フラグをtrueにする
 		drawing = true;
 		//キャンバス上の現在位置をposに格納
