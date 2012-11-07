@@ -330,12 +330,25 @@ onAppReady(function(param) {
 		prevY = currentY;
 	});
 
+
 	//画面上から筆が上げられた場合
 	$(document).mouseup(function(e) {
 		//描画フラグをfalseにする
 		drawing = false;
 		$("#colorPalette .color").last().click();
 	});
+	///////////////////////////////////////////////////////////////////////////////////
+	/** 				 ここから黒板の付随機能										**/
+	///////////////////////////////////////////////////////////////////////////////////
+
+	$("#colorPalette .color").bind('touchstart', function(e) {
+	  //消しゴムフラグをfalseにする
+		eracing = false;
+		//今の色をcolorに格納
+		color = $(this).data("color");
+		canvas.css("cursor", "url(images/pointer_" + color
+				+ ".cur), pointer");
+	}).last().click();
 
 	//チョークをクリックされた場合
 	$("#colorPalette .color").click(
