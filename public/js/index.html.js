@@ -242,7 +242,11 @@ onAppReady(function(param) {
 					x : currentX,
 					y : currentY
 				}
-	})
+	}, true)
+		}
+		prevX = currentX;
+		prevY = currentY;
+	});
 	canvas.mousemove(function(e) {
 		//動いた位置をcurPosに格納
 		var curPos = posOnCanvas(e.pageX, e.pageY);
