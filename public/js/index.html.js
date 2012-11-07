@@ -232,7 +232,7 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 
 	//各種端末の座標が移動した場合の処理
-	 document.addEventListener("touchmove", function(event){ //A タッチムーブイベント
+	 document.addEventListener("touchmove", function(e){ //A タッチムーブイベント
 		 //画面をずらさないようにする
 		 event.preventDefault();
 		 //動いた位置（現在位置）をcurPosに格納
@@ -253,6 +253,7 @@ onAppReady(function(param) {
 			}
 			//黒板消しの場合
 			if (eracing) {
+
 				COMMAND_OPS.erase({
 					start : {
 						x : prevX,
@@ -265,6 +266,7 @@ onAppReady(function(param) {
 				}, true);
 			//線を引く場合
 			} else {
+				console.log("drawline");
 				COMMAND_OPS.drawLine({
 					color : color,
 					start : {
@@ -275,7 +277,7 @@ onAppReady(function(param) {
 						x : currentX,
 						y : currentY
 					}
-	    }, false)
+	    }, false);
 			}
 			//beforeの座標の更新
 			prevX = currentX;
