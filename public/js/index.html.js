@@ -201,7 +201,8 @@ onAppReady(function(param) {
 	});
 
 	   document.addEventListener("touchmove", function(event){ //A タッチムーブイベント
-			//動いた位置をcurPosに格納
+		   event.preventDefault();
+		   //動いた位置をcurPosに格納
 			var curPos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
 			//動いた位置を最新の位置であるcurrentに格納
 			var currentX = curPos.x;
