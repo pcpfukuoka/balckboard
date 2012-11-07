@@ -26,7 +26,8 @@ onAppReady(function(param) {
 		green : ctx.createPattern(loadedImages[3], 'repeat'),
 		yellow : ctx.createPattern(loadedImages[4], 'repeat')
 	};
-	//ƒLƒƒƒ“ƒoƒX‚Ì‰Šú’l‚ğİ’è
+
+	//ã‚­ãƒ£ãƒ³ãƒã‚¹ã®åˆæœŸå€¤ã‚’è¨­å®š
 	var drawing = false;
 	var eracing = false;
 	var prevX = 0;
@@ -34,7 +35,7 @@ onAppReady(function(param) {
 	var lineWidth = 4;
 	var color = "white";
 
-	// Œ»İ‚Ì“ú•t‚ğ•”Â‚É‘‚­
+	// ç¾åœ¨ã®æ—¥ä»˜ã‚’é»’æ¿ã«æ›¸ã
 	$(function() {
 		var now = new Date;
 		var month = now.getMonth() + 1;
@@ -115,7 +116,7 @@ onAppReady(function(param) {
 	 *            y position on screen
 	 * @returns {Object} Position object which contains x, y properties.
 	 */
-	//Œ»İˆÊ’u‚ğ‘Š‘Î“I‚Éİ’è
+	//ç¾åœ¨ä½ç½®ã‚’ç›¸å¯¾çš„ã«è¨­å®š
 	function posOnCanvas(x, y) {
 		var canvasPos = canvas.offset();
 		return {
@@ -125,11 +126,11 @@ onAppReady(function(param) {
 	}
 
 	/**
-	 *ƒ†[ƒU[‚ªƒCƒxƒ“ƒg‚ğ”­¶‚³‚¹‚½ê‡‚Ìˆ—
-	 *COMMAND_OPS‚ÍƒCƒxƒ“ƒg‚²‚Æ‚Éˆ—‚ğŠi”[‚·‚é˜A‘z”z—ñ
+	 *ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºç”Ÿã•ã›ãŸå ´åˆã®å‡¦ç†
+	 *COMMAND_OPSã¯ã‚¤ãƒ™ãƒ³ãƒˆã”ã¨ã«å‡¦ç†ã‚’æ ¼ç´ã™ã‚‹é€£æƒ³é…åˆ—
 	 */
 	var COMMAND_OPS = {
-		//‰Šú‚Ìó‘Ô
+		//åˆæœŸã®çŠ¶æ…‹
 		clear: function(param, share) {
 			canvas[0].width = canvas[0].width;
 			if (share) {
@@ -139,7 +140,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//ƒ}ƒEƒX‚ªˆÚ“®‚µ‚½ê‡
+		//ãƒã‚¦ã‚¹ãŒç§»å‹•ã—ãŸå ´åˆ
 		mouseMove : function(param, share) {
 			if (!share) {
 				return;
@@ -149,7 +150,7 @@ onAppReady(function(param) {
 				param : param
 			});
 		},
-		//•”ÂÁ‚µ
+		//é»’æ¿æ¶ˆã—
 		erase : function(param, share) {
 			// Currently, start parameter is not used.
 			var end = param.end;
@@ -161,7 +162,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//ü‚ğˆø‚­
+		//ç·šã‚’å¼•ã
 		drawLine : function(param, share) {
 			var start = param.start, end = param.end;
 			ctx.strokeStyle = LINE_PATTERNS[param.color];
@@ -183,13 +184,13 @@ onAppReady(function(param) {
 	};
 	// UIEvent handling ==========================
 
-	//ƒLƒƒƒ“ƒoƒXã‚É•M‚ª‰º‚³‚ê‚½ê‡
+	//ã‚­ãƒ£ãƒ³ãƒã‚¹ä¸Šã«ç­†ãŒä¸‹ã•ã‚ŒãŸå ´åˆ
 	canvas.mousedown(function(e) {
-		//•`‰æƒtƒ‰ƒO‚ğtrue‚É‚·‚é
+		//æç”»ãƒ•ãƒ©ã‚°ã‚’trueã«ã™ã‚‹
 		drawing = true;
-		//ƒLƒƒƒ“ƒoƒXã‚ÌŒ»İˆÊ’u‚ğpos‚ÉŠi”[
+		//ã‚­ãƒ£ãƒ³ãƒã‚¹ä¸Šã®ç¾åœ¨ä½ç½®ã‚’posã«æ ¼ç´
 		var pos = posOnCanvas(e.pageX, e.pageY);
-		//pos‚ÌˆÊ’u‚ğˆ—‚ÌŠJnˆÊ’uibeforej‚Æ‚µ‚Äİ’è
+		//posã®ä½ç½®ã‚’å‡¦ç†ã®é–‹å§‹ä½ç½®ï¼ˆbeforeï¼‰ã¨ã—ã¦è¨­å®š
 		prevX = pos.x;
 		prevY = pos.y;
 
@@ -200,9 +201,9 @@ onAppReady(function(param) {
 		e.stopPropagation();
 	});
 	canvas.mousemove(function(e) {
-		//“®‚¢‚½ˆÊ’u‚ğcurPos‚ÉŠi”[
+		//å‹•ã„ãŸä½ç½®ã‚’curPosã«æ ¼ç´
 		var curPos = posOnCanvas(e.pageX, e.pageY);
-		//“®‚¢‚½ˆÊ’u‚ğÅV‚ÌˆÊ’u‚Å‚ ‚écurrent‚ÉŠi”[
+		//å‹•ã„ãŸä½ç½®ã‚’æœ€æ–°ã®ä½ç½®ã§ã‚ã‚‹currentã«æ ¼ç´
 		var currentX = curPos.x;
 		var currentY = curPos.y;
 
@@ -213,10 +214,10 @@ onAppReady(function(param) {
 			eracing : eracing
 		}, true);
 		if (!drawing) {
-			//•`‰æƒtƒ‰ƒO‚ªfalse‚Ìê‡‚Í‚È‚Ì‚à‚µ‚È‚¢
+			//æç”»ãƒ•ãƒ©ã‚°ãŒfalseã®å ´åˆã¯ãªã®ã‚‚ã—ãªã„
 			return;
 		}
-		//•”ÂÁ‚µ‚Ìê‡
+		//é»’æ¿æ¶ˆã—ã®å ´åˆ
 		if (eracing) {
 			COMMAND_OPS.erase({
 				start : {
@@ -228,7 +229,7 @@ onAppReady(function(param) {
 					y : currentY
 				}
 			}, true);
-		//ü‚ğˆø‚­ê‡
+		//ç·šã‚’å¼•ãå ´åˆ
 		} else {
 			COMMAND_OPS.drawLine({
 				color : color,
@@ -245,31 +246,31 @@ onAppReady(function(param) {
 		prevX = currentX;
 		prevY = currentY;
 	});
-	//ƒLƒƒƒ“ƒoƒXã‚©‚ç•M‚ªã‚°‚ç‚ê‚½ê‡
+	//ã‚­ãƒ£ãƒ³ãƒã‚¹ä¸Šã‹ã‚‰ç­†ãŒä¸Šã’ã‚‰ã‚ŒãŸå ´åˆ
 	$(document).mouseup(function(e) {
-		//•`‰æƒtƒ‰ƒO‚ğfalse‚É‚·‚é
+		//æç”»ãƒ•ãƒ©ã‚°ã‚’falseã«ã™ã‚‹
 		drawing = false;
 		$("#colorPalette .color").last().click();
 	});
-	//ƒ`ƒ‡[ƒN‚ğƒNƒŠƒbƒN‚³‚ê‚½ê‡
+	//ãƒãƒ§ãƒ¼ã‚¯ã‚’ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸå ´åˆ
 	$("#colorPalette .color").click(
 			function(e) {
-				//Á‚µƒSƒ€ƒtƒ‰ƒO‚ğfalse‚É‚·‚é
+				//æ¶ˆã—ã‚´ãƒ ãƒ•ãƒ©ã‚°ã‚’falseã«ã™ã‚‹
 				eracing = false;
-				//¡‚ÌF‚ğcolor‚ÉŠi”[
+				//ä»Šã®è‰²ã‚’colorã«æ ¼ç´
 				color = $(this).data("color");
 				canvas.css("cursor", "url(images/pointer_" + color
 						+ ".cur), pointer");
 			}).last().click();
-	//•”ÂÁ‚µ‚ğƒNƒŠƒbƒN‚³‚ê‚½ê‡
+	//é»’æ¿æ¶ˆã—ã‚’ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸå ´åˆ
 	$("#eraser").click(function(e) {
-		//•”ÂÁ‚µƒtƒ‰ƒO‚ğtrue‚É‚·‚é
+		//é»’æ¿æ¶ˆã—ãƒ•ãƒ©ã‚°ã‚’trueã«ã™ã‚‹
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
 
 	/**
-	 * ‚±‚±‚æ‚è‰º‚ÍƒT[ƒo‚Éƒf[ƒ^‚ğ‘—‚éˆ—
+	 * ã“ã“ã‚ˆã‚Šä¸‹ã¯ã‚µãƒ¼ãƒã«ãƒ‡ãƒ¼ã‚¿ã‚’é€ã‚‹å‡¦ç†
 	 *
 	 * @param {Object}
 	 *            command
