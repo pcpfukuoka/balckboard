@@ -360,6 +360,13 @@ onAppReady(function(param) {
 				canvas.css("cursor", "url(images/pointer_" + color
 						+ ".cur), pointer");
 			}).last().click();
+
+	$("#eraser").bind('touchstart', function(e) {
+		//黒板消しフラグをtrueにする
+		eracing = true;
+		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
+		});
+
 	//黒板消しをクリックされた場合
 	$("#eraser").click(function(e) {
 		//黒板消しフラグをtrueにする
