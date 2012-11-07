@@ -189,7 +189,7 @@ onAppReady(function(param) {
 	/** 				 キャンバス上に筆が下された場合の処理						**/
 	///////////////////////////////////////////////////////////////////////////////////
 	//各種端末からキャンバス上に筆が下された場合
-	canvas.addEventListener("touchstart", function(e){ //E タッチスタートイベント
+	ctx.addEventListener("touchstart", function(e){ //E タッチスタートイベント
         drawing = true;
         //筆を下した座標をprevに格納
         prevX = e.touches[0].pageX;
@@ -215,7 +215,7 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 
 	//各種端末上がキャンバス上から筆を離した場合
-	canvas.addEventListener("touchend", function(e){
+	ctx.addEventListener("touchend", function(e){
         drawing = false;
         e.stopPropagation();
 
@@ -232,7 +232,7 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 
 	//各種端末の座標が移動した場合の処理
-	 canvas.addEventListener("touchmove", function(event){ //A タッチムーブイベント
+	 ctx.addEventListener("touchmove", function(event){ //A タッチムーブイベント
 		 //画面をずらさないようにする
 		 event.preventDefault();
 		 //動いた位置（現在位置）をcurPosに格納
