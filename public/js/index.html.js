@@ -142,8 +142,10 @@ onAppReady(function(param) {
 		//マウスが移動した場合
 		mouseMove : function(param, share) {
 			if (!share) {
+			//falseの場合何もしない
 				return;
 			}
+			//trueの場合
 			sendCommand({
 				type : "mouseMove",
 				param : param
@@ -183,6 +185,17 @@ onAppReady(function(param) {
 	};
 	// UIEvent handling ==========================
 
+	///////////////////////////////////////////////////////////////////////////////////
+	/** 				 キャンバス上に筆が下された場合の処理						**/
+	///////////////////////////////////////////////////////////////////////////////////
+	//各種端末からキャンバス上に筆が下された場合
+	document.addEventListener("touchstart", function(e){ //E タッチスタートイベント
+        drawing = true;
+        //筆を下した座標をprevに格納
+        prevX = e.touches[0].pageX;
+        prevY = e.touches[0].pageY;
+        }, false);
+
 	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
 		//描画フラグをtrueにする
@@ -192,17 +205,36 @@ onAppReady(function(param) {
 		//posの位置を処理の開始位置（before）として設定
 		prevX = pos.x;
 		prevY = pos.y;
-
-		if(!eracing){ effects.play('chalkMouseDown'); }
+		//黒板消しフラグがfalseの場合音を出す
+		//if(!eracing){ effects.play('chalkMouseDown'); }
 	});
+
+	///////////////////////////////////////////////////////////////////////////////////
+	/** 				 キャンバス上から筆が離れた場合の処理						**/
+	///////////////////////////////////////////////////////////////////////////////////
+
+	//各種端末上がキャンバス上から筆を離した場合
+	document.addEventListener("touchend", function(e){
+        drawing = false;
+        e.stopPropagation();
+
+        }, false);
+
+	//キャンバス上から筆が離れた場合
 	canvas.mouseup(function(e) {
 		drawing = false;
 		e.stopPropagation();
 	});
 
-	   document.addEventListener("touchmove", function(event){ //A タッチムーブイベント
-		   event.preventDefault();
-		   //動いた位置をcurPosに格納
+	///////////////////////////////////////////////////////////////////////////////////
+	/** 				 キャンバス上で座標が動いた場合の処理						**/
+	///////////////////////////////////////////////////////////////////////////////////
+
+	//各種端末の座標が移動した場合の処理
+	 document.addEventListener("touchmove", function(event){ //A タッチムーブイベント
+		 //画面をずらさないようにする
+		 event.preventDefault();
+		 //動いた位置（現在位置）をcurPosに格納
 			var curPos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
 			//動いた位置を最新の位置であるcurrentに格納
 			var currentX = curPos.x;
@@ -244,11 +276,12 @@ onAppReady(function(param) {
 					}
 	    }, false)
 			}
+			//beforeの座標の更新
 			prevX = currentX;
 			prevY = currentY;
 		});
 
-	//スマホのカーソルの現在地が変わった場合
+	//カーソルの現在地が変わった場合
 	canvas.mousemove(function(e) {
 		//動いた位置をcurPosに格納
 		var curPos = posOnCanvas(e.pageX, e.pageY);
@@ -295,7 +328,8 @@ onAppReady(function(param) {
 		prevX = currentX;
 		prevY = currentY;
 	});
-	//キャンバス上から筆が上げられた場合
+
+	//画面上から筆が上げられた場合
 	$(document).mouseup(function(e) {
 		//描画フラグをfalseにする
 		drawing = false;
