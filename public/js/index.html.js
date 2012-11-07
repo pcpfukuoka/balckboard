@@ -26,7 +26,7 @@ onAppReady(function(param) {
 		green : ctx.createPattern(loadedImages[3], 'repeat'),
 		yellow : ctx.createPattern(loadedImages[4], 'repeat')
 	};
-
+	canvas.addEventListener("touchmove", touchmove, false);
 	//キャンバスの初期値を設定
 	var drawing = false;
 	var eracing = false;
@@ -200,6 +200,49 @@ onAppReady(function(param) {
 		drawing = false;
 		e.stopPropagation();
 	});
+	//スマホのカーソルの現在地が変わった場合
+	canvas.touchmove(function(e){
+		//動いた位置をcurPosに格納
+		var curPos = posOnCanvas(e.pageX, e.pageY);
+		//動いた位置を最新の位置であるcurrentに格納
+		var currentX = curPos.x;
+		var currentY = curPos.y;
+
+		COMMAND_OPS.mouseMove({
+			x : currentX,
+			y : currentY,
+			color : color,
+			eracing : eracing
+		}, true);
+		if (!drawing) {
+			//描画フラグがfalseの場合はなのもしない
+			return;
+		}
+		//黒板消しの場合
+		if (eracing) {
+			COMMAND_OPS.erase({
+				start : {
+					x : prevX,
+					y : prevY
+				},
+				end : {
+					x : currentX,
+					y : currentY
+				}
+			}, true);
+		//線を引く場合
+		} else {
+			COMMAND_OPS.drawLine({
+				color : color,
+				start : {
+					x : prevX,
+					y : prevY
+				},
+				end : {
+					x : currentX,
+					y : currentY
+				}
+	})
 	canvas.mousemove(function(e) {
 		//動いた位置をcurPosに格納
 		var curPos = posOnCanvas(e.pageX, e.pageY);
