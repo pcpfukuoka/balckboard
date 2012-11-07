@@ -7,7 +7,7 @@ onAppReady(function(param) {
 	if(msg.length > 0){ alert(msg.join('\n')); }
 
 
-	clock();
+	//clock();
 
 	// show images
 	var imgLoadTimer = setTimeout(function(){
