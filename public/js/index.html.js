@@ -189,8 +189,7 @@ onAppReady(function(param) {
 	/** 				 キャンバス上に筆が下された場合の処理						**/
 	///////////////////////////////////////////////////////////////////////////////////
 	//各種端末からキャンバス上に筆が下された場合
-	document.addEventListener("touchstart", function(e){ //E タッチスタートイベント
-        console.log("touchstart");
+	document.addEventListener("touchstart", function(e){
 		drawing = true;
         //筆を下した座標をprevに格納
         prevX = e.touches[0].pageX;
@@ -199,7 +198,6 @@ onAppReady(function(param) {
 
 	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
-		console.log("mousedown");
 		//描画フラグをtrueにする
 		drawing = true;
 		//キャンバス上の現在位置をposに格納
@@ -217,7 +215,6 @@ onAppReady(function(param) {
 
 	//各種端末上がキャンバス上から筆を離した場合
 	document.addEventListener("touchend", function(e){
-		console.log("touchend");
         drawing = false;
         e.stopPropagation();
 
@@ -225,7 +222,6 @@ onAppReady(function(param) {
 
 	//キャンバス上から筆が離れた場合
 	canvas.mouseup(function(e) {
-		console.log("mouseup");
 		drawing = false;
 		e.stopPropagation();
 	});
@@ -235,8 +231,7 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 
 	//各種端末の座標が移動した場合の処理
-	 document.addEventListener("touchmove", function(e){ //A タッチムーブイベント
-		 console.log("touchmove");
+	 document.addEventListener("touchmove", function(e){
 		 //画面をずらさないようにする
 		 event.preventDefault();
 		 //動いた位置（現在位置）をcurPosに格納
@@ -271,7 +266,6 @@ onAppReady(function(param) {
 			//線を引く場合
 			} else {
 
-				console.log("drawline");
 				COMMAND_OPS.drawLine({
 					color : color,
 					start : {
@@ -291,7 +285,6 @@ onAppReady(function(param) {
 
 	//カーソルの現在地が変わった場合
 	canvas.mousemove(function(e) {
-		console.log("mousemove");
 		//動いた位置をcurPosに格納
 		var curPos = posOnCanvas(e.pageX, e.pageY);
 		//動いた位置を最新の位置であるcurrentに格納
