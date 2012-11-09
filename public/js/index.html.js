@@ -184,17 +184,6 @@ onAppReady(function(param) {
 		}
 	};
 	// UIEvent handling ==========================
-
-	function kakunin()
-	{
-		ctx.beginPath();
-		ctx.clearRect(0, 0, canvas.width, canvas.height);	
-	
-	
-	
-	}	
-
-	
 	
 	///////////////////////////////////////////////////////////////////////////////////
 	/** 				 キャンバス上に筆が下された場合の処理						**/
@@ -387,7 +376,14 @@ onAppReady(function(param) {
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
+	$('#test').click(function(e){
+		
+			ctx.beginPath();
+			ctx.clearRect(0, 0, canvas.width, canvas.height);	
+			ctx.stroke();
+			ctx.closePath();
 
+	})
 	/**
 	 * ここより下はサーバにデータを送る処理
 	 *
