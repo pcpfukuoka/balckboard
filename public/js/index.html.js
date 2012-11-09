@@ -183,7 +183,7 @@ onAppReady(function(param) {
 			}
 		},
 		
-		reset : function(share)
+		reset : function(param,share)
 		{			
 			ctx.clearRect(-1000, -1000, 10000, 10000);	
 			if(share)
@@ -391,7 +391,16 @@ onAppReady(function(param) {
 	
 	
 	$("#all").click(function(e){
-		COMMAND_OPS.reset(true)
+		COMMAND_OPS.reset(				
+		start : {
+			x : -1000,
+			y : -1000
+		},
+		end : {
+			x : 10000,
+			y : 10000
+		},
+		true)
 
 
 	});
