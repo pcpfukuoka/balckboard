@@ -383,9 +383,8 @@ onAppReady(function(param) {
 		ctx.lineJoin = "round";
 		ctx.lineCap = "round";
 		ctx.beginPath();
-		var aaa = posOnCanvas(0,0);
-		ctx.moveTo(aaa.x, aaa.y);
-		ctx.lineTo(1000, 1000);
+		ctx.moveTo(0, 0);
+		ctx.lineTo(100, 100);
 		ctx.stroke();
 		ctx.closePath();
 
@@ -394,6 +393,7 @@ onAppReady(function(param) {
 	
 	$("#all").click(function(e){
 		
+			ctx.clearRect(-1000, -1000, 10000, 10000);	
 
 	});
 	/**
