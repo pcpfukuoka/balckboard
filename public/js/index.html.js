@@ -376,12 +376,24 @@ onAppReady(function(param) {
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
+	$("#set").click(function(e){
+		
+		ctx.strokeStyle = LINE_PATTERNS['black'];
+		ctx.lineWidth = lineWidth;
+		ctx.lineJoin = "round";
+		ctx.lineCap = "round";
+		ctx.beginPath();
+		var aaa = posOnCanvas(0,0);
+		ctx.moveTo(aaa.x, aaa.y);
+		ctx.lineTo(1000, 1000);
+		ctx.stroke();
+		ctx.closePath();
+
+	});
+	
+	
 	$("#all").click(function(e){
 		
-			ctx.beginPath();
-			ctx.clearRect(0, 0, canvas.width, canvas.height);	
-			ctx.stroke();
-			ctx.closePath();
 
 	});
 	/**
