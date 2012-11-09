@@ -391,7 +391,7 @@ onAppReady(function(param) {
 	
 	
 	$("#all").click(function(e){
-		COMMAND_OPS.reset(				
+		COMMAND_OPS.reset(	{			
 		start : {
 			x : -1000,
 			y : -1000
@@ -399,10 +399,8 @@ onAppReady(function(param) {
 		end : {
 			x : 10000,
 			y : 10000
-		},
+		}},
 		true)
-
-
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
