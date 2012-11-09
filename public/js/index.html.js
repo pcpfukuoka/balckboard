@@ -181,6 +181,18 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+		},
+		
+		reset : function(share)
+		{			
+			ctx.clearRect(-1000, -1000, 10000, 10000);	
+			if(share)
+			{
+				sendCommand({
+					type : "reset",
+					param : param
+				});				
+			}
 		}
 	};
 	// UIEvent handling ==========================
@@ -376,24 +388,11 @@ onAppReady(function(param) {
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
-	$("#set").click(function(e){
-		
-		ctx.strokeStyle = LINE_PATTERNS['black'];
-		ctx.lineWidth = lineWidth;
-		ctx.lineJoin = "round";
-		ctx.lineCap = "round";
-		ctx.beginPath();
-		ctx.moveTo(0, 0);
-		ctx.lineTo(100, 100);
-		ctx.stroke();
-		ctx.closePath();
-
-	});
 	
 	
 	$("#all").click(function(e){
-		
-			ctx.clearRect(-1000, -1000, 10000, 10000);	
+		COMMAND_OPS.reset(true)
+
 
 	});
 	/**
