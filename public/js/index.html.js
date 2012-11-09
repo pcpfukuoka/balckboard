@@ -383,7 +383,7 @@ onAppReady(function(param) {
 			ctx.stroke();
 			ctx.closePath();
 
-	})
+	});
 	/**
 	 * ここより下はサーバにデータを送る処理
 	 *
