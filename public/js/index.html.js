@@ -376,7 +376,7 @@ onAppReady(function(param) {
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
-	$('#test').click(function(e){
+	$("#all").click(function(e){
 		
 			ctx.beginPath();
 			ctx.clearRect(0, 0, canvas.width, canvas.height);	
