@@ -192,8 +192,10 @@ onAppReady(function(param) {
 	document.addEventListener("touchstart", function(e){
 		drawing = true;
         //筆を下した座標をprevに格納
-        prevX = e.touches[0].pageX;
-        prevY = e.touches[0].pageY;
+		var pos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
+
+        prevX = pos.x;
+        prevY = pos.y;
         }, false);
 
 	//キャンバス上に筆が下された場合
