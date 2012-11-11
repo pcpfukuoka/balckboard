@@ -405,7 +405,7 @@ onAppReady(function(param) {
 	$("#next").click(function(e){
 		var img= new Image();
 		var type ='image/ping';
-		img.src=canvas.toDataURL(type);
+		img.src=ctx.toDataURL(type);
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
