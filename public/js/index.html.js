@@ -26,7 +26,8 @@ onAppReady(function(param) {
 		console.log("a");
 			var img=new Image();
 			console.log("next");
-			   var imgdata = $('#canvas').toDataURL();  
+			   var aa =  $('canvas').get(0);
+			   aa.toDataUrl.toDataURL('image/png');
 	});
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
