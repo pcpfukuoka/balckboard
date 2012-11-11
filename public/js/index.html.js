@@ -15,10 +15,10 @@ onAppReady(function(param) {
 		clearTimeout(imgLoadTimer);
 		imgLoadTimer = null;
 	}, 2000);
-	var canvas = document.getElementById("canvas");
-	var ctx = canvas.getContext("2d");
-	//var canvas = $("#canvas");
-	//var ctx = canvas[0].getContext("2d");
+	//var canvas = document.getElementById("canvas");
+	//var ctx = canvas.getContext("2d");
+	var canvas = $("#canvas");
+	var ctx = canvas[0].getContext("2d");
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
 		pink : ctx.createPattern(loadedImages[0], 'repeat'),
