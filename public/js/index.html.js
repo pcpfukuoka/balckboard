@@ -24,10 +24,10 @@ onAppReady(function(param) {
 	/////////////////////////////////////
 	$("#next").click(function(e){
 		console.log("a");
-			var img=new Image();
+			var img = new Image();
 			console.log("next");
-			   var aa =  $('canvas').get(0);
-			   aa.toDataUrl.toDataURL('image/png');
+			var can = document.getElementById("myCanvas");
+			var data = can.toDataURL("image/png");
 	});
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
