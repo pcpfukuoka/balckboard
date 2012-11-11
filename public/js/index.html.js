@@ -404,7 +404,7 @@ onAppReady(function(param) {
 		true)
 	});
 	$("#next").click(function(e){
-		if(canvas.getcontext){
+		if(canvas.getContext){
 			var img= new Image();
 			console.log("next");
 			var type ='image/jpeg';
