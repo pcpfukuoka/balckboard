@@ -15,8 +15,8 @@ onAppReady(function(param) {
 		clearTimeout(imgLoadTimer);
 		imgLoadTimer = null;
 	}, 2000);
-
-	var canvas = $("#canvas");
+	var canvas = document.getElementById("canvas");
+	//var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
@@ -403,12 +403,12 @@ onAppReady(function(param) {
 		true)
 	});
 	$("#next").click(function(e){
-
+		if(canvas.getcontext){
 			var img= new Image();
 			console.log("next");
 			var type ='image/jpeg';
-			img.src=ctx.toDataURL(type);
-
+			img.src=canvas.toDataURL(type);
+		}
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
