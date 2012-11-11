@@ -19,6 +19,7 @@ onAppReady(function(param) {
 	//var ctx = canvas.getContext("2d");
 	var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
+	console.log(ctx);
 	$("#next").click(function(e){
 		console.log("a");
 
