@@ -182,21 +182,21 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		
+
 		reset : function(param,share)
-		{			
-			ctx.clearRect(-1000, -1000, 10000, 10000);	
+		{
+			ctx.clearRect(-1000, -1000, 10000, 10000);
 			if(share)
 			{
 				sendCommand({
 					type : "reset",
 					param : param
-				});				
+				});
 			}
 		}
 	};
 	// UIEvent handling ==========================
-	
+
 	///////////////////////////////////////////////////////////////////////////////////
 	/** 				 キャンバス上に筆が下された場合の処理						**/
 	///////////////////////////////////////////////////////////////////////////////////
@@ -388,10 +388,10 @@ onAppReady(function(param) {
 		eracing = true;
 		canvas.css('cursor', 'url(images/pointer_eraser.cur), pointer');
 	});
-	
-	
+
+
 	$("#all").click(function(e){
-		COMMAND_OPS.reset(	{			
+		COMMAND_OPS.reset(	{
 		start : {
 			x : -1000,
 			y : -1000
@@ -401,6 +401,11 @@ onAppReady(function(param) {
 			y : 10000
 		}},
 		true)
+	});
+	$("#next").click(function(e){
+		var img= new Image();
+		var type ='image/ping';
+		img.src=canvas.toDataURL(type);
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
