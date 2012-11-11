@@ -22,9 +22,9 @@ onAppReady(function(param) {
 	$("#next").click(function(e){
 		console.log("a");
 
-			var img= new Image();
+			var img=new Image();
 			console.log("next");
-			var type ='image/jpeg';
+			var type="image/jpeg";
 			img.src=canvas.toDataURL(type);
 
 	});
