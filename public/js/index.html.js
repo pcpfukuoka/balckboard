@@ -25,7 +25,7 @@ onAppReady(function(param) {
 	$("#next").click(function(e){
 		console.log("a");
 			var img=new Image();
-			console.log("next");d
+			console.log("next");
 			img.src=canvas.toDataURL();
 
 	});
