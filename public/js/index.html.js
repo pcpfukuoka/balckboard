@@ -25,7 +25,7 @@ onAppReady(function(param) {
 
 			var img=new Image();
 			console.log("next");
-			img.src=ctx.toDataURL();
+			img.src=canvas.toDataURL();
 
 	});
 	var loadedImages = param.loadedImages;
