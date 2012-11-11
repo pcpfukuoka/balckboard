@@ -403,9 +403,12 @@ onAppReady(function(param) {
 		true)
 	});
 	$("#next").click(function(e){
-		var img= new Image();
-		var type ='image/ping';
-		img.src=ctx.toDataURL(type);
+		if(canvas.getcontext){
+			var img= new Image();
+			console.log("next");
+			var type ='image/jpeg';
+			img.src=canvas.toDataURL(type);
+		}
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
