@@ -21,12 +21,12 @@ onAppReady(function(param) {
 	var ctx = canvas[0].getContext("2d");
 	$("#next").click(function(e){
 		console.log("a");
-		if(canvas.getContext){
+
 			var img= new Image();
 			console.log("next");
 			var type ='image/jpeg';
 			img.src=canvas.toDataURL(type);
-		}
+
 	});
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
