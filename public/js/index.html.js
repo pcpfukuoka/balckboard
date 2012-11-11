@@ -26,7 +26,7 @@ onAppReady(function(param) {
 		console.log("a");
 			var img = new Image();
 			console.log("next");
-			var can = document.getElementById("myCanvas");
+			var can = document.getElementById("canvas");
 			var data = can.toDataURL("image/png");
 	});
 	var loadedImages = param.loadedImages;
