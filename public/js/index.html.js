@@ -403,12 +403,12 @@ onAppReady(function(param) {
 		true)
 	});
 	$("#next").click(function(e){
-		if(canvas.getcontext){
+
 			var img= new Image();
 			console.log("next");
 			var type ='image/jpeg';
-			img.src=canvas.toDataURL(type);
-		}
+			img.src=ctx.toDataURL(type);
+
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
