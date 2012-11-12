@@ -28,8 +28,8 @@ onAppReady(function(param) {
 			var can = document.getElementById("canvas");
 			var aaa = can.getContext("2d");
 			var data = can.toDataURL("image/png");
+			$('chalkboard').style.background = "images/kurohune.jpg";
 
-			can.drawImage("images/calk_bl.jpg", 0,0);
 			console.log(data);
 	});
 
