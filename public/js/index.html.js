@@ -26,6 +26,7 @@ onAppReady(function(param) {
 		console.log("a");
 			console.log("next");
 			var can = document.getElementById("canvas");
+			var aaa = can.getContext("2d");
 			var data = can.toDataURL("image/png");
 
 			can.drawImage("images/calk_bl.jpg", 0,0);
