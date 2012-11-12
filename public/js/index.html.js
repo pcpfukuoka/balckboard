@@ -47,7 +47,7 @@ onAppReady(function(param) {
 				y : -10000
 			}
 		}, true);
-	};
+	});
 
 
 	var loadedImages = param.loadedImages;
@@ -225,7 +225,7 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
-		}
+		},
 		next : function(param,share)
 		{
 			if(share)
