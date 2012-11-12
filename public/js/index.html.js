@@ -24,7 +24,6 @@ onAppReady(function(param) {
 	/////////////////////////////////////
 	$("#next").click(function(e){
 		console.log("a");
-			var img = new Image();
 			console.log("next");
 			var can = document.getElementById("canvas");
 			var data = can.toDataURL("image/png");
