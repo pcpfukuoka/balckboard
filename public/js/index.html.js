@@ -19,6 +19,18 @@ onAppReady(function(param) {
 	//var ctx = canvas.getContext("2d");
 	var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
+	/////////////////////////////////////
+	/*				ここ				*/
+	/////////////////////////////////////
+	$("#next").click(function(e){
+		console.log("a");
+			var img = new Image();
+			console.log("next");
+			var can = document.getElementById("canvas");
+			var data = can.toDataURL("image/png");
+			can.drawImage(data, 0,0);
+			console.log(data);
+	});
 
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
