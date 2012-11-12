@@ -22,20 +22,33 @@ onAppReady(function(param) {
 	/////////////////////////////////////
 	/*				ここ				*/
 	/////////////////////////////////////
-	$("#next").click(function(e){
-		console.log("a");
-			console.log("next");
+
+	/*$("#next").click(function(e){
 			var can = document.getElementById("canvas");
 			var aaa = can.getContext("2d");
 			var data = can.toDataURL("image/png");
 //			document.getElementById('chalkboard').style.backgroundImage ='url(images/kurohune.jpg)';
 			var img = new Image();
 			  img.src = "images/kokuban.jpg?" + new Date().getTime();
-			  /* 画像が読み込まれるのを待ってから処理を続行 */
 			  img.onload = function() {
 				  aaa.drawImage(img, 0, 0);
 			  }
 	});
+	*/
+	$("#next").click(function(e){
+		COMMAND_OPS.next({
+			color : color,
+			start : {
+				x : 1000,
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
+	};
+
 
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
@@ -211,6 +224,23 @@ onAppReady(function(param) {
 					type : "reset",
 					param : param
 				});
+			}
+		}
+		next : function(param,share)
+		{
+			if(share)
+			{
+				var can = document.getElementById("canvas");
+				var aaa = can.getContext("2d");
+				var data = can.toDataURL("image/png");
+//				document.getElementById('chalkboard').style.backgroundImage ='url(images/kurohune.jpg)';
+				var img = new Image();
+				img.src = "images/kokuban.jpg?" + new Date().getTime();
+				/* 画像が読み込まれるのを待ってから処理を続行 */
+				img.onload = function() {
+				aaa.drawImage(img, 0, 0);
+
+			};
 			}
 		}
 	};
