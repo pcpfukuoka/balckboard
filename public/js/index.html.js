@@ -29,8 +29,6 @@ onAppReady(function(param) {
 			var aaa = can.getContext("2d");
 			var data = can.toDataURL("image/png");
 			$('chalkboard').css.background = "images/kurohune.jpg";
-
-			console.log(data);
 	});
 
 	var loadedImages = param.loadedImages;
