@@ -28,6 +28,7 @@ onAppReady(function(param) {
 			console.log("next");
 			var can = document.getElementById("canvas");
 			var data = can.toDataURL("image/png");
+			console.log(data);
 	});
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
