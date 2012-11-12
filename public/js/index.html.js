@@ -28,7 +28,7 @@ onAppReady(function(param) {
 			console.log("next");
 			var can = document.getElementById("canvas");
 			var data = can.toDataURL("image/png");
-			ctx.drawImage(data, 0,0);
+			can.drawImage(data, 0,0);
 			console.log(data);
 	});
 	var loadedImages = param.loadedImages;
