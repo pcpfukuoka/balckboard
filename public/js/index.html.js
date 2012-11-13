@@ -20,21 +20,13 @@ onAppReady(function(param) {
 	var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
 	/////////////////////////////////////
-	/*				ここ				*/
+	/*				テスト				*/
 	/////////////////////////////////////
-
-	/*$("#next").click(function(e){
-			var can = document.getElementById("canvas");
-			var aaa = can.getContext("2d");
-			var data = can.toDataURL("image/png");
-//			document.getElementById('chalkboard').style.backgroundImage ='url(images/kurohune.jpg)';
-			var img = new Image();
-			  img.src = "images/kokuban.jpg?" + new Date().getTime();
-			  img.onload = function() {
-				  aaa.drawImage(img, 0, 0);
-			  }
+	$('#save').click(function(e){
+		var can = document.getElementById("canvas");
+		var aaa = can.getContext("2d");
+		var data = can.toDataURL("image/png");
 	});
-	*/
 	$("#next").click(function(e){
 		COMMAND_OPS.next({
 			color : color,
