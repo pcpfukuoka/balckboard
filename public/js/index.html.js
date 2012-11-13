@@ -233,14 +233,16 @@ onAppReady(function(param) {
 				var can = document.getElementById("canvas");
 				var aaa = can.getContext("2d");
 				var data = can.toDataURL("image/png");
-//				document.getElementById('chalkboard').style.backgroundImage ='url(images/kurohune.jpg)';
 				var img = new Image();
 				img.src = "images/kurohune.jpg?" + new Date().getTime();
 				/* 画像が読み込まれるのを待ってから処理を続行 */
 				img.onload = function() {
 				aaa.drawImage(img, 0, 0);
-
-			};
+				};
+				sendCommand({
+					type : "next",
+					param : param
+				});
 			}
 		}
 	};
