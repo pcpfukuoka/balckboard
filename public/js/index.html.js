@@ -226,19 +226,20 @@ onAppReady(function(param) {
 				});
 			}
 		},
+
 		next : function(param,share)
 		{
+			var can = document.getElementById("canvas");
+			var aaa = can.getContext("2d");
+			var data = can.toDataURL("image/png");
+			var img = new Image();
+			img.src = "images/kurohune.jpg?" + new Date().getTime();
+			/* 画像が読み込まれるのを待ってから処理を続行 */
+			img.onload = function() {
+			aaa.drawImage(img, 0, 0);
+			};
 			if(share)
 			{
-				var can = document.getElementById("canvas");
-				var aaa = can.getContext("2d");
-				var data = can.toDataURL("image/png");
-				var img = new Image();
-				img.src = "images/kurohune.jpg?" + new Date().getTime();
-				/* 画像が読み込まれるのを待ってから処理を続行 */
-				img.onload = function() {
-				aaa.drawImage(img, 0, 0);
-				};
 				sendCommand({
 					type : "next",
 					param : param
