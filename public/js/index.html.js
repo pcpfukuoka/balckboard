@@ -46,7 +46,7 @@ onAppReady(function(param) {
 				x : -10000,
 				y : -10000
 			}
-		}, true);
+		}, true).last().click();
 	});
 
 
