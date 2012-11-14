@@ -28,7 +28,7 @@ onAppReady(function(param) {
 		var data = can.toDataURL("image/png");
 	});
 	$('#test').click(function(e){
-		var img=new Image();
+/*		var img=new Image();
 		var can = document.getElementById("canvas");
 		var aaa = can.getContext("2d");
 		img.src = can.toDataURL("image/png");
@@ -37,6 +37,26 @@ onAppReady(function(param) {
 	       //例：現在のウィンドウに出力。
 	    location.href = img.src;
 	    };
+	    */
+		var can = document.getElementById("canvas");
+		var aaa = can.getContext("2d");
+		var data = can.toDataURL("image/png");
+		var img = new Image();
+		img.src = "images/kokuban.jpg?" + new Date().getTime();
+		/* 画像が読み込まれるのを待ってから処理を続行 */
+		img.onload = function() {
+		aaa.drawImage(img, 0, 0);
+		};
+		var img2 = new Image();
+
+		img2.src = "images/aaaa.png?" + new Date().getTime();
+		/* 画像が読み込まれるのを待ってから処理を続行 */
+		img2.onload = function() {
+		aaa.drawImage(img2, 0, 0);
+		};
+
+
+
 	});
 	$("#next").click(function(e){
 		COMMAND_OPS.next({
