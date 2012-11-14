@@ -32,8 +32,11 @@ onAppReady(function(param) {
 		var can = document.getElementById("canvas");
 		var aaa = can.getContext("2d");
 		img.src = can.toDataURL("image/png");
-		window.open(img.src, '_blank', 'width=200,height=200');
-
+		//念のため、onloadで読み込み完了を待つ。
+	    img.onload = function(){
+	       //例：現在のウィンドウに出力。
+	    location.href = img.src;
+	    };
 	});
 	$("#next").click(function(e){
 		COMMAND_OPS.next({
