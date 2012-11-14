@@ -28,7 +28,7 @@ onAppReady(function(param) {
 		var data = can.toDataURL("image/png");
 	});
 	$('#test').click(function(e){
-		var img = new image();
+		var img=new Image();
 		var can = document.getElementById("canvas");
 		var aaa = can.getContext("2d");
 		img.src = can.toDataURL("image/png");
