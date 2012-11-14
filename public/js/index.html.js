@@ -27,6 +27,14 @@ onAppReady(function(param) {
 		var aaa = can.getContext("2d");
 		var data = can.toDataURL("image/png");
 	});
+	$('#test').click(function(e){
+		var img = new image();
+		var can = document.getElementById("canvas");
+		var aaa = can.getContext("2d");
+		img.src = can.toDataURL("image/png");
+		window.open(img.src, '_blank', 'width=200,height=200');
+
+	});
 	$("#next").click(function(e){
 		COMMAND_OPS.next({
 			color : color,
