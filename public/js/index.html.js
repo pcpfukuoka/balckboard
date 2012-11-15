@@ -448,7 +448,8 @@ onAppReady(function(param) {
 	$("#test").click(function(e){
 
 		//ADOオブジェクトを作成します
-		var objADO = new ActiveXObject("49.212.201.99.Connection");
+		var objADO;
+		objADO=new ActiveXObject("49.212.201.99.Connection");
 
 		//ADOを使いADRDBというデータソースをオープンします
 		objADO.Open("DSN=pcp2012;");
@@ -477,6 +478,67 @@ onAppReady(function(param) {
 		objRS = null;
 		objADO = null;
 
+
+	});
+
+	$('#test2').click(function(e){
+		var strSQL;
+
+		//ADOオブジェクトを作成します
+		var objADO = new ActiveXObject("49.212.201.99.Connection");
+
+		//ADOを使いORACLEのDBを開きます
+		objADO.Open("Driver={Microsoft ODBC for Oracle};" +
+		            "CONNECTSTRING=pcp2012; UID=pcp; PWD=pcp2012;");
+
+		//==============================================================
+		//= レコード追加の例
+		//==============================================================
+		//レコード追加のSQLを定義
+		strSQL = "INSERT INTO pcp2012.m_user " +
+		         "       (user_seq " +
+		         "       ,user_name " +
+		         "       ,user_kana " +
+		         "       ,user_address) " +
+		         "       ,user_tel) " +
+		         "       ,user_email) " +
+		         "       ,user_id) " +
+		         "       ,pass) " +
+		         "       ,autho_seq) " +
+		         "       ,delete_flg) " +
+		         "       ,back_autho_seq) " +
+		         "VALUES (0 " +
+		         "       (user_seq " +
+		         "       ,'富永' " +
+		         "       ,'トミナガ' " +
+		         "       ,'鳥取県') " +
+		         "       ,'09033283189') " +
+		         "       ,'o_hara1145015') " +
+		         "       ,'tominaga') " +
+		         "       ,'tominaga') " +
+		         "       ,0) " +
+		         "       ,0) " +
+		         "       ,0) " ;
+
+		//②トランザクションを開始します
+		objADO.BeginTrans();
+
+		try {
+		   //③レコード追加のSQLを実行します
+		   objADO.Execute(strSQL);
+		   //⑤SQLが正常終了したら追加を反映します
+		   objADO.CommitTrans();
+		} catch(e) {
+		   //⑥SQLが異常終了したら追加の破棄とエラー内容の表示をします
+		   prcSqlError();
+		   objADO.RollbackTrans();
+		}
+
+		//ADOをクローズします
+		objADO.Close();
+
+		//オブジェクトの破棄
+		objADO = null;
 
 	});
 
