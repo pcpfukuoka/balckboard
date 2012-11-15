@@ -216,7 +216,6 @@ onAppReady(function(param) {
 			img2.src = back.toDataURL("image/png");
 
 
-
 			if(share)
 			{
 				sendCommand({
@@ -445,6 +444,40 @@ onAppReady(function(param) {
 				y : -10000
 			}
 		}, true);
+	});
+	$("#test").click(function(e){
+
+		//ADOオブジェクトを作成します
+		var objADO = new ActiveXObject("49.212.201.99.Connection");
+
+		//ADOを使いADRDBというデータソースをオープンします
+		objADO.Open("DSN=pcp2012;");
+
+		//①SQLを実行します
+		var objRS = objADO.Execute("select * from pcp2012.m_user");
+
+		//②SQLの実行結果をデータが無くなるまで表示します
+		do {
+
+		    //③フィールド値の表示
+		    console.log(objRS("user_name") + objRS("user_address"));
+
+		    //④カーソルを次の行へ
+		    objRS.MoveNext();
+
+		} while(objRS.Eof==false);
+
+		//⑤レコードセットをクローズします
+		objRS.Close();
+
+		//データベースをクローズします
+		objADO.Close();
+
+		//オブジェクトの破棄
+		objRS = null;
+		objADO = null;
+
+
 	});
 
 	/**
