@@ -19,59 +19,6 @@ onAppReady(function(param) {
 	//var ctx = canvas.getContext("2d");
 	var canvas = $("#canvas");
 	var ctx = canvas[0].getContext("2d");
-	/////////////////////////////////////
-	/*				テスト				*/
-	/////////////////////////////////////
-	$('#save').click(function(e){
-		var can = document.getElementById("canvas");
-		var aaa = can.getContext("2d");
-		var data = can.toDataURL("image/png");
-	});
-	$('#test').click(function(e){
-/*		var img=new Image();
-		var can = document.getElementById("canvas");
-		var aaa = can.getContext("2d");
-		img.src = can.toDataURL("image/png");
-		//念のため、onloadで読み込み完了を待つ。
-	    img.onload = function(){
-	       //例：現在のウィンドウに出力。
-	    location.href = img.src;
-	    };
-	    */
-		var can = document.getElementById("canvas");
-		var aaa = can.getContext("2d");
-		var data = can.toDataURL("image/png");
-		var img = new Image();
-		img.src = "images/kokuban.jpg?" + new Date().getTime();
-		/* 画像が読み込まれるのを待ってから処理を続行 */
-		img.onload = function() {
-		aaa.drawImage(img, 0, 0);
-		};
-		var img2 = new Image();
-
-		img2.src = "images/aaaa.png?" + new Date().getTime();
-		/* 画像が読み込まれるのを待ってから処理を続行 */
-		img2.onload = function() {
-		aaa.drawImage(img2, 0, 0);
-		};
-
-
-
-	});
-	$("#next").click(function(e){
-		COMMAND_OPS.next({
-			color : color,
-			start : {
-				x : 1000,
-				y : 1000
-			},
-			end : {
-				x : -10000,
-				y : -10000
-			}
-		}, true);
-	});
-
 
 	var loadedImages = param.loadedImages;
 	var LINE_PATTERNS = {
@@ -252,15 +199,24 @@ onAppReady(function(param) {
 
 		next : function(param,share)
 		{
+
+			//canvasのＵＲＬを保存する処理
 			var can = document.getElementById("canvas");
 			var aaa = can.getContext("2d");
-			var data = can.toDataURL("image/png");
-			var img = new Image();
-			img.src = "images/kurohune.jpg?" + new Date().getTime();
-			/* 画像が読み込まれるのを待ってから処理を続行 */
-			img.onload = function() {
-			aaa.drawImage(img, 0, 0);
-			};
+			var img=new image();
+			img.src = can.toDataURL("image/png");
+
+
+
+
+			//divに設定されている背景画像を保存する処理
+			var back = document.getElementById("chalkboard");
+			var bbb = back.getContext("2d");
+			var img2=new image();
+			img2.src = back.toDataURL("image/png");
+
+
+
 			if(share)
 			{
 				sendCommand({
@@ -476,6 +432,19 @@ onAppReady(function(param) {
 			y : 10000
 		}},
 		true)
+	});
+	$("#next").click(function(e){
+		COMMAND_OPS.next({
+			color : color,
+			start : {
+				x : 1000,
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
 	});
 
 	/**
