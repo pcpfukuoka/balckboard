@@ -430,7 +430,7 @@ onAppReady(function(param) {
 			x : 10000,
 			y : 10000
 		}},
-		true)
+		true);
 	});
 	$("#next").click(function(e){
 		COMMAND_OPS.next({
@@ -449,7 +449,8 @@ onAppReady(function(param) {
 
 		//ADOオブジェクトを作成します
 		var objADO;
-		objADO=new ActiveXObject("49.212.201.99.Connection");
+
+		objADO=new ActiveXObject("ADODB.Connection");
 
 		//ADOを使いADRDBというデータソースをオープンします
 		objADO.Open("DSN=pcp2012;");
