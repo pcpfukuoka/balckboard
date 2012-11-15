@@ -453,7 +453,7 @@ onAppReady(function(param) {
 		objADO=new ActiveXObject("ADODB.Connection");
 
 		//ADOを使いADRDBというデータソースをオープンします
-		objADO.Open("DSN=pcp2012;");
+		objADO.Open("DSN=49.212.201.99;");
 
 		//①SQLを実行します
 		var objRS = objADO.Execute("select * from pcp2012.m_user");
@@ -486,11 +486,11 @@ onAppReady(function(param) {
 		var strSQL;
 
 		//ADOオブジェクトを作成します
-		var objADO = new ActiveXObject("49.212.201.99.Connection");
+		var objADO = new ActiveXObject("ADODB.Connection");
 
 		//ADOを使いORACLEのDBを開きます
 		objADO.Open("Driver={Microsoft ODBC for Oracle};" +
-		            "CONNECTSTRING=pcp2012; UID=pcp; PWD=pcp2012;");
+		            "CONNECTSTRING=49.212.201.99; UID=pcp; PWD=pcp2012;");
 
 		//==============================================================
 		//= レコード追加の例
