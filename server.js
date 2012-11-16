@@ -57,6 +57,18 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		// mouseMove繧､繝吶Φ繝医�菫晏ｭ倥＠縺ｪ縺�
 		if (command.type !== 'mouseMove') {
 			storeCommand(command);
+		}
+		// 繧ｭ繝｣繝ｳ繝舌せ繧偵け繝ｪ繧｢縺吶ｋ髫帙�繧ｳ繝槭Φ繝牙ｱ･豁ｴ繧ょ�縺ｦ繧ｯ繝ｪ繧｢
+		if (command.type === 'clear') {
+			commands = [];
+		}
+		socket.broadcast.emit('command', command);
+		
+		
+		if(command.type == 'next')
+		{
+			
+			
 			//接続します
 			connection.connect();
 			
@@ -82,14 +94,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			    console.log('end');
 			    connection.destroy(); //終了
 			  });
-			
+
 			
 		}
-		// 繧ｭ繝｣繝ｳ繝舌せ繧偵け繝ｪ繧｢縺吶ｋ髫帙�繧ｳ繝槭Φ繝牙ｱ･豁ｴ繧ょ�縺ｦ繧ｯ繝ｪ繧｢
-		if (command.type === 'clear') {
-			commands = [];
-		}
-		socket.broadcast.emit('command', command);
+		
 		
 	});
 	socket.on('disconnect', function() {
