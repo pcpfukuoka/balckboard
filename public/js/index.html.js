@@ -239,13 +239,16 @@ onAppReady(function(param) {
 		img : function(param,share)
 		{
 
-			var canvas = document.getElementById("canvas");  //canvas要素を取得
-			var can = canvas.getContext('2d');
-
-			//var img01 = new Image();
-			//img01.src = param.color;
-			console.log(param.color);
-			//can.drawImage(img01,0,0);
+			if(!share)
+			{
+				var canvas = document.getElementById("canvas");  //canvas要素を取得
+				var can = canvas.getContext('2d');
+				console.log(param.color);
+				var img01 = new Image();
+				img01.src = param.color;
+				console.log(param.color);
+				can.drawImage(img01,0,0);
+			}
 
 			if(share)
 			{
@@ -563,10 +566,7 @@ onAppReady(function(param) {
 			var param = command.param;
 			var sessionId = command.sessionId;
 			var pointer = pointers[sessionId];
-			if(command.param.img)
-			{
-				console.log(param.color);
-			}
+
 
 			if (!pointer) {
 				pointer = $('<div class="userPointer"/>').appendTo(
