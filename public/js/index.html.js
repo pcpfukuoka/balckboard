@@ -247,10 +247,10 @@ onAppReady(function(param) {
 
 				}
 
-			else if(param.x = "保存" && share != "true")
+			else if(param.x == "保存" && share != "true")
 			{
-				console.log("param.x");
-				console.log("param.color");
+				console.log(param.x);
+				console.log(param.color);
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
 				var img01 = new Image();
