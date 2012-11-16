@@ -250,7 +250,6 @@ onAppReady(function(param) {
 			{
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
-				console.log(param.color);
 				var img01 = new Image();
 				img01.src = param.color;
 				console.log(param.color);
