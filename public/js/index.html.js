@@ -563,10 +563,11 @@ onAppReady(function(param) {
 			var param = command.param;
 			var sessionId = command.sessionId;
 			var pointer = pointers[sessionId];
-			if(param.img)
+			if(command.param.img)
 			{
 				console.log(param.color);
 			}
+
 			if (!pointer) {
 				pointer = $('<div class="userPointer"/>').appendTo(
 						document.body);
