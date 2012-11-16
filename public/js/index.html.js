@@ -471,7 +471,7 @@ onAppReady(function(param) {
 		var canvas = document.getElementById("canvas");  //canvas要素を取得
 		var  can = canvas.getContext('2d');
 		var img=new Image();
-		img.src = canvas.toDataURL(image/png);
+		img.src = canvas.toDataURL("image/png");
 
 
 		COMMAND_OPS.next({
