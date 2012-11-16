@@ -245,7 +245,9 @@ onAppReady(function(param) {
 					param : param
 				});
 
-				ctx.drawImage(param.color,0,0);
+				var canvas = document.getElementById("canvas");  //canvas要素を取得
+				var  can = canvas.getContext('2d');
+				can.drawImage(param.color,0,0);
 			}
 		}
 
