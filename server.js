@@ -89,14 +89,14 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			    console.log('end');
 				connection.end();
 			  });
-
+			socket.broadcast.emit('command', command);
 		}
 
 
 
 
 
-		socket.broadcast.emit('command', command);
+
 
 		if(command.type == 'reset')
 		{
