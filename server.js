@@ -65,8 +65,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		socket.broadcast.emit('command', command);
 		
 		
-		if(command.type == 'next')
+		if(command.type == 'reset')
 		{
+			commands = [];
 			
 			
 			//接続します
