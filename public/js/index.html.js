@@ -558,7 +558,7 @@ onAppReady(function(param) {
 			delete pointers[sessionId];
 		});
 		socket.on('command', function(command) {
-			console.log(command.color);
+			console.log(command.param.color);
 			// render mouse pointer
 			var param = command.param;
 			var sessionId = command.sessionId;
