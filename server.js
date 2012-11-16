@@ -20,6 +20,8 @@ var connection = mysql.createConnection({
   database : 'pcp2012'    //DB名
 });
 
+//接続します
+connection.connect();
 
 
 
@@ -70,8 +72,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			commands = [];
 			
 			
-			//接続します
-			connection.connect();
 			
 			//SQL文を書く
 			var sql = 'SELECT * FROM m_user;';
