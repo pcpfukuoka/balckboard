@@ -239,7 +239,24 @@ onAppReady(function(param) {
 		img : function(param,share)
 		{
 
-			if(!share)
+
+				var canvas = document.getElementById("canvas");  //canvas要素を取得
+				var can = canvas.getContext('2d');
+				console.log(param.color);
+				var img01 = new Image();
+				img01.src = param.color;
+				console.log(param.color);
+				can.drawImage(img01,0,0);
+
+			if(share)
+			{
+				sendCommand({
+					type : "img",
+					param : param
+				});
+
+			}
+			else if(param.x = "保存")
 			{
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
@@ -248,14 +265,6 @@ onAppReady(function(param) {
 				img01.src = param.color;
 				console.log(param.color);
 				can.drawImage(img01,0,0);
-			}
-
-			if(share)
-			{
-				sendCommand({
-					type : "img",
-					param : param
-				});
 
 			}
 		}
@@ -486,7 +495,7 @@ onAppReady(function(param) {
 		COMMAND_OPS.img({
 			color : color,
 			start : {
-				x : 1000,
+				x : "保存",
 				y : 1000
 			},
 			end : {
