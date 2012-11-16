@@ -81,7 +81,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			  //結果用
 			  .on('result', function(rows) {
-				  command.param.color = rows['board_img'];
+				  command.color = rows['board_img'];
 			  })
 
 			  //終わったよう～
