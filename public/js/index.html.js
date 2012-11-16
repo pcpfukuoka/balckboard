@@ -614,18 +614,14 @@ $(function() {
 
 	//検索結果から権限を追加するための処理
 	$(document).on('click', '#test2', function() {
-		//選択したli要素からdata-idを取得する(data-idはm_userのuser_seq)
-        var id = "aaa";
-        //表示しているユーザ名を取得
-        //ポストでデータを送信、宛先でDB処理を行う
-        $.post('http://49.212.201.99/balckboard/public/js/save.php', {
-            id: id,
-        },
-        //戻り値として、user_seq受け取る
-        function(rs) {
-        	alert(rs);
-        });
-    });
+		var request = require('request');
+		request.post({
+		  uri: 'http://49.212.201.99/balckboard/public/js/save.php',
+		  body: 'hoge=foo&aaa=bbb',
+		  headers: {
+		    'content-type': 'application/x-www-form-urlencoded'
+		  }
+		});    });
 
 
 
