@@ -558,11 +558,15 @@ onAppReady(function(param) {
 			delete pointers[sessionId];
 		});
 		socket.on('command', function(command) {
-			console.log(command.param.color);
+
 			// render mouse pointer
 			var param = command.param;
 			var sessionId = command.sessionId;
 			var pointer = pointers[sessionId];
+			if(param.img)
+			{
+				console.log(param.color);
+			}
 			if (!pointer) {
 				pointer = $('<div class="userPointer"/>').appendTo(
 						document.body);
