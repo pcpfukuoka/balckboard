@@ -244,6 +244,8 @@ onAppReady(function(param) {
 
 			var img01 = new Image();
 			img01.src = param.color;
+			console.log(param.color);
+			can.drawImage(img01,0,0);
 
 			if(share)
 			{
