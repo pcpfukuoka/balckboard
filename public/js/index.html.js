@@ -441,7 +441,7 @@ onAppReady(function(param) {
 		true);
 	});
 	$("#next").click(function(e){
-		COMMAND_OPS.next({
+		COMMAND_OPS.save({
 			color : color,
 			start : {
 				x : 1000,
