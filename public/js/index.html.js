@@ -228,20 +228,25 @@ onAppReady(function(param) {
 
 		save : function(param,share)
 		{
+			if(share)
+			{
 				sendCommand({
 					type : "save",
 					param : param
 				});
+			}
 		},
 		img : function(param,share)
 		{
-			sendCommand({
-				type : "img",
-				param : param
-			});
+			if(share)
+			{
+				sendCommand({
+					type : "img",
+					param : param
+				});
 
-			ctx.drawImage(param.color,0,0);
-
+				ctx.drawImage(param.color,0,0);
+			}
 		}
 
 	};
