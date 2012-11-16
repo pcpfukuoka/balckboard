@@ -57,39 +57,39 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		// mouseMove繧､繝吶Φ繝医�菫晏ｭ倥＠縺ｪ縺�
 		if (command.type !== 'mouseMove') {
 			storeCommand(command);
+			//接続します
+			connection.connect();
+			
+			//SQL文を書く
+			var sql = 'SELECT * FROM m_user;';
+			
+			var query = connection.query(sql);
+
+			//あとはイベント発生したらそれぞれよろしくねっ
+			query
+			  //エラー用
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
+
+			  //結果用
+			  .on('result', function(rows) {
+			    console.log('The res is: ', rows );
+			  })
+
+			  //終わったよう～
+			  .on('end', function() {
+			    console.log('end');
+			    connection.destroy(); //終了
+			  });
+			
+			
 		}
 		// 繧ｭ繝｣繝ｳ繝舌せ繧偵け繝ｪ繧｢縺吶ｋ髫帙�繧ｳ繝槭Φ繝牙ｱ･豁ｴ繧ょ�縺ｦ繧ｯ繝ｪ繧｢
 		if (command.type === 'clear') {
 			commands = [];
 		}
 		socket.broadcast.emit('command', command);
-		
-		//接続します
-		connection.connect();
-		
-		//SQL文を書く
-		var sql = 'SELECT * FROM m_user;';
-		
-		var query = connection.query(sql, [userId]);
-
-		//あとはイベント発生したらそれぞれよろしくねっ
-		query
-		  //エラー用
-		  .on('error', function(err) {
-		    console.log('err is: ', err );
-		  })
-
-		  //結果用
-		  .on('result', function(rows) {
-		    console.log('The res is: ', rows );
-		  })
-
-		  //終わったよう～
-		  .on('end', function() {
-		    console.log('end');
-		    connection.destroy(); //終了
-		  });
-		
 		
 	});
 	socket.on('disconnect', function() {
