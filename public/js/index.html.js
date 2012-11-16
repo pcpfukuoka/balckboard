@@ -247,7 +247,7 @@ onAppReady(function(param) {
 
 				}
 
-			else if(param.x == "保存" && share != "true")
+			else if(param.x == "保存")
 			{
 				console.log(param.x);
 				console.log(param.color);
