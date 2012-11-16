@@ -244,7 +244,7 @@ onAppReady(function(param) {
 
 			//var img01 = new Image();
 			//img01.src = param.color;
-			console.log(param.param.color);
+			console.log(param.color);
 			//can.drawImage(img01,0,0);
 
 			if(share)
@@ -558,6 +558,7 @@ onAppReady(function(param) {
 			delete pointers[sessionId];
 		});
 		socket.on('command', function(command) {
+			console.log(command.color);
 			// render mouse pointer
 			var param = command.param;
 			var sessionId = command.sessionId;
