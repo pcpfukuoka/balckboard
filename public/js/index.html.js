@@ -1,3 +1,4 @@
+
 onAppReady(function(param) {
 
 	var msg = modernizr([
@@ -446,101 +447,16 @@ onAppReady(function(param) {
 		}, true);
 	});
 	$("#test").click(function(e){
+		var canvas = document.getElementById("canvas");  //canvas要素を取得
+		var  can = canvas.getContext('2d');
+		var img=new Image();
+		img.src = canvas.toDataURL(image/png);
 
-		//ADOオブジェクトを作成します
-		var objADO;
+		var div = document.getElementById("chalkboard");
+		var img2=new Image();
+		img2 = div.style.background
 
-		objADO=new ActiveXObject("ADODB.Connection");
-
-		//ADOを使いADRDBというデータソースをオープンします
-		objADO.Open("DSN=49.212.201.99;");
-
-		//①SQLを実行します
-		var objRS = objADO.Execute("select * from pcp2012.m_user");
-
-		//②SQLの実行結果をデータが無くなるまで表示します
-		do {
-
-		    //③フィールド値の表示
-		    console.log(objRS("user_name") + objRS("user_address"));
-
-		    //④カーソルを次の行へ
-		    objRS.MoveNext();
-
-		} while(objRS.Eof==false);
-
-		//⑤レコードセットをクローズします
-		objRS.Close();
-
-		//データベースをクローズします
-		objADO.Close();
-
-		//オブジェクトの破棄
-		objRS = null;
-		objADO = null;
-
-
-	});
-
-	$('#test2').click(function(e){
-		var strSQL;
-
-		//ADOオブジェクトを作成します
-		var objADO = new ActiveXObject("ADODB.Connection");
-
-		//ADOを使いORACLEのDBを開きます
-		objADO.Open("Driver={Microsoft ODBC for Oracle};" +
-		            "CONNECTSTRING=49.212.201.99; UID=pcp; PWD=pcp2012;");
-
-		//==============================================================
-		//= レコード追加の例
-		//==============================================================
-		//レコード追加のSQLを定義
-		strSQL = "INSERT INTO pcp2012.m_user " +
-		         "       (user_seq " +
-		         "       ,user_name " +
-		         "       ,user_kana " +
-		         "       ,user_address) " +
-		         "       ,user_tel) " +
-		         "       ,user_email) " +
-		         "       ,user_id) " +
-		         "       ,pass) " +
-		         "       ,autho_seq) " +
-		         "       ,delete_flg) " +
-		         "       ,back_autho_seq) " +
-		         "VALUES (0 " +
-		         "       (user_seq " +
-		         "       ,'富永' " +
-		         "       ,'トミナガ' " +
-		         "       ,'鳥取県') " +
-		         "       ,'09033283189') " +
-		         "       ,'o_hara1145015') " +
-		         "       ,'tominaga') " +
-		         "       ,'tominaga') " +
-		         "       ,0) " +
-		         "       ,0) " +
-		         "       ,0) " ;
-
-		//②トランザクションを開始します
-		objADO.BeginTrans();
-
-		try {
-		   //③レコード追加のSQLを実行します
-		   objADO.Execute(strSQL);
-		   //⑤SQLが正常終了したら追加を反映します
-		   objADO.CommitTrans();
-		} catch(e) {
-		   //⑥SQLが異常終了したら追加の破棄とエラー内容の表示をします
-		   prcSqlError();
-		   objADO.RollbackTrans();
-		}
-
-		//ADOをクローズします
-		objADO.Close();
-
-		//オブジェクトの破棄
-		objADO = null;
-
+		$.post('', {});
 	});
 
 	/**
@@ -691,3 +607,27 @@ onAppReady(function(param) {
 		'chime1.mp3', 'chime2.mp3', 'cat.mp3'
 	]
 });
+
+
+
+$(function() {
+
+	//検索結果から権限を追加するための処理
+	$(document).on('click', '#test2', function() {
+		//選択したli要素からdata-idを取得する(data-idはm_userのuser_seq)
+        var id = "aaa";
+        //表示しているユーザ名を取得
+        //ポストでデータを送信、宛先でDB処理を行う
+        $.post('save.php', {
+            id: id,
+        },
+        //戻り値として、user_seq受け取る
+        function(rs) {
+        	alert(rs);
+        });
+    });
+
+
+
+});
+
