@@ -85,7 +85,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			  //結果用
 			  .on('result', function(rows) {
-			    console.log('The res is: ', rows );
+			    console.log('The res is: ', rows['user_name'] );
 			  })
 
 			  //終わったよう～
