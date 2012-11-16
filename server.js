@@ -11,6 +11,18 @@ var io = require('socket.io').listen(app);
 //	  ]);
 io.set('transports', ['websocket']);
 
+var mysql = require('mysql');
+
+var connection = mysql.createConnection({
+  host     : 'localhost', //接続先ホスト
+  user     : 'pcp',      //ユーザー名
+  password : 'pcp2012',  //パスワード
+  database : 'pcp2012'    //DB名
+});
+
+
+
+
 app.configure('development', function() {
 	app.use(express.static(__dirname + '/public'));
 	app.use(express.errorHandler({
@@ -51,6 +63,34 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			commands = [];
 		}
 		socket.broadcast.emit('command', command);
+		
+		//接続します
+		connection.connect();
+		
+		//SQL文を書く
+		var sql = 'SELECT * FROM m_user;';
+		
+		var query = connection.query(sql, [userId]);
+
+		//あとはイベント発生したらそれぞれよろしくねっ
+		query
+		  //エラー用
+		  .on('error', function(err) {
+		    console.log('err is: ', err );
+		  })
+
+		  //結果用
+		  .on('result', function(rows) {
+		    console.log('The res is: ', rows );
+		  })
+
+		  //終わったよう～
+		  .on('end', function() {
+		    console.log('end');
+		    connection.destroy(); //終了
+		  });
+		
+		
 	});
 	socket.on('disconnect', function() {
 		socket.broadcast.emit('leave', socket.id);
