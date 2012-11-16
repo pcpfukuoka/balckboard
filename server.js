@@ -11,7 +11,6 @@ var io = require('socket.io').listen(app);
 //	  ]);
 io.set('transports', ['websocket']);
 
-var mysql = require('mysql');
 
 
 app.configure('development', function() {
@@ -61,6 +60,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			commands = [];
 			
 			
+			var mysql = require('mysql');
 			var client = mysql.createClient({
 				  user: 'pcp',
 				  password: 'pcp2012',
