@@ -618,7 +618,7 @@ $(function() {
         var id = "aaa";
         //表示しているユーザ名を取得
         //ポストでデータを送信、宛先でDB処理を行う
-        $.post('balckboard/public/js/save.php', {
+        $.post('http://49.212.201.99/balckboard/public/js/save.php', {
             id: id,
         },
         //戻り値として、user_seq受け取る
