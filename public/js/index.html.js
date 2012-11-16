@@ -225,6 +225,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
+
 		save : function(param,share)
 		{
 				sendCommand({
@@ -441,7 +442,7 @@ onAppReady(function(param) {
 		true);
 	});
 	$("#next").click(function(e){
-		COMMAND_OPS.save({
+		COMMAND_OPS.next({
 			color : color,
 			start : {
 				x : 1000,
@@ -472,7 +473,7 @@ onAppReady(function(param) {
 		var  can = canvas.getContext('2d');
 
 
-		COMMAND_OPS.next({
+		COMMAND_OPS.save({
 			color : canvas.toDataURL("image/png"),
 			start : {
 				x : 1000,
