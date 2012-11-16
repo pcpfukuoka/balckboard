@@ -77,11 +77,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			//SQL文を書く
 			var sql = 'INSERT INTO board VALUES (0,?);';
 
-//			var query = connection.query(sql,[command.param.color]);
+			var query = connection.query(sql,[command.param.color]);
 
-			console.log(command.param.color);
 			//あとはイベント発生したらそれぞれよろしくねっ
-/*			query
+			query
 			  //エラー用
 			  .on('error', function(err) {
 			    console.log('err is: ', err );
@@ -97,7 +96,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			    console.log('end');
 				connection.end();
 			  });
-*/
+
 		}
 
 
