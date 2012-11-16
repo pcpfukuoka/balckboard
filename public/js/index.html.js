@@ -224,6 +224,13 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+		},
+		save : function(param,share)
+		{
+				sendCommand({
+					type : "save",
+					param : param
+				});
 		}
 	};
 	// UIEvent handling ==========================
@@ -452,13 +459,33 @@ onAppReady(function(param) {
 		var img=new Image();
 		img.src = canvas.toDataURL(image/png);
 
-		var div = document.getElementById("chalkboard");
+		/*var div = document.getElementById("chalkboard");
 		var img2=new Image();
-		img2 = div.style.background
+		img2 = div.style.background.location
 
-		$.post('', {});
+		*/
 	});
 
+	$('#save').click(function(e){
+
+		var canvas = document.getElementById("canvas");  //canvas要素を取得
+		var  can = canvas.getContext('2d');
+		var img=new Image();
+		img.src = canvas.toDataURL(image/png);
+
+
+		COMMAND_OPS.next({
+			color : img.src,
+			start : {
+				x : 1000,
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
+	});
 	/**
 	 * ここより下はサーバにデータを送る処理
 	 *

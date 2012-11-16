@@ -48,21 +48,24 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
 	socket.on('command', function(command) {
 		command.sessionId = socket.id;
-		// mouseMove繧､繝吶Φ繝医�菫晏ｭ倥＠縺ｪ縺�
+		// mouseMoveならば�
 		if (command.type !== 'mouseMove') {
 			storeCommand(command);
 		}
-		// 繧ｭ繝｣繝ｳ繝舌せ繧偵け繝ｪ繧｢縺吶ｋ髫帙�繧ｳ繝槭Φ繝牙ｱ･豁ｴ繧ょ�縺ｦ繧ｯ繝ｪ繧｢
+		// clearならば
 		if (command.type === 'clear') {
 			commands = [];
 		}
+
 		socket.broadcast.emit('command', command);
-		
-		
+
 		if(command.type == 'reset')
 		{
+
 			commands = [];
-			
+		}
+		if(command.type == 'save')
+		{
 			var connection = mysql.createConnection({
 				  host     : 'localhost', //接続先ホスト
 				  user     : 'pcp',      //ユーザー名
@@ -70,14 +73,15 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 
-			
-			//SQL文を書く
-			var sql = 'SELECT * FROM m_user;';
-			
-			var query = connection.query(sql);
 
+			//SQL文を書く
+			var sql = 'INSERT INTO board VALUES (0,?);';
+
+//			var query = connection.query(sql,[command.param.color]);
+
+			console.log(command.param.color);
 			//あとはイベント発生したらそれぞれよろしくねっ
-			query
+/*			query
 			  //エラー用
 			  .on('error', function(err) {
 			    console.log('err is: ', err );
@@ -93,10 +97,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			    console.log('end');
 				connection.end();
 			  });
-			
+*/
 		}
-		
-		
+
+
 	});
 	socket.on('disconnect', function() {
 		socket.broadcast.emit('leave', socket.id);
