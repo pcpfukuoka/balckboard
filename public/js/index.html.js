@@ -232,7 +232,18 @@ onAppReady(function(param) {
 					type : "save",
 					param : param
 				});
+		},
+		img : function(param,share)
+		{
+			sendCommand({
+				type : "img",
+				param : param
+			});
+
+			ctx.drawImage(param.color,0,0);
+
 		}
+
 	};
 	// UIEvent handling ==========================
 
@@ -455,16 +466,21 @@ onAppReady(function(param) {
 		}, true);
 	});
 	$("#test").click(function(e){
-		var canvas = document.getElementById("canvas");  //canvas要素を取得
-		var  can = canvas.getContext('2d');
-		var img=new Image();
-		img.src = canvas.toDataURL(image/png);
 
-		/*var div = document.getElementById("chalkboard");
-		var img2=new Image();
-		img2 = div.style.background.location
+		COMMAND_OPS.img({
+			color : color,
+			start : {
+				x : 1000,
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
 
-		*/
+
+
 	});
 
 	$('#save').click(function(e){
@@ -635,21 +651,4 @@ onAppReady(function(param) {
 });
 
 
-
-$(function() {
-
-	//検索結果から権限を追加するための処理
-	$(document).on('click', '#test2', function() {
-		var request = require('request');
-		request.post({
-		  uri: 'http://49.212.201.99/balckboard/public/js/save.php',
-		  body: 'hoge=foo&aaa=bbb',
-		  headers: {
-		    'content-type': 'application/x-www-form-urlencoded'
-		  }
-		});    });
-
-
-
-});
 

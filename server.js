@@ -57,6 +57,45 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			commands = [];
 		}
 
+		if(command.type == 'img')
+		{
+			var connection = mysql.createConnection({
+				  host     : 'localhost', //接続先ホスト
+				  user     : 'pcp',      //ユーザー名
+				  password : 'pcp2012',  //パスワード
+				  database : 'pcp2012'    //DB名
+				});
+
+
+			//SQL文を書く
+			var sql = 'SELECT * FROM board;';
+
+			var query = connection.query(sql);
+
+			//あとはイベント発生したらそれぞれよろしくねっ
+			query
+			  //エラー用
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
+
+			  //結果用
+			  .on('result', function(rows) {
+				  command.param.color = rows['board_img'];
+			  })
+
+			  //終わったよう～
+			  .on('end', function() {
+			    console.log('end');
+				connection.end();
+			  });
+
+		}
+
+
+
+
+
 		socket.broadcast.emit('command', command);
 
 		if(command.type == 'reset')
