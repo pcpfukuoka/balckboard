@@ -239,14 +239,14 @@ onAppReady(function(param) {
 		img : function(param,share)
 		{
 			if(share)
-			{
-				sendCommand({
+				{
+					sendCommand({
 					type : "img",
 					param : param
-				});
+					});
 
-			}
-			else if(param.x = "保存" && !share)
+				}
+			else if(param.x = "保存" && share != "true")
 			{
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
