@@ -13,17 +13,6 @@ io.set('transports', ['websocket']);
 
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
-  host     : 'localhost', //接続先ホスト
-  user     : 'pcp',      //ユーザー名
-  password : 'pcp2012',  //パスワード
-  database : 'pcp2012'    //DB名
-});
-
-//接続します
-connection.connect();
-
-
 
 app.configure('development', function() {
 	app.use(express.static(__dirname + '/public'));
@@ -72,30 +61,25 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			commands = [];
 			
 			
-			
-			//SQL文を書く
-			var sql = 'SELECT * FROM m_user;';
-			
-			var query = connection.query(sql);
-
-			//あとはイベント発生したらそれぞれよろしくねっ
-			query
-			  //エラー用
-			  .on('error', function(err) {
-			    console.log('err is: ', err );
-			  })
-
-			  //結果用
-			  .on('result', function(rows) {
-			    console.log('The res is: ', rows );
-			  })
-
-			  //終わったよう～
-			  .on('end', function() {
-			    console.log('end');
-			    connection.destroy(); //終了
-			  });
-
+			var client = mysql.createClient({
+				  user: 'pcp',
+				  password: 'pcp2012',
+				  database: 'pcp2012'
+				});
+				 
+				//データの検索
+				client.query(
+				  'select * from m_user' ,
+				  function (err, result, field) {
+				    if (err) {
+				      throw err;
+				    }
+				     
+				    console.log(result);
+				    console.log(field);
+				    client.end();
+				  }
+				);
 			
 		}
 		
