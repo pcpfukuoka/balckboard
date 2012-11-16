@@ -238,6 +238,11 @@ onAppReady(function(param) {
 		},
 		img : function(param,share)
 		{
+
+			var canvas = document.getElementById("canvas");  //canvas要素を取得
+			var  can = canvas.getContext('2d');
+			can.drawImage(param.color,0,0);
+
 			if(share)
 			{
 				sendCommand({
@@ -245,9 +250,6 @@ onAppReady(function(param) {
 					param : param
 				});
 
-				var canvas = document.getElementById("canvas");  //canvas要素を取得
-				var  can = canvas.getContext('2d');
-				can.drawImage(param.color,0,0);
 			}
 		}
 
