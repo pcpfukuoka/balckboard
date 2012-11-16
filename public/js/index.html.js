@@ -495,7 +495,7 @@ onAppReady(function(param) {
 		COMMAND_OPS.img({
 			color : color,
 			start : {
-				x : 保存,
+				x : "保存",
 				y : 1000
 			},
 			end : {
