@@ -246,7 +246,6 @@ onAppReady(function(param) {
 					});
 
 				}
-
 			else if(param.start.x == "保存")
 			{
 				console.log(param.start.x);
