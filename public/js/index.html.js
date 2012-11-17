@@ -533,7 +533,7 @@ onAppReady(function(param) {
 				console.error('Unknown command type:' + command.type);
 				return;
 			}
-			console.log(command.color);
+			console.log(command.param.color);
 			fn(command.param);
 		}
 		socket.on('connect', function(commands) {
