@@ -68,6 +68,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 			//SQL文を書く
+			//var sql = 'SELECT * FROM board
 			var sql = 'SELECT * FROM board WHERE board_seq = "499";';
 
 			var query = connection.query(sql);
