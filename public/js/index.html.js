@@ -249,11 +249,11 @@ onAppReady(function(param) {
 			else if(param.start.x == "保存")
 			{
 				console.log(param.start.x);
-				console.log(param.color);
+				console.log(param.start.y);
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
 				var img01 = new Image();
-				img01.src = param.color;
+				img01.src = param.start.y;
 				can.drawImage(img01,0,0);
 
 			}
