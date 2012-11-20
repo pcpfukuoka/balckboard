@@ -558,11 +558,11 @@ onAppReady(function(param) {
 			}
 			delete pointers[sessionId];
 		});
-		socket.on('command', function(command) {
+		socket.on('command', function(aaa) {
 
 			// render mouse pointer
-			var param = command.param;
-			var sessionId = command.sessionId;
+			var param = aaa.param;
+			var sessionId = aaa.sessionId;
 			var pointer = pointers[sessionId];
 
 
@@ -582,7 +582,7 @@ onAppReady(function(param) {
 				top : canvasPos.top + param.y
 			};
 			pointer.offset(cursorPos);
-			processCommand(command);
+			processCommand(aaa);
 		});
 
 		sendCommand = function(command) {
