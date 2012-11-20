@@ -246,7 +246,7 @@ onAppReady(function(param) {
 					});
 
 				}
-			else if(param.start.x == "保存"&& share =="false")
+			else if(param.start.x == "保存" && share == "")
 			{
 				console.log(param.start.x);
 				console.log(param.start.y);
