@@ -51,7 +51,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		// clearならば
 		if (command.type === 'clear') {
 			commands = [];
-			socket.broadcast.emit('command', command);
 
 		}
 
@@ -76,8 +75,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  //エラー用
 			  .on('error', function(err) {
 			    console.log('err is: ', err );
-				socket.broadcast.emit('command', command);
-
 			  })
 
 			  //結果用
@@ -88,24 +85,22 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //console.log(command.param.start.y);
 				  console.log("です");
 				  socket.emit('command', command);
-				  socket.broadcast.emit('command', command);
-
 			  })
 
 			  //終わったよう～
 			  .on('end', function() {
 			    console.log('end');
 				connection.end();
-				socket.broadcast.emit('command', command);
 
 			  });
 		// mouseMoveならば�
 
 		if (command.type !== 'mouseMove') {
 			storeCommand(command);
-			socket.broadcast.emit('command', command);
+
 
 		}
+		socket.broadcast.emit('command', command);
 
 
 
