@@ -246,8 +246,9 @@ onAppReady(function(param) {
 					});
 
 				}
-			else if(param.start.x == "保存" && share == "")
+			else if(param.start.x == "保存")
 			{
+				console.log(share);
 				console.log(param.start.x);
 				console.log(param.start.y);
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
