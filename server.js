@@ -83,6 +83,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //console.log("画像のＵＲＬは");
 				  //console.log(command.param.start.y);
 				  console.log("です");
+				  socket.emit('command', command);
 			  })
 
 			  //終わったよう～
