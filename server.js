@@ -48,10 +48,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
 	socket.on('command', function(command) {
 		command.sessionId = socket.id;
-		// mouseMoveならば�
-		if (command.type !== 'mouseMove') {
-			storeCommand(command);
-		}
 		// clearならば
 		if (command.type === 'clear') {
 			commands = [];
@@ -94,6 +90,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				connection.end();
 			  });
 			socket.emit('command', command);
+		}
+		// mouseMoveならば�
+		if (command.type !== 'mouseMove') {
+			storeCommand(command);
 		}
 
 		socket.broadcast.emit('command', command);
