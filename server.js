@@ -80,10 +80,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  //結果用
 			  .on('result', function(rows) {
 				  command.param.start.y = rows['board_img'];
-				  console.log(command);
+				  //console.log(command);
 				  //console.log("画像のＵＲＬは");
 				  //console.log(command.param.start.y);
-				  console.log("です");
+				  //console.log("です");
 				  socket.emit('command', command);
 			  })
 
@@ -100,6 +100,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 		}
+		console.log(command);
 		socket.broadcast.emit('command', command);
 
 
