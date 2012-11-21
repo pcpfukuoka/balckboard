@@ -96,11 +96,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  });
 		// mouseMoveならば�
 
-		if (command.type !== 'mouseMove') {
-			storeCommand(command);
-
-
-		};
+			if (command.type !== 'mouseMove') {
+				storeCommand(command);
+			};
 		console.log("テスト");
 		console.log(command);
 		socket.broadcast.emit('command', command);
@@ -149,7 +147,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		};
 
 
-		};
+
 	});
 
 	socket.on('disconnect', function() {
