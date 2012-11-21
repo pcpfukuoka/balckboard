@@ -94,8 +94,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				connection.end();
 
 			  });
-		// mouseMoveならば�
+		}
 
+			// mousemove以外をログとして保存
 			if (command.type !== 'mouseMove') {
 				storeCommand(command);
 			};
