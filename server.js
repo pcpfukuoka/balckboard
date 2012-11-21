@@ -48,6 +48,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
 	socket.on('command', function(command) {
 		command.sessionId = socket.id;
+
 		// clearならば
 		if (command.type === 'clear') {
 			commands = [];
@@ -109,7 +110,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		{
 
 			commands = [];
-		}
+		};
+
 		if(command.type == 'save')
 		{
 			var connection = mysql.createConnection({
@@ -143,10 +145,11 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				connection.end();
 			  });
 
-		}
+		};
 
 
-	});
+	}});
+
 	socket.on('disconnect', function() {
 		socket.broadcast.emit('leave', socket.id);
 	});
