@@ -100,7 +100,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			storeCommand(command);
 
 
-		}
+		};
+		console.log("テスト");
 		console.log(command);
 		socket.broadcast.emit('command', command);
 
@@ -148,7 +149,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		};
 
 
-	}});
+		};
+	});
 
 	socket.on('disconnect', function() {
 		socket.broadcast.emit('leave', socket.id);
