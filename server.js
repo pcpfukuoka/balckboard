@@ -94,15 +94,16 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				connection.end();
 
 			  });
+			console.log("テスト");
+			console.log(command);
+			socket.broadcast.emit('command', command);
+
 		}
 
 			// mousemove以外をログとして保存
-			if (command.type !== 'mouseMove') {
-				storeCommand(command);
-			};
-		console.log("テスト");
-		console.log(command);
-		socket.broadcast.emit('command', command);
+		if (command.type !== 'mouseMove') {
+			storeCommand(command);
+		}
 
 
 
