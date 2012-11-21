@@ -240,7 +240,7 @@ onAppReady(function(param) {
 		{
 			if(share)
 				{
-					sendCommand({
+					img({
 					type : "img",
 					param : param
 					});
@@ -522,6 +522,7 @@ onAppReady(function(param) {
 	 *            command
 	 */
 	var sendCommand;
+	var img;
 	// Interaction with server using Socket.IO
 	(function() {
 		var socket = io.connect(location.protocol + '//' + location.host
@@ -584,10 +585,15 @@ onAppReady(function(param) {
 			pointer.offset(cursorPos);
 			processCommand(aaa);
 		});
-
+		socket.on('img', function(aaa){
+			processCommand(aaa);
+		});
+		img = function(command){
+			socket.emit('command', command);
+		};
 		sendCommand = function(command) {
 			socket.emit('command', command);
-		}
+		};
 	})();
 
 	function clock(){
