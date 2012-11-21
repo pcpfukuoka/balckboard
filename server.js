@@ -55,6 +55,20 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 		}
 
+		socket.broadcast.emit('command', command);
+
+		// mousemove以外をログとして保存
+		if (command.type !== 'mouseMove') {
+			storeCommand(command);
+		}
+
+		if(command.type == 'reset')
+		{
+
+			commands = [];
+		};
+
+
 		if(command.type == 'img')
 		{
 			var connection = mysql.createConnection({
@@ -86,6 +100,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //console.log(command.param.start.y);
 				  //console.log("です");
 				  socket.emit('command', command);
+				  socket.broadcast.emit('command', command);
+
+
 			  })
 
 			  //終わったよう～
@@ -95,23 +112,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			  });
 		}
-		console.log("ああああああああああああああああ");
-		console.log(command);
-		socket.broadcast.emit('command', command);
-
-		// mousemove以外をログとして保存
-		if (command.type !== 'mouseMove') {
-			storeCommand(command);
-		}
-
-
-
-		if(command.type == 'reset')
-		{
-
-			commands = [];
-		};
-
 		if(command.type == 'save')
 		{
 			var connection = mysql.createConnection({
