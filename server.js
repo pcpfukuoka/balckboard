@@ -100,6 +100,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //console.log(command.param.start.y);
 				  //console.log("です");
 				  socket.emit('command', command);
+				  socket.broadcast.emit('command', command);
 
 
 			  })
@@ -110,8 +111,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				connection.end();
 
 			  });
-			  socket.broadcast.emit('command', command);
-
 		}
 		if(command.type == 'save')
 		{
