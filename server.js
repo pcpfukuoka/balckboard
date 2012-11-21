@@ -81,6 +81,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			connection.end();
 
 		  });
+
+		storeCommand(command);
+
 		socket.broadcast.emit('img', command);
 	});
 
