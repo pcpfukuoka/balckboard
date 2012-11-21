@@ -96,7 +96,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  });
 		}
 		console.log("ああああああああああああああああ");
-		console.log(command.param.start.y);
+		console.log(command);
 		socket.broadcast.emit('command', command);
 
 		// mousemove以外をログとして保存
