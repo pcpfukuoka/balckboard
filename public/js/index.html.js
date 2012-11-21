@@ -589,7 +589,7 @@ onAppReady(function(param) {
 			processCommand(aaa);
 		});
 		img = function(command){
-			socket.emit('command', command);
+			socket.emit('img', command);
 		};
 		sendCommand = function(command) {
 			socket.emit('command', command);
