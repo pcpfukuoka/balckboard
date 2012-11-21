@@ -73,7 +73,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('result', function(rows) {
 			  command.param.start.y = rows['board_img'];
 			    console.log('ログ用');
-			    console.log(command.param.start.y);
+				storeCommand(command);
+				socket.broadcast.emit('img', command);
 			  socket.emit('command', command);
 		  })
 
@@ -84,8 +85,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 		  });
 
-		storeCommand(command);
-		socket.broadcast.emit('img', command);
 	});
 
 	socket.on('command', function(command) {
