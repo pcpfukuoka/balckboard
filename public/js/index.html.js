@@ -201,6 +201,7 @@ onAppReady(function(param) {
 		next : function(param,share)
 		{
 
+			/*
 			//canvasのＵＲＬを保存する処理
 			var can = document.getElementById("canvas");
 			var aaa = can.getContext("2d");
@@ -215,8 +216,7 @@ onAppReady(function(param) {
 			var bbb = back.getContext("2d");
 			var img2=new image();
 			img2.src = back.toDataURL("image/png");
-
-
+			*/
 			if(share)
 			{
 				sendCommand({

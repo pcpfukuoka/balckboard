@@ -146,6 +146,39 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 		};
 
+		if(command.type == 'next')
+		{
+
+			var connection = mysql.createConnection({
+				  host     : 'localhost', //接続先ホスト
+				  user     : 'pcp',      //ユーザー名
+				  password : 'pcp2012',  //パスワード
+				  database : 'pcp2012'    //DB名
+				});
+
+
+			//SQL文を書く
+			var sql = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
+
+			var query = connection.query(sql);
+
+
+			//あとはイベント発生したらそれぞれよろしくねっ
+			query
+			  //エラー用
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
+			  //終わったよう～
+			  .on('end', function() {
+			    console.log('end');
+				connection.end();
+			  });
+
+
+
+		}
+
 
 
 	});
