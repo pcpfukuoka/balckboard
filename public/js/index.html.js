@@ -6,8 +6,6 @@ onAppReady(function(param) {
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
 	]);
 	if(msg.length > 0){ alert(msg.join('\n')); }
-
-
 	//clock();
 
 	// show images
@@ -217,6 +215,9 @@ onAppReady(function(param) {
 			var img2=new image();
 			img2.src = back.toDataURL("image/png");
 			*/
+
+			//param.start.xに現在の使用ページ数＋１の値（ページ追加後の枚数）を格納
+			param.start.x = page_num + 1;
 			if(share)
 			{
 				sendCommand({

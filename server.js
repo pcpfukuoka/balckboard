@@ -148,7 +148,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 		if(command.type == 'next')
 		{
-
+			var page_num = command.param.x;
 			var connection = mysql.createConnection({
 				  host     : 'localhost', //接続先ホスト
 				  user     : 'pcp',      //ユーザー名
@@ -158,7 +158,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 			//SQL文を書く
-			var sql = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
+			var sql = 'INSERT INTO board VALUES (0,now(),15,15,page_num,0,0);';
 
 			var query = connection.query(sql);
 
