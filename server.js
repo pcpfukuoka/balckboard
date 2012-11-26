@@ -155,7 +155,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 
-			var sql = 'SELECT page_num FROM board WHERE date = now() AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
+			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),'%Y-%m-%d') AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
 
 			var query = connection.query(sql);
 			query
