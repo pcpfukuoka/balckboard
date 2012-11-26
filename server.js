@@ -168,7 +168,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 			//あとはイベント発生したらそれぞれよろしくねっ
-			query
+			query2
 			  //エラー用
 			  .on('error', function(err) {
 			    console.log('err is: ', err );
