@@ -158,9 +158,26 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			var sql1 = 'SELECT page_num FROM board WHERE date = now() AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
 
 			var query1 = connection.query(sql1);
+			query1
+			  //エラー用
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
 
-			page_num = query1 ++;
-			console.log(page_num);
+			  //結果用
+			  .on('result', function(rows) {
+
+				  var a = rows['page_num'];
+				  a++;
+			    console.log('ページ番号：'+ a);
+			  })
+
+			  //終わったよう～
+			  .on('end', function() {
+			    console.log('end');
+				connection.end();
+			  });
+
 			//SQL文を書く
 			//var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
 
