@@ -181,7 +181,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  //終了ログ
 			  .on('end', function() {
 			    console.log('end');
-				connection.end();
 			  });
 			socket.broadcast.emit('next',command);
 			socket.emit('next',command);
