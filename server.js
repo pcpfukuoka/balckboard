@@ -154,14 +154,15 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  password : 'pcp2012',  //パスワード
 				  database : 'pcp2012'    //DB名
 				});
+
 			var sql1 = 'SELECT page_num FROM board WHERE date = now() AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
 
 			var query1 = connection.query(sql1);
 
-			page_num = query1 + 1;
+			//page_num = query1 + 1;
 
 			//SQL文を書く
-			var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,'+page_num+',0,0);';
+			var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
 
 			var query2 = connection.query(sql2);
 
