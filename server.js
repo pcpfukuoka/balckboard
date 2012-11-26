@@ -49,7 +49,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
 	//
 	socket.on('page_move', function(command){
-		page_move =  page_move + command.start.x;
+		page_move =  page_move + command.param.start.x;
 		console.log("////////////////////");
 		console.log(page_move);
 	});
