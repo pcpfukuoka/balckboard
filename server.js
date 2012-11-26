@@ -163,6 +163,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			var query = connection.query(sql);
 
 
+
 			//あとはイベント発生したらそれぞれよろしくねっ
 			query
 			  //エラー用
@@ -192,7 +193,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			var sql = 'SELECT count(count(*)) FROM pcp2012.board WHERE date = now() AND class_seq = "15" AND subject_seq = "15" ;';
 
 			var query = connection.query(sql);
-
+			console.log("////////////////////////////////////////////////////");
+			console.log(query);
 			command.param.start.x = query;
 			//結果の判別
 			query

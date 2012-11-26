@@ -202,6 +202,7 @@ onAppReady(function(param) {
 
 		next : function(param,share)
 		{
+			console.log(param.start.x);
 			//param.start.xに現在の使用ページ数＋１の値（ページ追加後の枚数）を格納
 			param.start.x++;
 			console.log(param.start.x);
