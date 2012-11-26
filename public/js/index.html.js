@@ -250,7 +250,7 @@ onAppReady(function(param) {
 		{
 			if(share)
 			{
-				count({
+				sendCommand({
 					type : "count",
 					param : param
 				});
