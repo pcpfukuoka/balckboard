@@ -13,6 +13,8 @@ io.set('transports', ['websocket']);
 
 var mysql = require('mysql');
 
+var page_move = 0;
+
 
 
 
@@ -45,6 +47,13 @@ function storeCommand(command) {
 
 var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
+	//
+	socket.on('page_move', function(command){
+		page_move =  page_move + command.start.x;
+		console.log("////////////////////");
+		console.log(page_move);
+	});
+
 	socket.on('img', function(command){
 
 		var connection = mysql.createConnection({

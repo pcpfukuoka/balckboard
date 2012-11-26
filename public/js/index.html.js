@@ -253,6 +253,16 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+		},
+		page_move :function(param,share)
+		{
+			if(share)
+			{
+				page_move({
+					type : "page_move",
+					param : param
+				});
+			}
 		}
 
 	};
@@ -476,8 +486,23 @@ onAppReady(function(param) {
 			}
 		}, true);
 	});
-	$("#test").click(function(e){
 
+
+	$("#test").click(function(e){
+		//戻る（テスト）をクリック
+
+		COMMAND_OPS.page_move({
+			color : color,
+			start : {
+				x : -1,
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
+	/*
 		COMMAND_OPS.img({
 			color : color,
 			start : {
@@ -489,11 +514,27 @@ onAppReady(function(param) {
 				y : -10000
 			}
 		}, true);
-
+	*/
 
 
 	});
 
+	$("#test2").click(function(e){
+		//戻る（テスト）をクリック
+
+		COMMAND_OPS.page_move({
+			color : color,
+			start : {
+				x : 1,
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
+
+	});
 	$('#save').click(function(e){
 
 		var canvas = document.getElementById("canvas");  //canvas要素を取得
@@ -604,6 +645,10 @@ onAppReady(function(param) {
 
 		img = function(command){
 			socket.emit('img', command);
+		};
+
+		page_move = function(command){
+			socket.emit('page_move',command);
 		};
 
 		sendCommand = function(command) {
