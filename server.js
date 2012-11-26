@@ -44,7 +44,6 @@ function storeCommand(command) {
 }
 
 var sockets = io.of('/chalkboard').on('connection', function(socket) {
-	// 邏ｯ遨阪＠縺溘さ繝槭Φ繝峨ｒ繧ｯ繝ｩ繧､繧｢繝ｳ繝医↓蜷代¢縺ｦ騾√ｋ
 	socket.emit('init', commands);
 	socket.on('img', function(command){
 
@@ -167,34 +166,26 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  .on('result', function(rows) {
 				  var a = rows['page_num'];
 				  a++;
-				console.log("/////////////////////////////////////");
-			    console.log('ページ番号：'+ a);
+
+				  //テーブルにデータのひな形の追加
+				  var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,'+a+',0,0);';
+
+				  var query2 = connection.query(sql2);
+					  query2
+					  //エラー用
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //終わったよう～
+					  .on('end', function() {
+					    console.log('end');
+					  });
 			  })
 			  //終了ログ
 			  .on('end', function() {
 			    console.log('end');
 				connection.end();
 			  });
-
-			//SQL文を書く
-			//var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
-
-			//var query2 = connection.query(sql2);
-
-
-			/*
-			//あとはイベント発生したらそれぞれよろしくねっ
-			query2
-			  //エラー用
-			  .on('error', function(err) {
-			    console.log('err is: ', err );
-			  })
-			  //終わったよう～
-			  .on('end', function() {
-			    console.log('end');
-				connection.end();
-			  });
-			*/
 			socket.broadcast.emit('next',command);
 			socket.emit('next',command);
 

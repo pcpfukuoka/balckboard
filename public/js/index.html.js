@@ -593,15 +593,19 @@ onAppReady(function(param) {
 			processCommand(aaa);
 		});
 		socket.on('next', function(command){
+			//画面のリセットをする
 			command.type = "reset";
 			processCommand(command);
 		});
+
 		socket.on('img', function(aaa){
 			processCommand(aaa);
 		});
+
 		img = function(command){
 			socket.emit('img', command);
 		};
+
 		sendCommand = function(command) {
 			socket.emit('command', command);
 		};
