@@ -1,12 +1,14 @@
 
 onAppReady(function(param) {
 
+
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
 	]);
 	if(msg.length > 0){ alert(msg.join('\n')); }
 	//clock();
+
 
 	// show images
 	var imgLoadTimer = setTimeout(function(){
@@ -198,24 +200,6 @@ onAppReady(function(param) {
 
 		next : function(param,share)
 		{
-
-			/*
-			//canvasのＵＲＬを保存する処理
-			var can = document.getElementById("canvas");
-			var aaa = can.getContext("2d");
-			var img=new image();
-			img.src = can.toDataURL("image/png");
-
-
-
-
-			//divに設定されている背景画像を保存する処理
-			var back = document.getElementById("chalkboard");
-			var bbb = back.getContext("2d");
-			var img2=new image();
-			img2.src = back.toDataURL("image/png");
-			*/
-
 			//param.start.xに現在の使用ページ数＋１の値（ページ追加後の枚数）を格納
 			param.start.x = page_num + 1;
 			if(share)
@@ -229,6 +213,7 @@ onAppReady(function(param) {
 
 		save : function(param,share)
 		{
+
 			if(share)
 			{
 				sendCommand({
@@ -249,6 +234,7 @@ onAppReady(function(param) {
 				}
 			else if(param.start.x == "保存")
 			{
+
 				console.log(param.start.x);
 				console.log(param.start.y);
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
@@ -503,18 +489,25 @@ onAppReady(function(param) {
 		var canvas = document.getElementById("canvas");  //canvas要素を取得
 		var  can = canvas.getContext('2d');
 
+		//divに設定されている背景画像を保存する処理
+		var back = document.getElementById("chalkboard");
 
+		div_url = back.style.backgroud;
+		console.log(div_url);
+
+		/*
 		COMMAND_OPS.save({
 			color : canvas.toDataURL("image/png"),
 			start : {
-				x : 1000,
-				y : 1000
+				x : canvas.toDataURL("image/png"),
+				y : div_url
 			},
 			end : {
 				x : -10000,
 				y : -10000
 			}
 		}, true);
+		*/
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
