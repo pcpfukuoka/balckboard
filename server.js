@@ -167,7 +167,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			//var query2 = connection.query(sql2);
 
 
-
+			/*
 			//あとはイベント発生したらそれぞれよろしくねっ
 			query2
 			  //エラー用
@@ -179,7 +179,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			    console.log('end');
 				connection.end();
 			  });
-
+			*/
 			socket.broadcast.emit('next',command);
 			socket.emit('next',command);
 
