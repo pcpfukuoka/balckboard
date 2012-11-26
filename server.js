@@ -178,6 +178,33 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 		}
+		if(command.type == 'count')
+		{
+			var connection = mysql.createConnection({
+				  host     : 'localhost', //接続先ホスト
+				  user     : 'pcp',      //ユーザー名
+				  password : 'pcp2012',  //パスワード
+				  database : 'pcp2012'    //DB名
+				});
+
+
+			//レコード数を取得するためのＳＱＬ文
+			var sql = 'SELECT count(count(*)) FROM pcp2012.board WHERE date = now() AND class_seq = "15" AND subject_seq = "15" ;';
+
+			var query = connection.query(sql);
+
+			command.param.start.x = query;
+			//結果の判別
+			query
+			  //エラー
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
+			connection.end();
+			socket.emit('next',command);
+
+
+		}
 
 
 

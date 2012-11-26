@@ -1,7 +1,9 @@
 
 onAppReady(function(param) {
 
+	$(function() {
 
+	});
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
@@ -201,7 +203,7 @@ onAppReady(function(param) {
 		next : function(param,share)
 		{
 			//param.start.xに現在の使用ページ数＋１の値（ページ追加後の枚数）を格納
-			param.start.x = page_num + 1;
+			param.start.x = param.start.x + 1;
 			if(share)
 			{
 				sendCommand({
@@ -242,6 +244,16 @@ onAppReady(function(param) {
 				var img01 = new Image();
 				img01.src = param.start.y;
 				can.drawImage(img01,0,0);
+			}
+		},
+		count :function(param,share)
+		{
+			if(share)
+			{
+				count({
+					type : "count",
+					param : param
+				});
 			}
 		}
 
@@ -454,7 +466,7 @@ onAppReady(function(param) {
 		true);
 	});
 	$("#next").click(function(e){
-		COMMAND_OPS.next({
+		COMMAND_OPS.count({
 			color : color,
 			start : {
 				x : 1000,
@@ -517,6 +529,9 @@ onAppReady(function(param) {
 	 */
 	var sendCommand;
 	var img;
+	var count;
+	var next;
+
 	// Interaction with server using Socket.IO
 	(function() {
 		var socket = io.connect(location.protocol + '//' + location.host
@@ -578,6 +593,10 @@ onAppReady(function(param) {
 			};
 			pointer.offset(cursorPos);
 			processCommand(aaa);
+		});
+		socket.on('next', function(command){
+			command.type = 'next';
+			processCommand(command);
 		});
 		socket.on('img', function(aaa){
 			processCommand(aaa);
