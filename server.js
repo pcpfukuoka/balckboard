@@ -159,12 +159,12 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			var query1 = connection.query(sql1);
 
-			//page_num = query1 + 1;
-
+			page_num = query1 + 1;
+			console.log(page_num);
 			//SQL文を書く
-			var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
+			//var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,0,0,0);';
 
-			var query2 = connection.query(sql2);
+			//var query2 = connection.query(sql2);
 
 
 
