@@ -148,19 +148,22 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 		if(command.type == 'next')
 		{
-			var page_num = command.param.start.x;
 			var connection = mysql.createConnection({
 				  host     : 'localhost', //接続先ホスト
 				  user     : 'pcp',      //ユーザー名
 				  password : 'pcp2012',  //パスワード
 				  database : 'pcp2012'    //DB名
 				});
+			var sql1 = 'SELECT page_num FROM board WHERE date = now() AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
 
+			var query1 = connection.query(sql1);
+
+			page_num = query1 + 1;
 
 			//SQL文を書く
-			var sql = 'INSERT INTO board VALUES (0,now(),15,15,'+page_num+',0,0);';
+			var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,'+page_num+',0,0);';
 
-			var query = connection.query(sql);
+			var query2 = connection.query(sql2);
 
 
 
@@ -176,35 +179,13 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				connection.end();
 			  });
 
+			socket.broadcast.emit('next',command);
+			socket.emit('next',command);
 
 
 		}
 		if(command.type == 'count')
 		{
-			var connection = mysql.createConnection({
-				  host     : 'localhost', //接続先ホスト
-				  user     : 'pcp',      //ユーザー名
-				  password : 'pcp2012',  //パスワード
-				  database : 'pcp2012'    //DB名
-				});
-
-
-			//レコード数を取得するためのＳＱＬ文
-			var sql = 'SELECT * FROM pcp2012.board WHERE date = now() AND class_seq = "15" AND subject_seq = "15" ;';
-
-			var query = connection.query(sql);
-			console.log("////////////////////////////////////////////////////");
-			console.log(query);
-			command.param.start.x = query;
-			//結果の判別
-			query
-			  //エラー
-			  .on('error', function(err) {
-			    console.log('err is: ', err );
-			  })
-			connection.end();
-			socket.emit('next',command);
-
 
 		}
 
