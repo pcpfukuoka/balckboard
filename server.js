@@ -190,7 +190,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 			//レコード数を取得するためのＳＱＬ文
-			var sql = 'SELECT count(count(*)) FROM pcp2012.board WHERE date = now() AND class_seq = "15" AND subject_seq = "15" ;';
+			var sql = 'SELECT * FROM pcp2012.board WHERE date = now() AND class_seq = "15" AND subject_seq = "15" ;';
 
 			var query = connection.query(sql);
 			console.log("////////////////////////////////////////////////////");
