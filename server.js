@@ -167,6 +167,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  .on('result', function(rows) {
 				  var a = rows['page_num'];
 				  a++;
+				console.log("/////////////////////////////////////");
 			    console.log('ページ番号：'+ a);
 			  })
 			  //終了ログ
