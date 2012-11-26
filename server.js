@@ -176,10 +176,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  .on('error', function(err) {
 					    console.log('err is: ', err );
 					  })
-					  //終わったよう～
-					  .on('end', function() {
-					    console.log('end');
-					  });
+					   connection.end();
 			  })
 			  //終了ログ
 			  .on('end', function() {
