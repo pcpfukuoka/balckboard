@@ -155,24 +155,21 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 
-			var sql1 = 'SELECT page_num FROM board WHERE date = now() AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
+			var sql = 'SELECT page_num FROM board WHERE date = now() AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC;';
 
-			var query1 = connection.query(sql1);
-			query1
-			  //エラー用
+			var query = connection.query(sql);
+			query
+			  //エラーログ
 			  .on('error', function(err) {
 			    console.log('err is: ', err );
 			  })
-
 			  //結果用
 			  .on('result', function(rows) {
-
 				  var a = rows['page_num'];
 				  a++;
 			    console.log('ページ番号：'+ a);
 			  })
-
-			  //終わったよう～
+			  //終了ログ
 			  .on('end', function() {
 			    console.log('end');
 				connection.end();
