@@ -623,8 +623,7 @@ onAppReady(function(param) {
 			$('#loadingMessage').hide();
 		});
 		socket.on('init', function(commands) {
-			var param['now_page'];
-			param['now_page'] = "aaa";
+			var param = {now_page: "aaa"} ;
 			socket.emit('page_move',param);
 			if (!(commands instanceof Array)) {
 				return;
