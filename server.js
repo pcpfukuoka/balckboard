@@ -64,6 +64,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		}
 		console.log("////////////////////");
 		console.log(page_move);
+		socket.emit('now_page', page_move)
 	});
 
 	socket.on('img', function(command){
@@ -244,7 +245,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  .on('error', function(err) {
 					    console.log('err is: ', err );
 					  })
-					  socket.emit('refresh',command)
 					   connection.end();
 			  })
 			  //終了ログ

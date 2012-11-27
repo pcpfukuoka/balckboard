@@ -4,6 +4,7 @@ onAppReady(function(param) {
 	$(function() {
 
 	});
+	var now_page;
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
@@ -625,6 +626,10 @@ onAppReady(function(param) {
 			for ( var i = 0, n = commands.length; i < n; i++) {
 				processCommand(commands[i]);
 			}
+		});
+		socket.on('now_page', function(move_page){
+			now_page = move_page;
+			console.log(now_page);
 		});
 		// Holder for the mouse pointer of the other user.
 		// Key:sessionId, Value:the div element which indicate the pointer's
