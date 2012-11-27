@@ -5,7 +5,7 @@ onAppReady(function(param) {
 
 	});
 
-	now_page;
+	var now_page;
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
