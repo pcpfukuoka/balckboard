@@ -276,7 +276,7 @@ onAppReady(function(param) {
 			else
 			{
 				param.type = "reset";
-				processCommand(command);
+				processCommand(param);
 			}
 		}
 
