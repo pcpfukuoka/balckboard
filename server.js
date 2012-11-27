@@ -213,7 +213,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 		};
 
-		if(command.type == 'new_page')
+		if(command.type == "new_page")
 		{
 			var connection = mysql.createConnection({
 				  host     : 'localhost', //接続先ホスト
