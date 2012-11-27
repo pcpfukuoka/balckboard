@@ -507,15 +507,7 @@ onAppReady(function(param) {
 		//戻る（テスト）をクリック
 
 		COMMAND_OPS.page_move({
-			color : color,
-			start : {
-				x : "turn",
-				y : 1000
-			},
-			end : {
-				x : -10000,
-				y : -10000
-			}
+				now_page : "turn"
 		}, true);
 	/*
 		COMMAND_OPS.img({
@@ -538,17 +530,8 @@ onAppReady(function(param) {
 		//次へ（テスト）をクリック
 
 		COMMAND_OPS.page_move({
-			color : color,
-			start : {
-				x : "next",
-				y : 1000
-			},
-			end : {
-				x : -10000,
-				y : -10000
-			}
-		}, true);
-
+			now_page : "next"
+	}, true);
 	});
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
@@ -640,7 +623,8 @@ onAppReady(function(param) {
 			$('#loadingMessage').hide();
 		});
 		socket.on('init', function(commands) {
-			param.start.x = "aaa";
+			var param['now_page'];
+			param['now_page'] = "aaa";
 			socket.emit('page_move',param);
 			if (!(commands instanceof Array)) {
 				return;
@@ -712,17 +696,8 @@ onAppReady(function(param) {
 
 			//画面の移動値を初期値（０）に戻す
 			COMMAND_OPS.page_move({
-				color : color,
-				start : {
-					x : "refresh",
-					y : 1000
-				},
-				end : {
-					x : -10000,
-					y : -10000
-				}
-			}, true);
-
+				now_page : "refresh"
+		}, true);
 		});
 
 		socket.on('img', function(aaa){

@@ -55,15 +55,15 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		console.log(command.canvas);
 	});
 	socket.on('page_move', function(command){
-		if(command.param.start.x == "next")
+		if(command.param.now_page == "next")
 		{
 			page_move =  page_move + 1;
 		}
-		else if(command.param.start.x == "turn")
+		else if(command.param.now_page == "turn")
 		{
 			page_move = page_move - 1;
 		}
-		else if(command.param.start.x == "refresh")
+		else if(command.param.now_page == "refresh")
 		{
 			page_move = 0;
 		}
