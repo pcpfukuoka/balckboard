@@ -4,7 +4,8 @@ onAppReady(function(param) {
 	$(function() {
 
 	});
-	var now_page;
+
+	now_page;
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
@@ -639,6 +640,8 @@ onAppReady(function(param) {
 			$('#loadingMessage').hide();
 		});
 		socket.on('init', function(commands) {
+			param.start.x = "aaa";
+			socket.emit('page_move',param);
 			if (!(commands instanceof Array)) {
 				return;
 			}
