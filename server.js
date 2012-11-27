@@ -48,7 +48,12 @@ function storeCommand(command) {
 
 var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
-	//
+	socket.on('save', function(command){
+		console.log("//////////////////////////////////////");
+		console.log(command.now_page);
+		console.log(command.div);
+		console.log(command.canvas);
+	});
 	socket.on('page_move', function(command){
 		if(command.param.start.x == "next")
 		{
@@ -64,7 +69,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		}
 		console.log("////////////////////");
 		console.log(page_move);
-		socket.emit('now_page', page_move)
+		socket.emit('now_page', page_move);
 	});
 
 	socket.on('img', function(command){

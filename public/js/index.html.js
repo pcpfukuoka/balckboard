@@ -217,10 +217,7 @@ onAppReady(function(param) {
 
 			if(share)
 			{
-				sendCommand({
-					type : "save",
-					param : param
-				});
+				save(param);
 			}
 		},
 		img : function(param,share)
@@ -568,6 +565,27 @@ onAppReady(function(param) {
 		}, true);
 
 	});
+	$("#test4").click(function(e){
+		//保存（テスト）をクリック
+
+		var canvas = document.getElementById("canvas");  //canvas要素を取得
+		var  can = canvas.getContext('2d');
+
+
+		//divに設定されている背景画像を保存する処理
+		var back = document.getElementById("chalkboard");
+
+		div_url = back.style.backgroundImage;
+		console.log(div_url);
+
+		COMMAND_OPS.save({
+				now_page : now_page,
+				div : div_url,
+				canvas : canvas.toDataURL("image/png")
+		}, true);
+
+	});
+
 	$('#save').click(function(e){
 
 		var canvas = document.getElementById("canvas");  //canvas要素を取得
@@ -603,6 +621,7 @@ onAppReady(function(param) {
 	var img;
 	var count;
 	var next;
+	var save;
 
 	// Interaction with server using Socket.IO
 	(function() {
@@ -713,6 +732,9 @@ onAppReady(function(param) {
 
 		page_move = function(command){
 			socket.emit('page_move',command);
+		};
+		save = function(command){
+			socket.emit('save', command);
 		};
 
 		sendCommand = function(command) {
