@@ -263,7 +263,23 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+		},
+		new_page :function(param,share)
+		{
+			if(share)
+			{
+				sendCommand({
+					type : "new_page",
+					param : param
+				});
+			}
+			else
+			{
+				param.type = "reset";
+				processCommand(command);
+			}
 		}
+
 
 	};
 	// UIEvent handling ==========================
@@ -494,7 +510,7 @@ onAppReady(function(param) {
 		COMMAND_OPS.page_move({
 			color : color,
 			start : {
-				x : -1,
+				x : "turn",
 				y : 1000
 			},
 			end : {
@@ -520,9 +536,25 @@ onAppReady(function(param) {
 	});
 
 	$("#test2").click(function(e){
-		//戻る（テスト）をクリック
+		//次へ（テスト）をクリック
 
 		COMMAND_OPS.page_move({
+			color : color,
+			start : {
+				x : "next",
+				y : 1000
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
+
+	});
+	$("#test3").click(function(e){
+		//新規作成（テスト）をクリック
+
+		COMMAND_OPS.new_page({
 			color : color,
 			start : {
 				x : 1,
@@ -607,6 +639,19 @@ onAppReady(function(param) {
 			}
 			delete pointers[sessionId];
 		});
+		socket.on('refresh', function(command){
+
+			COMMAND_OPS.reset(	{
+				start : {
+					x : -1000,
+					y : -1000
+				},
+				end : {
+					x : 10000,
+					y : 10000
+				}},
+				true);
+		});
 		socket.on('command', function(aaa) {
 
 			// render mouse pointer
@@ -637,6 +682,20 @@ onAppReady(function(param) {
 			//画面のリセットをする
 			command.type = "reset";
 			processCommand(command);
+
+			//画面の移動値を初期値（０）に戻す
+			COMMAND_OPS.page_move({
+				color : color,
+				start : {
+					x : "refresh",
+					y : 1000
+				},
+				end : {
+					x : -10000,
+					y : -10000
+				}
+			}, true);
+
 		});
 
 		socket.on('img', function(aaa){
