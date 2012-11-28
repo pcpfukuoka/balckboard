@@ -259,11 +259,13 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+			/*
 			else
 			{
 				param.type = "reset";
 				processCommand(param);
 			}
+			*/
 		}
 
 
@@ -596,6 +598,27 @@ onAppReady(function(param) {
 	});
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画像を保存する処理								   //
+		////////////////////////////////////////////////////////////////////////////////////
+
+
+		var canvas = document.getElementById("canvas");
+		var  can = canvas.getContext('2d');
+
+
+		//divに設定されている背景画像を保存する処理
+		var back = document.getElementById("chalkboard");
+
+		div_url = back.style.backgroundImage;
+		console.log(div_url);
+
+		COMMAND_OPS.save({
+				now_page : now_page,
+				div : div_url,
+				canvas : canvas.toDataURL("image/png")
+		}, true);
+
 
 		COMMAND_OPS.new_page({
 			color : color,
