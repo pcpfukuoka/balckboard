@@ -72,7 +72,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-			  var page_max = rows['page_num'];
+			  var max_page = rows['page_num'];
 
 			  if(command.param.now_page == "next")
 				{
@@ -89,7 +89,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			  now_page = max_page + page_move;
 
-			  if(now_page > page_max){
+			  if(now_page > max_page){
 				  page_move--;
 			  }
 			  else if(now_page < 1){
