@@ -478,10 +478,50 @@ onAppReady(function(param) {
 
 	$("#test").click(function(e){
 		//戻る（テスト）をクリック
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画像を保存する処理								   //
+		////////////////////////////////////////////////////////////////////////////////////
 
+
+		var canvas = document.getElementById("canvas");
+		var  can = canvas.getContext('2d');
+
+
+		//divに設定されている背景画像を保存する処理
+		var back = document.getElementById("chalkboard");
+
+		div_url = back.style.backgroundImage;
+		console.log(div_url);
+
+		COMMAND_OPS.save({
+				now_page : now_page,
+				div : div_url,
+				canvas : canvas.toDataURL("image/png")
+		}, true);
+
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								現在のページ移動数の変更						   //
+		////////////////////////////////////////////////////////////////////////////////////
 		COMMAND_OPS.page_move({
 				now_page : "turn"
 		}, true);
+
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画面クリア										   //
+		////////////////////////////////////////////////////////////////////////////////////
+		COMMAND_OPS.reset(	{
+			start : {
+				x : -1000,
+				y : -1000
+			},
+			end : {
+				x : 10000,
+				y : 10000
+			}},
+			true);
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画像を描画										   //
+		////////////////////////////////////////////////////////////////////////////////////
 		COMMAND_OPS.img({
 			color : color,
 			start : {
@@ -498,9 +538,61 @@ onAppReady(function(param) {
 	$("#test2").click(function(e){
 		//次へ（テスト）をクリック
 
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画像を保存する処理								   //
+		////////////////////////////////////////////////////////////////////////////////////
+
+
+		var canvas = document.getElementById("canvas");
+		var  can = canvas.getContext('2d');
+
+
+		//divに設定されている背景画像を保存する処理
+		var back = document.getElementById("chalkboard");
+
+		div_url = back.style.backgroundImage;
+		console.log(div_url);
+
+		COMMAND_OPS.save({
+				now_page : now_page,
+				div : div_url,
+				canvas : canvas.toDataURL("image/png")
+		}, true);
+
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								現在のページ移動数の変更						   //
+		////////////////////////////////////////////////////////////////////////////////////
 		COMMAND_OPS.page_move({
-			now_page : "next"
-	}, true);
+				now_page : "turn"
+		}, true);
+
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画面クリア										   //
+		////////////////////////////////////////////////////////////////////////////////////
+		COMMAND_OPS.reset(	{
+			start : {
+				x : -1000,
+				y : -1000
+			},
+			end : {
+				x : 10000,
+				y : 10000
+			}},
+			true);
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画像を描画										   //
+		////////////////////////////////////////////////////////////////////////////////////
+		COMMAND_OPS.img({
+			color : color,
+			start : {
+				x : "保存",
+				y : now_page
+			},
+			end : {
+				x : -10000,
+				y : -10000
+			}
+		}, true);
 	});
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
@@ -515,26 +607,6 @@ onAppReady(function(param) {
 				x : -10000,
 				y : -10000
 			}
-		}, true);
-
-	});
-	$("#test4").click(function(e){
-		//保存（テスト）をクリック
-
-		var canvas = document.getElementById("canvas");  //canvas要素を取得
-		var  can = canvas.getContext('2d');
-
-
-		//divに設定されている背景画像を保存する処理
-		var back = document.getElementById("chalkboard");
-
-		div_url = back.style.backgroundImage;
-		console.log(div_url);
-
-		COMMAND_OPS.save({
-				now_page : now_page,
-				div : div_url,
-				canvas : canvas.toDataURL("image/png")
 		}, true);
 
 	});
