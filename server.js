@@ -66,6 +66,11 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  })
 		  //結果用
 		  .on('result', function(rows) {
+			  console.log(command.now_page);
+			  console.log(command.div);
+			  console.log(command.canvas);
+
+
 			  max_page = rows['page_num'];
 
 			  now_page = max_page + command.now_page;
@@ -80,9 +85,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //結果用
 				  .on('result', function(rows) {
 					  console.log("//////////////////////////////////////");
-						console.log(command.now_page);
-						console.log(command.div);
-						console.log(command.canvas);
 
 				  })
 				  //終了ログ
