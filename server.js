@@ -164,7 +164,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		//SQL文を書く
 		console.log(command.param.start.y);
 		page_now = command.param.start.y;
-		var sql = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+  + '";;';
+		var sql = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ page_now + '";;';
 
 		var query = connection.query(sql);
 
