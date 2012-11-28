@@ -58,8 +58,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			});
 		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
 
-		var query = connection.query(sql2);
-		query2
+		var query = connection.query(sql);
+		query
 		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
@@ -71,7 +71,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  now_page = max_page + command.now_page;
 			  var sql2 = 'UPDATE board SET div_url = '+command.div+', canvas_url = '+command.canvas +' WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+now_page+';';
 
-				var query = connection.query(sql2);
+				var query2 = connection.query(sql2);
 				query2
 				  //エラーログ
 				  .on('error', function(err) {
