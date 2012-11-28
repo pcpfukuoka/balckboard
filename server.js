@@ -66,13 +66,11 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-			  console.log(command.now_page);
-			  console.log(command.div);
-			  console.log(command.canvas);
 
 
 			  max_page = rows['page_num'];
 
+			  console.log(max_page);
 			  now_page = max_page + command.now_page;
 			  var sql2 = 'UPDATE board SET div_url = '+command.div+', canvas_url = '+command.canvas +' WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+now_page+';';
 
@@ -92,8 +90,11 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				    console.log('end');
 				    connection.end();
 				  });
-
+					console.log(command.now_page);
+					console.log(command.div);
+					console.log(command.canvas);
 		  })
+
 		  //終了ログ
 		  .on('end', function() {
 		    console.log('end');
