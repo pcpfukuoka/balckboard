@@ -54,22 +54,57 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		console.log(command.div);
 		console.log(command.canvas);
 	});
+	//移動数をサーバー側に保持
 	socket.on('page_move', function(command){
-		if(command.param.now_page == "next")
-		{
-			page_move =  page_move + 1;
-		}
-		else if(command.param.now_page == "turn")
-		{
-			page_move = page_move - 1;
-		}
-		else if(command.param.now_page == "refresh")
-		{
-			page_move = 0;
-		}
-		console.log("////////////////////");
-		console.log(page_move);
-		socket.emit('now_page', page_move);
+		var connection = mysql.createConnection({
+			  host     : 'localhost', //接続先ホスト
+			  user     : 'pcp',      //ユーザー名
+			  password : 'pcp2012',  //パスワード
+			  database : 'pcp2012'    //DB名
+			});
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
+
+		var query = connection.query(sql);
+		query
+		  //エラーログ
+		  .on('error', function(err) {
+		    console.log('err is: ', err );
+		  })
+		  //結果用
+		  .on('result', function(rows) {
+			  var page_max = rows['page_num'];
+
+			  if(command.param.now_page == "next")
+				{
+					page_move =  page_move + 1;
+				}
+				else if(command.param.now_page == "turn")
+				{
+					page_move = page_move - 1;
+				}
+				else if(command.param.now_page == "refresh")
+				{
+					page_move = 0;
+				}
+
+			  now_page = max_page + page_move;
+
+			  if(now_page > page_max){
+				  page_move--;
+			  }
+			  else if(now_page < 1){
+				  page_move++;
+			  }
+
+			  console.log("////////////////////");
+				console.log(page_move);
+				socket.emit('now_page', page_move);
+		  })
+		  //終了ログ
+		  .on('end', function() {
+		    console.log('end');
+		    connection.end();
+		  });
 	});
 
 	socket.on('img', function(command){
