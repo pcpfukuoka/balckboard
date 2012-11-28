@@ -79,6 +79,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  })
 				  //結果用
 				  .on('result', function(rows) {
+					  console.log("//////////////////////////////////////");
+						console.log(command.now_page);
+						console.log(command.div);
+						console.log(command.canvas);
 
 				  })
 				  //終了ログ
@@ -92,10 +96,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('end', function() {
 		    console.log('end');
 		  });
-		console.log("//////////////////////////////////////");
-		console.log(command.now_page);
-		console.log(command.div);
-		console.log(command.canvas);
 	});
 	//移動数をサーバー側に保持
 	socket.on('page_move', function(command){
