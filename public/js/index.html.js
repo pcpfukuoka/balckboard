@@ -233,24 +233,11 @@ onAppReady(function(param) {
 				}
 			else if(param.start.x == "保存")
 			{
-
-				console.log(param.start.x);
-				console.log(param.start.y);
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
 				var img01 = new Image();
 				img01.src = param.start.y;
 				can.drawImage(img01,0,0);
-			}
-		},
-		count :function(param,share)
-		{
-			if(share)
-			{
-				sendCommand({
-					type : "count",
-					param : param
-				});
 			}
 		},
 		page_move :function(param,share)
@@ -488,20 +475,6 @@ onAppReady(function(param) {
 		}},
 		true);
 	});
-	$("#next").click(function(e){
-		COMMAND_OPS.next({
-			color : color,
-			start : {
-				x : 1000,
-				y : 1000
-			},
-			end : {
-				x : -10000,
-				y : -10000
-			}
-		}, true);
-	});
-
 
 	$("#test").click(function(e){
 		//戻る（テスト）をクリック
@@ -509,21 +482,17 @@ onAppReady(function(param) {
 		COMMAND_OPS.page_move({
 				now_page : "turn"
 		}, true);
-	/*
 		COMMAND_OPS.img({
 			color : color,
 			start : {
 				x : "保存",
-				y : 1000
+				y : now_page
 			},
 			end : {
 				x : -10000,
 				y : -10000
 			}
 		}, true);
-	*/
-
-
 	});
 
 	$("#test2").click(function(e){
@@ -568,32 +537,6 @@ onAppReady(function(param) {
 				canvas : canvas.toDataURL("image/png")
 		}, true);
 
-	});
-
-	$('#save').click(function(e){
-
-		var canvas = document.getElementById("canvas");  //canvas要素を取得
-		var  can = canvas.getContext('2d');
-
-		//divに設定されている背景画像を保存する処理
-		var back = document.getElementById("chalkboard");
-
-		div_url = back.style.backgroundImage;
-		console.log(div_url);
-
-		/*
-		COMMAND_OPS.save({
-			color : canvas.toDataURL("image/png"),
-			start : {
-				x : canvas.toDataURL("image/png"),
-				y : div_url
-			},
-			end : {
-				x : -10000,
-				y : -10000
-			}
-		}, true);
-		*/
 	});
 	/**
 	 * ここより下はサーバにデータを送る処理
@@ -701,8 +644,8 @@ onAppReady(function(param) {
 		}, true);
 		});
 
-		socket.on('img', function(aaa){
-			processCommand(aaa);
+		socket.on('img', function(command){
+			processCommand(command);
 		});
 
 		img = function(command){
