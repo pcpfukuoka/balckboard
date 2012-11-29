@@ -239,7 +239,9 @@ onAppReady(function(param) {
 				console.log(param.start.y);
 				img01.src = "images/kurohune.jpg";
 				//img01.src = param.start.y;
-				can.drawImage(img01,0,0);
+				img.onload = function() {
+				    can.drawImage(img01, 0, 0);
+				  };
 			}
 		},
 		page_move :function(param,share)
