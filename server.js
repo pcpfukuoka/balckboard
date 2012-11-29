@@ -80,7 +80,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  })
 				  //結果用
 				  .on('result', function(rows) {
-					  console.log("//////////////////////////////////////");
 
 				  })
 				  //終了ログ
@@ -88,9 +87,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				    console.log('end');
 				    connection.end();
 				  });
-					console.log(command.now_page);
-					console.log(command.div);
-					console.log(command.canvas);
 		  })
 
 		  //終了ログ
