@@ -236,10 +236,7 @@ onAppReady(function(param) {
 				var img1 = new Image();
 				console.log(param.start.y);
 				img1.src = param.start.y;
-
-				img1.onload = function(){
 				can.drawImage(img1, 0, 0);
-				};
 			}
 		},
 		page_move :function(param,share)

@@ -114,6 +114,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('result', function(rows) {
 			  var max_page = rows['page_num'];
 
+			  console.log(command.param.now_page);
 			  if(command.param.now_page == "next")
 				{
 					page_move =  page_move + 1;
@@ -146,8 +147,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	});
 
 	socket.on('img', function(command){
-		console.log("////////////////////////////////////");
-
 		var connection = mysql.createConnection({
 		  host     : 'localhost', //接続先ホスト
 		  user     : 'pcp',      //ユーザー名
