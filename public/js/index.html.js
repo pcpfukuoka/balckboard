@@ -221,7 +221,7 @@ onAppReady(function(param) {
 				save(param);
 			}
 		},
-		img : function(param,share)
+		img :function(param,share)
 		{
 			if(share)
 				{
