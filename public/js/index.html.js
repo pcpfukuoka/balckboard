@@ -495,7 +495,6 @@ onAppReady(function(param) {
 		var back = document.getElementById("chalkboard");
 
 		div_url = back.style.backgroundImage;
-		console.log(div_url);
 
 		COMMAND_OPS.save({
 				now_page : now_page,
@@ -612,7 +611,6 @@ onAppReady(function(param) {
 		var back = document.getElementById("chalkboard");
 
 		div_url = back.style.backgroundImage;
-		console.log(div_url);
 
 		COMMAND_OPS.save({
 				now_page : now_page,
@@ -675,7 +673,6 @@ onAppReady(function(param) {
 		});
 		socket.on('now_page', function(move_page){
 			now_page = move_page;
-			console.log(now_page);
 		});
 		// Holder for the mouse pointer of the other user.
 		// Key:sessionId, Value:the div element which indicate the pointer's
@@ -741,7 +738,6 @@ onAppReady(function(param) {
 		});
 
 		socket.on('img', function(command){
-			console.log(command);
 			processCommand(command);
 		});
 
