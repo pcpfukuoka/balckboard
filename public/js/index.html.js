@@ -234,11 +234,14 @@ onAppReady(function(param) {
 
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
-				var img1 = new Image();
 
-				console.log(param.start.y);
-				img1.src = param.start.y;
-				can.drawImage(img1, 0, 0);
+				 var img1 = new Image();
+				  img1.src = param.start.y + new Date().getTime();
+				  /* 画像が読み込まれるのを待ってから処理を続行 */
+				  img.onload = function() {
+				    can.drawImage(img1, 0, 0);
+				  }
+
 			}
 		},
 		page_move :function(param,share)
