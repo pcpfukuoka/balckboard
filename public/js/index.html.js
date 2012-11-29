@@ -236,6 +236,7 @@ onAppReady(function(param) {
 				var canvas = document.getElementById("canvas");  //canvas要素を取得
 				var can = canvas.getContext('2d');
 				var img01 = new Image();
+				console.log(pram.start.y);
 				img01.src = param.start.y;
 				can.drawImage(img01,0,0);
 			}
@@ -739,6 +740,7 @@ onAppReady(function(param) {
 		});
 
 		socket.on('img', function(command){
+			console.log(command);
 			processCommand(command);
 		});
 
