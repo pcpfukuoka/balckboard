@@ -501,7 +501,7 @@ onAppReady(function(param) {
 		COMMAND_OPS.save({
 				now_page : now_page,
 				div : div_url,
-				canvas : canvas.toDataURL("image/jpeg")
+				canvas : canvas.toDataURL()
 		}, true);
 
 		/////////////////////////////////////////////////////////////////////////////////////
