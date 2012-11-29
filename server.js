@@ -135,8 +135,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  else if(now_page < 1){
 				  page_move++;
 			  }
-
-			  console.log("////////////////////");
 				console.log(page_move);
 				socket.emit('now_page', page_move);
 		  })
@@ -148,6 +146,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	});
 
 	socket.on('img', function(command){
+		console.log("////////////////////////////////////");
 
 		var connection = mysql.createConnection({
 		  host     : 'localhost', //接続先ホスト
