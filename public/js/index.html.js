@@ -225,15 +225,13 @@ onAppReady(function(param) {
 		{
 			if(share)
 				{
-					img({
-					type : "img",
-					param : param
-					});
+
+				img({type : "img",param : param});
 
 				}
 			else if(param.start.x == "保存")
 			{
-				var canvas = document.getElementById("canvas");  //canvas要素を取得
+				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
 				var img = new Image();
 				console.log(param.start.y);
@@ -640,7 +638,6 @@ onAppReady(function(param) {
 	 */
 	var sendCommand;
 	var img;
-	var count;
 	var next;
 	var save;
 
