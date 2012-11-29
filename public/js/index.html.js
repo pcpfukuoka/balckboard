@@ -235,9 +235,11 @@ onAppReady(function(param) {
 				var can = canvas.getContext('2d');
 				var img = new Image();
 				console.log(param.start.y);
-				img.src = "images/kurohune.jpg";
-				//img01.src = param.start.y;
+				img.src = param.start.y;
+
+				img.onload = function(){
 				can.drawImage(img, 0, 0);
+				};
 			}
 		},
 		page_move :function(param,share)
