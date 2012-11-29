@@ -237,7 +237,8 @@ onAppReady(function(param) {
 				var can = canvas.getContext('2d');
 				var img01 = new Image();
 				console.log(param.start.y);
-				img01.src = param.start.y;
+				img01.src = "images/kurohune.jpg";
+				//img01.src = param.start.y;
 				can.drawImage(img01,0,0);
 			}
 		},
