@@ -180,6 +180,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				 })
 				 //結果用
 				 .on('result', function(rows) {
+					 command.param.end.x = rows['div_url'];
+					 command.param.start.y = rows['canvas_url']
 					 storeCommand(command);
 					 socket.broadcast.emit('img', command);
 					 socket.emit('img', command);
