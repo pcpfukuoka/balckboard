@@ -229,11 +229,13 @@ onAppReady(function(param) {
 				img({type : "img",param : param});
 
 				}
-			else if(param.start.x == "保存")
+			else if(param.start.x == "save")
 			{
+
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
 				var img1 = new Image();
+
 				console.log(param.start.y);
 				img1.src = param.start.y;
 				can.drawImage(img1, 0, 0);
@@ -525,7 +527,7 @@ onAppReady(function(param) {
 		COMMAND_OPS.img({
 			color : color,
 			start : {
-				x : "保存",
+				x : "save",
 				y : now_page
 			},
 			end : {
@@ -549,7 +551,6 @@ onAppReady(function(param) {
 
 		//divに設定されている背景画像を保存する処理
 		var back = document.getElementById("chalkboard");
-		console.log(canvas.toDataURL("image/png"));
 
 		div_url = back.style.backgroundImage;
 		COMMAND_OPS.save({
