@@ -553,8 +553,6 @@ onAppReady(function(param) {
 		var back = document.getElementById("chalkboard");
 
 		div_url = back.style.backgroundImage;
-		console.log(div_url);
-
 		COMMAND_OPS.save({
 				now_page : now_page,
 				div : div_url,
@@ -584,6 +582,7 @@ onAppReady(function(param) {
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画像を描画										   //
 		////////////////////////////////////////////////////////////////////////////////////
+
 		COMMAND_OPS.img({
 			color : color,
 			start : {
