@@ -233,12 +233,12 @@ onAppReady(function(param) {
 			{
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
-				var img = new Image();
+				var img1 = new Image();
 				console.log(param.start.y);
-				img.src = param.start.y;
+				img1.src = param.start.y;
 
-				img.onload = function(){
-				can.drawImage(img, 0, 0);
+				img1.onload = function(){
+				can.drawImage(img1, 0, 0);
 				};
 			}
 		},
