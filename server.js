@@ -172,17 +172,16 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('result', function(rows) {
 			  //現在のページ数を取得
 			  var max = rows['page_num'];
-			  page_now = max + command.param.start.y;
+			  var page_now = max + command.param.start.y;
 			  var sql2 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ page_now + '";';
 
 			  var query2 = connection.query(sql2);
 
 			  query2
 			  //エラー用
-			  .on('error', function(err) {
+			  	.on('error', function(err) {
 				  console.log('err is: ', err );
 				 })
-
 				 //結果用
 				 .on('result', function(rows) {
 					 command.param.start.y = rows['div_url'];
@@ -196,7 +195,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  .on('end', function() {
 					  console.log('end');
 					  connection.end();
-
 				  });
 
 		  })
