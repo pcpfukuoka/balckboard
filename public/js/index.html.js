@@ -549,6 +549,7 @@ onAppReady(function(param) {
 
 		//divに設定されている背景画像を保存する処理
 		var back = document.getElementById("chalkboard");
+		console.log(canvas.toDataURL("image/png"));
 
 		div_url = back.style.backgroundImage;
 		COMMAND_OPS.save({
