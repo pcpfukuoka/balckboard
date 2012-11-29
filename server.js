@@ -202,34 +202,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('end', function() {
 		    console.log('end');
 		  });
-		//SQL文を書く
-		page_now = command.param.start.y;
-		var sql = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ page_now + '";;';
-
-		var query = connection.query(sql);
-
-		//あとはイベント発生したらそれぞれよろしくねっ
-		query
-		  //エラー用
-		  .on('error', function(err) {
-		    console.log('err is: ', err );
-		  })
-
-		  //結果用
-		  .on('result', function(rows) {
-			  command.param.start.y = rows['div_url'];
-			  command.param.end.x = rows['canvas_url']
-				storeCommand(command);
-				socket.broadcast.emit('img', command);
-			  socket.emit('img', command);
-		  })
-
-		  //終わったよう～
-		  .on('end', function() {
-		    console.log('end');
-			connection.end();
-
-		  });
 
 	});
 
