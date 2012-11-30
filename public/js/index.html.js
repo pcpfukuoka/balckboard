@@ -1,11 +1,6 @@
 
 onAppReady(function(param) {
-
-	$(function() {
-
-	});
-
-	var now_page;
+	var now_moving = 0;
 	var msg = modernizr([
 		'canvas', 'websockets',
 		'fontface', 'opacity', 'borderradius', 'boxshadow'
@@ -499,7 +494,7 @@ onAppReady(function(param) {
 		div_url = back.style.backgroundImage;
 
 		COMMAND_OPS.save({
-				now_page : now_page,
+				now_page : now_moving,
 				div : div_url,
 				canvas : canvas.toDataURL()
 		}, true);
@@ -531,7 +526,7 @@ onAppReady(function(param) {
 			color : color,
 			start : {
 				x : "save",
-				y : now_page
+				y : now_moving
 			},
 			end : {
 				x : -10000,
@@ -557,7 +552,7 @@ onAppReady(function(param) {
 
 		div_url = back.style.backgroundImage;
 		COMMAND_OPS.save({
-				now_page : now_page,
+				now_page : now_moving,
 				div : div_url,
 				canvas : canvas.toDataURL("image/png")
 		}, true);
@@ -589,8 +584,8 @@ onAppReady(function(param) {
 		COMMAND_OPS.img({
 			color : color,
 			start : {
-				x : "保存",
-				y : now_page
+				x : "save",
+				y : now_moving
 			},
 			end : {
 				x : -10000,
@@ -615,7 +610,7 @@ onAppReady(function(param) {
 		div_url = back.style.backgroundImage;
 
 		COMMAND_OPS.save({
-				now_page : now_page,
+				now_page : now_moving,
 				div : div_url,
 				canvas : canvas.toDataURL("image/png")
 		}, true);
@@ -673,7 +668,7 @@ onAppReady(function(param) {
 			}
 		});
 		socket.on('now_page', function(move_page){
-			now_page = move_page;
+			now_moving = move_page;
 		});
 		// Holder for the mouse pointer of the other user.
 		// Key:sessionId, Value:the div element which indicate the pointer's
