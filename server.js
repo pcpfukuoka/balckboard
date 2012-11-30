@@ -136,6 +136,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  else if(now_page < 1){
 				  page_move++;
 			  }
+			    console.log("//////////////////////");
 				console.log(page_move);
 				socket.emit('now_page', page_move);
 		  })
