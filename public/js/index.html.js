@@ -258,13 +258,6 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
-			/*
-			else
-			{
-				param.type = "reset";
-				processCommand(param);
-			}
-			*/
 		}
 
 
