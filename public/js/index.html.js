@@ -509,6 +509,7 @@ onAppReady(function(param) {
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画面クリア										   //
 		////////////////////////////////////////////////////////////////////////////////////
+		console.log(now_moving);
 		COMMAND_OPS.reset(	{
 			start : {
 				x : -1000,
@@ -669,6 +670,7 @@ onAppReady(function(param) {
 		});
 		socket.on('now_page', function(move_page){
 			now_moving = move_page;
+			console.log(now_moving);
 		});
 		// Holder for the mouse pointer of the other user.
 		// Key:sessionId, Value:the div element which indicate the pointer's
