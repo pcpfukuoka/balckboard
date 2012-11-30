@@ -669,7 +669,7 @@ onAppReady(function(param) {
 		});
 		socket.on('now_page', function(move_page){
 			now_moving = move_page;
-			console.log("変更後のnow_moving:")
+			console.log("変更後のnow_moving:");
 			console.log(now_moving);
 		});
 		// Holder for the mouse pointer of the other user.
