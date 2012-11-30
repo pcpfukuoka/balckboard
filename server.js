@@ -166,9 +166,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('result', function(rows) {
 			  //現在のページ数を取得
 			  var max = rows['page_num'];
-			  console.log("移動ページ数");
+			  console.log("idoupage");
 			  console.log(page_now);
-			  console.log("画像取得用ページ番号");
+			  console.log("imggetpage");
 			  console.log(page_now);
 			  var page_now = max + c;
 			  var sql2 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ page_now + '";';
