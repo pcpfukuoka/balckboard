@@ -187,15 +187,15 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //現在のページ数を格納
 				  max_page = rows['page_num'];
 				  //現在表示しているページにカーソルをそろえる
-				  var now_page = max_page + command.now_page;
+				  var now_page = max_page + command.param.start.x;
 
 				  //戻るボタンを押したため移動数マイナス１
-				  command.now_page--;
+				  command.param.start.x--;
 				  if(now_page < 1){
 					  page_move++;
 				  }
 
-				  var sql2 = 'UPDATE board SET div_url = "'+ command.div + '", canvas_url = "'+ command.canvas +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
+				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 
 					var query2 = connection.query(sql2);
 					query2
@@ -205,7 +205,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  })
 					  //結果用
 					  .on('result', function(rows) {
-						 now_page = max_page - command.now_page;
+						 now_page = max_page - command.param.start.x;
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
 						 var query3 = connection.query(sql3);
 						 query3
