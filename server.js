@@ -249,7 +249,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  })
 					  //結果用
 					  .on('result', function(rows) {
-						 now_page = max_page - command.param.start.x;
+						 now_page = max_page + command.param.start.x;
 
 						 console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 						 console.log(now_page);
