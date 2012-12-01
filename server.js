@@ -250,6 +250,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  //結果用
 					  .on('result', function(rows) {
 						 now_page = max_page - command.param.start.x;
+
+						 console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+						 console.log(now_page);
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
 						 var query3 = connection.query(sql3);
 						 query3
@@ -260,12 +263,12 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 						  //結果用
 						  .on('result', function(rows) {
 								command.param.end.x = rows['div_url'];
-								command.param.start.y = rows['canvas_url']
+								command.param.start.y = rows['canvas_url'];
 
 								commands = [];
 
 								storeCommand(command);
-								socket.emit('now_page', command.now_page);
+								socket.emit('now_page', command.param.start.x);
 								socket.broadcast.emit('img', command);
 								socket.emit('img', command);
 						  })
