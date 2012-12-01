@@ -251,9 +251,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  .on('result', function(rows) {
 						 now_page = max_page + command.param.start.x;
 
-						 console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-						 console.log(now_page);
+
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+						 console.log("sql:");
+						 console.log(sql3);
 						 var query3 = connection.query(sql3);
 						 query3
 						 //エラーログ
@@ -264,7 +265,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 						  .on('result', function(rows) {
 								command.param.end.x = rows['div_url'];
 								command.param.start.y = rows['canvas_url'];
-
+								socket.emit('log_test',command);
 								commands = [];
 
 								storeCommand(command);

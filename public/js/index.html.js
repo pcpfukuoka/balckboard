@@ -725,6 +725,9 @@ onAppReady(function(param) {
 
 
 		});
+		socket.on('log_test', function(command){
+			console.log(command);
+		});
 
 		img = function(command){
 			socket.emit('img', command);
