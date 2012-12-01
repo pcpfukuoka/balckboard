@@ -187,10 +187,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //現在のページ数を格納
 				  max_page = rows['page_num'];
 				  //現在表示しているページにカーソルをそろえる
-				  var now_page = max_page + command.param.start.x;
+				  var now_page = max_page + command.param.start.y;
 
 				  //戻るボタンを押したため移動数マイナス１
-				  command.param.start.x--;
+				  command.param.start.y--;
 				  if(now_page < 1){
 					  page_move++;
 				  }
