@@ -213,7 +213,10 @@ onAppReady(function(param) {
 
 			if(share)
 			{
-				save(param);
+				sendCommand({
+					type : "turn",
+					param : param
+				});
 			}
 		},
 		img :function(param,share)
@@ -235,7 +238,7 @@ onAppReady(function(param) {
 				  /* 画像が読み込まれるのを待ってから処理を続行 */
 				  img1.onload = function() {
 				    can.drawImage(img1, 0, 0);
-				  }
+				  };
 
 			}
 		},
@@ -487,18 +490,15 @@ onAppReady(function(param) {
 		div_url = back.style.backgroundImage;
 
 		COMMAND_OPS.save({
-				now_page : now_moving,
-				div : div_url,
-				canvas : canvas.toDataURL()
-		}, true);
-
-		/////////////////////////////////////////////////////////////////////////////////////
-		//								現在のページ移動数の変更						   //
-		////////////////////////////////////////////////////////////////////////////////////
-		COMMAND_OPS.page_move({
-				now_page : "turn"
-		}, true);
-
+			start : {
+				x : now_moving,
+				y : div_url
+			},
+			end : {
+				x : canvas.toDataURL(),
+				y : 10000
+			}},
+			true);
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画面クリア										   //
 		////////////////////////////////////////////////////////////////////////////////////
@@ -729,7 +729,13 @@ onAppReady(function(param) {
 		});
 
 		socket.on('img', function(command){
+			command.type = "reset";
 			processCommand(command);
+
+			command.param.start.x == "save";
+			processCommand(command);
+
+
 		});
 
 		img = function(command){

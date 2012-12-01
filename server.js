@@ -48,52 +48,7 @@ function storeCommand(command) {
 
 var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
-	socket.on('save', function(command){
 
-		var connection = mysql.createConnection({
-			  host     : 'localhost', //接続先ホスト
-			  user     : 'pcp',      //ユーザー名
-			  password : 'pcp2012',  //パスワード
-			  database : 'pcp2012'    //DB名
-			});
-		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
-
-		var query = connection.query(sql);
-		query
-		  //エラーログ
-		  .on('error', function(err) {
-		    console.log('err is: ', err );
-		  })
-		  //結果用
-		  .on('result', function(rows) {
-
-
-			  max_page = rows['page_num'];
-			  var now_page = max_page + command.now_page;
-			  var sql2 = 'UPDATE board SET div_url = "'+ command.div + '", canvas_url = "'+ command.canvas +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
-
-				var query2 = connection.query(sql2);
-				query2
-				  //エラーログ
-				  .on('error', function(err) {
-				    console.log('err is: ', err );
-				  })
-				  //結果用
-				  .on('result', function(rows) {
-
-				  })
-				  //終了ログ
-				  .on('end', function() {
-				    console.log('end');
-				    connection.end();
-				  });
-		  })
-
-		  //終了ログ
-		  .on('end', function() {
-		    console.log('end');
-		  });
-	});
 	//移動数をサーバー側に保持
 	socket.on('page_move', function(command){
 		var connection = mysql.createConnection({
@@ -145,69 +100,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		    console.log('end');
 		    connection.end();
 		  });
-	});
-
-	socket.on('img', function(command){
-		var connection = mysql.createConnection({
-		  host     : 'localhost', //接続先ホスト
-		  user     : 'pcp',      //ユーザー名
-		  password : 'pcp2012',  //パスワード
-		  database : 'pcp2012'    //DB名
-		});
-
-		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
-
-		var query = connection.query(sql);
-		query
-		  //エラーログ
-		  .on('error', function(err) {
-		    console.log('err is: ', err );
-		  })
-		  //結果用
-		  .on('result', function(rows) {
-			  //現在のページ数を取得
-			  var max = rows['page_num'];
-			  var page_now = max + command.param.start.y;
-			  var sql2 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ page_now + '";';
-			  console.log("sql");
-			  console.log(sql2);
-			  console.log("imggerpage");
-			  console.log(page_now);
-			  console.log("sendopage");
-			  console.log(command.param.start.y);
-
-
-			  var query2 = connection.query(sql2);
-
-			  query2
-			  //エラー用
-			  	.on('error', function(err) {
-				  console.log('err is: ', err );
-				 })
-				 //結果用
-				 .on('result', function(rows) {
-					 command.param.end.x = rows['div_url'];
-					 command.param.start.y = rows['canvas_url']
-
-					 commands = [];
-
-					 storeCommand(command);
-					 socket.broadcast.emit('img', command);
-					 socket.emit('img', command);
-				  })
-
-				  //終了ログ
-				  .on('end', function() {
-					  console.log('end');
-					  connection.end();
-				  });
-
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    console.log('end');
-		  });
-
 	});
 
 	socket.on('command', function(command) {
@@ -270,6 +162,86 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  });
 			socket.broadcast.emit('next',command);
 			socket.emit('next',command);
+
+		}
+		if(command.type == "turn")
+		{
+			var connection = mysql.createConnection({
+				  host     : 'localhost', //接続先ホスト
+				  user     : 'pcp',      //ユーザー名
+				  password : 'pcp2012',  //パスワード
+				  database : 'pcp2012'    //DB名
+				});
+			//現在のページ数をとってくるＳＱＬ
+			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
+
+			var query = connection.query(sql);
+			query
+			  //エラーログ
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
+			  //結果用
+			  .on('result', function(rows) {
+
+				  //現在のページ数を格納
+				  max_page = rows['page_num'];
+				  //現在表示しているページにカーソルをそろえる
+				  var now_page = max_page + command.now_page;
+
+				  //戻るボタンを押したため移動数マイナス１
+				  command.now_page--;
+				  if(now_page < 1){
+					  page_move++;
+				  }
+
+				  var sql2 = 'UPDATE board SET div_url = "'+ command.div + '", canvas_url = "'+ command.canvas +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
+
+					var query2 = connection.query(sql2);
+					query2
+					  //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+						 now_page = max_page - command.now_page;
+						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+						 var query3 = connection.query(sql3);
+						 query3
+						 //エラーログ
+						  .on('error', function(err) {
+						    console.log('err is: ', err );
+						  })
+						  //結果用
+						  .on('result', function(rows) {
+								command.param.end.x = rows['div_url'];
+								command.param.start.y = rows['canvas_url']
+
+								commands = [];
+
+								storeCommand(command);
+								socket.emit('now_page', command.now_page);
+								socket.broadcast.emit('img', command);
+								socket.emit('img', command);
+						  })
+						  //終了ログ
+						  .on('end', function() {
+							connection.end()
+						    console.log('end');
+						  });
+
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					  });
+			  })
+
+			  //終了ログ
+			  .on('end', function() {
+			    console.log('end');
+			  });
 
 		}
 	});
