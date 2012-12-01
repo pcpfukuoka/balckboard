@@ -265,6 +265,90 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 						  .on('result', function(rows) {
 								command.param.end.x = rows['div_url'];
 								command.param.start.y = rows['canvas_url'];
+								commands = [];
+
+								storeCommand(command);
+								socket.emit('now_page', command.param.start.x);
+								socket.broadcast.emit('img', command);
+								socket.emit('img', command);
+						  })
+						  //終了ログ
+						  .on('end', function() {
+							connection.end()
+						    console.log('end');
+						  });
+
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					  });
+			  })
+
+			  //終了ログ
+			  .on('end', function() {
+			    console.log('end');
+			  });
+
+		}
+
+		if(command.type == "next")
+		{
+			var connection = mysql.createConnection({
+				  host     : 'localhost', //接続先ホスト
+				  user     : 'pcp',      //ユーザー名
+				  password : 'pcp2012',  //パスワード
+				  database : 'pcp2012'    //DB名
+				});
+			//現在のページ数をとってくるＳＱＬ
+			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
+
+			var query = connection.query(sql);
+			query
+			  //エラーログ
+			  .on('error', function(err) {
+			    console.log('err is: ', err );
+			  })
+			  //結果用
+			  .on('result', function(rows) {
+
+				  //現在のページ数を格納
+				  max_page = rows['page_num'];
+				  //現在表示しているページにカーソルをそろえる
+				  var now_page = max_page + command.param.start.x;
+
+				  //戻るボタンを押したため移動数マイナス１
+				  command.param.start.x++;
+				  if(now_page > max_page){
+					  page_move--;
+				  }
+
+				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
+
+					var query2 = connection.query(sql2);
+					query2
+					  //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+						 now_page = max_page + command.param.start.x;
+
+
+						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+						 console.log("sql:");
+						 console.log(sql3);
+						 var query3 = connection.query(sql3);
+						 query3
+						 //エラーログ
+						  .on('error', function(err) {
+						    console.log('err is: ', err );
+						  })
+						  //結果用
+						  .on('result', function(rows) {
+								command.param.end.x = rows['div_url'];
+								command.param.start.y = rows['canvas_url'];
 								socket.emit('log_test',command);
 								commands = [];
 

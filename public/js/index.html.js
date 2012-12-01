@@ -208,7 +208,7 @@ onAppReady(function(param) {
 			}
 		},
 
-		save : function(param,share)
+		turn : function(param,share)
 		{
 
 			if(share)
@@ -489,7 +489,7 @@ onAppReady(function(param) {
 
 		div_url = back.style.backgroundImage;
 
-		COMMAND_OPS.save({
+		COMMAND_OPS.turn({
 			start : {
 				x : now_moving,
 				y : div_url
@@ -502,8 +502,7 @@ onAppReady(function(param) {
 	});
 
 	$("#test2").click(function(e){
-		//次へ（テスト）をクリック
-
+		//進む（テスト）をクリック
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
@@ -517,47 +516,18 @@ onAppReady(function(param) {
 		var back = document.getElementById("chalkboard");
 
 		div_url = back.style.backgroundImage;
-		COMMAND_OPS.save({
-				now_page : now_moving,
-				div : div_url,
-				canvas : canvas.toDataURL("image/png")
-		}, true);
 
-		/////////////////////////////////////////////////////////////////////////////////////
-		//								現在のページ移動数の変更						   //
-		////////////////////////////////////////////////////////////////////////////////////
-		COMMAND_OPS.page_move({
-				now_page : "turn"
-		}, true);
-
-		/////////////////////////////////////////////////////////////////////////////////////
-		//								画面クリア										   //
-		////////////////////////////////////////////////////////////////////////////////////
-		COMMAND_OPS.reset(	{
+		COMMAND_OPS.next({
 			start : {
-				x : -1000,
-				y : -1000
+				x : now_moving,
+				y : div_url
 			},
 			end : {
-				x : 10000,
+				x : canvas.toDataURL(),
 				y : 10000
 			}},
 			true);
-		/////////////////////////////////////////////////////////////////////////////////////
-		//								画像を描画										   //
-		////////////////////////////////////////////////////////////////////////////////////
-
-		COMMAND_OPS.img({
-			color : color,
-			start : {
-				x : "save",
-				y : now_moving
-			},
-			end : {
-				x : -10000,
-				y : -10000
-			}
-		}, true);
+	});
 	});
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
