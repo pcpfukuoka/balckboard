@@ -144,8 +144,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  .on('result', function(rows) {
 
 				  //現在のページ数を格納
-				  var now_page = rows['page_num'];
-
+				  var max_page = rows['page_num'];
+				  var now_page = max_page + page_move;
 				  page_move= 0;
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
