@@ -693,7 +693,8 @@ onAppReady(function(param) {
 			command.type = "reset";
 			processCommand(command);
 
-			command.param.start.x == "save";
+			command.type = "img";
+			command.param.start.x = "save";
 			processCommand(command);
 
 
