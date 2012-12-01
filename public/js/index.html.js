@@ -602,21 +602,14 @@ onAppReady(function(param) {
 
 		div_url = back.style.backgroundImage;
 
-		COMMAND_OPS.save({
-				now_page : now_moving,
-				div : div_url,
-				canvas : canvas.toDataURL("image/png")
-		}, true);
-
-
 		COMMAND_OPS.new_page({
 			color : color,
 			start : {
-				x : 1,
-				y : 1000
+				x : now_moving,
+				y : div_url
 			},
 			end : {
-				x : -10000,
+				x : canvas.toDataURL("image/png"),
 				y : -10000
 			}
 		}, true);
@@ -721,11 +714,6 @@ onAppReady(function(param) {
 			//画面のリセットをする
 			command.type = "reset";
 			processCommand(command);
-
-			//画面の移動値を初期値（０）に戻す
-			COMMAND_OPS.page_move({
-				now_page : "refresh"
-		}, true);
 		});
 
 		socket.on('img', function(command){
