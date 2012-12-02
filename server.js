@@ -131,6 +131,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  password : 'pcp2012',  //パスワード
 				  database : 'pcp2012'    //DB名
 				});
+			socket.emit("tag_test",command.param.start.x);
 			//現在のページ数をとってくるＳＱＬ
 			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
 
@@ -145,7 +146,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  //現在のページ数を格納
 				  var max_page = rows['page_num'];
-				  var now_page = max_page + page_move;
+				  var now_page = max_page + command.param.start.x;
 				  page_move= 0;
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
