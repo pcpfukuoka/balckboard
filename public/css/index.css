@@ -26,6 +26,8 @@ html, body, #container {
 	width: 780px;
 	height: 540px;
 	padding-top: 20px;
+	background-repeat:no-repeat;
+
 }
 #canvas {
 	display: block;
