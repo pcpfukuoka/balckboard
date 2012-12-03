@@ -616,7 +616,7 @@ onAppReady(function(param) {
 			fn(command.param);
 		}
 		socket.on('page_jump',function(){
-			document.location = "49.212.201.99/pcp2012";
+			document.location = "http://49.212.201.99/pcp2012";
 		});
 		socket.on('connect', function(commands) {
 			$('#loadingMessage').hide();
