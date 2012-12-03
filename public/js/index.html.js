@@ -1,5 +1,44 @@
 
 onAppReady(function(param) {
+
+	$(function(){
+		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
+	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
+
+	    $("#glayLayer").click(function(){
+	        $(this).hide();
+	        $("#overLayer").hide();
+	    });
+
+	    $("test3").click(function(){
+	    	var i= 0;
+	    	$("#glayLayer").show();
+	    	$("#overLayer").html("<ul>");
+	    	for(i = 0;i > 10; i++){
+	    		$("#overLayer").html("<li>");
+	    		$("#overLayer").html("<img src='"+ ｄｂから持ってきた配列のＵＲＬ+" class='bg_img'>");
+	    		$("#overLayer").html("</li>");
+	    	};
+	    	$("#overLayer").html("</ul>");
+	    });
+
+	    if($.browser.msie && $.browser.version<7){
+	        $(window).scroll(function(){
+	            $("#glayLayer").css('top',$(document).scrollTop());
+	            $("#overLayer").css('top',($(document).scrollTop()+$(window).height()/2) +"px");
+	        });
+	    }
+
+	    $(".bg_img").click(function(){
+	    	var divSrc = $(this).attr("src");
+	        $("#overLayer").hide();
+	        $("#glayLayer").hide();
+	        use_div_url = divSrc;
+
+	    });
+	});
+
+	var use_div_url;
 	var now_moving = 0;
 	var msg = modernizr([
 		'canvas', 'websockets',
@@ -233,11 +272,12 @@ onAppReady(function(param) {
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
 
+				/*
 				//divのＵＲＬの変更
 				console.log(param.end.x);
 				var div = document.getElementById("chalkboard");
 				div.style.background = param.end.x;
-
+				*/
 
 
 
@@ -694,6 +734,11 @@ onAppReady(function(param) {
 			//画面のリセットをする
 			command.type = "reset";
 			processCommand(command);
+
+			//背景画像の設定
+			var div = document.getElementById("chalkboard");
+			div.style.background = use_div_url;
+
 		});
 
 		socket.on('img', function(command){
