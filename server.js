@@ -66,14 +66,15 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-			  socket.brouadcast.emit('page_jump');
-			  socket.emit('page_jump');
+			console.log("aaa");
 		  })
 		  //終了ログ
 		  .on('end', function() {
 		    console.log('end');
 		    connection.end();
 		  });
+		socket.broadcast.emit('page_jump',command);
+		socket.emit('page_jump',command);
 
 	});
 
