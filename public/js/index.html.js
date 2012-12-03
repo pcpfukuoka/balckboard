@@ -234,7 +234,7 @@ onAppReady(function(param) {
 				var can = canvas.getContext('2d');
 
 				//divのＵＲＬの変更
-				console.log(param.start.x);
+				console.log(param.end.x);
 				var div = document.getElementById("chalkboard");
 				div.style.background = param.end.x;
 
