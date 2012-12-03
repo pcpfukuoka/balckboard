@@ -220,7 +220,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  a++;
 
 				  //テーブルにデータのひな形の追加
-				  var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,'+a+',0,0);';
+				  var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,'+a+',0,0,0);';
 
 				  var query2 = connection.query(sql2);
 					  query2
