@@ -49,6 +49,34 @@ function storeCommand(command) {
 var sockets = io.of('/chalkboard').on('connection', function(socket) {
 	socket.emit('init', commands);
 
+	socket.on('end_class', function(command){
+		var connection = mysql.createConnection({
+			  host     : 'localhost', //接続先ホスト
+			  user     : 'pcp',      //ユーザー名
+			  password : 'pcp2012',  //パスワード
+			  database : 'pcp2012'    //DB名
+			});
+		var sql = 'UPDATE board SET end_flg = "1" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15";';
+
+		var query = connection.query(sql);
+		query
+		 //エラーログ
+		  .on('error', function(err) {
+		    console.log('err is: ', err );
+		  })
+		  //結果用
+		  .on('result', function(rows) {
+			  socket.brouadcast.emit('page_jump');
+			  socket.emit('page_jump');
+		  })
+		  //終了ログ
+		  .on('end', function() {
+		    console.log('end');
+		    connection.end();
+		  });
+
+	});
+
 	//移動数をサーバー側に保持
 	socket.on('page_move', function(command){
 		var connection = mysql.createConnection({

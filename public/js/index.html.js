@@ -270,6 +270,16 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+		},
+		end_class :function(param,share)
+		{
+			if(share)
+			{
+				end_class({
+					type : "end_class",
+					param : param
+				});
+			}
 		}
 
 
@@ -566,6 +576,21 @@ onAppReady(function(param) {
 		}, true);
 
 	});
+	$("#end").click(function(e){
+		//授業終了ボタンをクリック
+
+		COMMAND_OPS.end_class({
+			color : color,
+			start : {
+				x : 1000,
+				y : 1000
+			},
+			end : {
+				x : 1000,
+				y : -10000
+			}
+		}, true);
+	});
 	/**
 	 * ここより下はサーバにデータを送る処理
 	 *
@@ -576,6 +601,7 @@ onAppReady(function(param) {
 	var img;
 	var next;
 	var save;
+	var end_class;
 
 	// Interaction with server using Socket.IO
 	(function() {
@@ -589,6 +615,9 @@ onAppReady(function(param) {
 			}
 			fn(command.param);
 		}
+		socket.on('page_jump',function(){
+			document.location = "49.212.201.99/pcp2012";
+		});
 		socket.on('connect', function(commands) {
 			$('#loadingMessage').hide();
 		});
@@ -694,6 +723,9 @@ onAppReady(function(param) {
 
 		sendCommand = function(command) {
 			socket.emit('command', command);
+		};
+		end_class = function(command) {
+			socket.emit('end_class', command);
 		};
 	})();
 
