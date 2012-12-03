@@ -233,6 +233,15 @@ onAppReady(function(param) {
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
 
+				//divのＵＲＬの変更
+				console.log(param.start.y);
+				var div = document.getElementById("chalkboard");
+				div.style.background = param.end.x;
+
+
+
+
+				//canvasに画像の描画
 				 var img1 = new Image();
 				  img1.src = param.start.y;
 				  /* 画像が読み込まれるのを待ってから処理を続行 */
