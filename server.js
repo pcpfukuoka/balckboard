@@ -84,7 +84,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-		var sql = 'SELECT  COUNT(*) AS cnt  img_url FROM use_img WHERE teacher_seq = "15" AND subject_seq = "15" AND used_flg = "0";';
+		var sql = 'SELECT img_url FROM use_img WHERE teacher_seq = "15" AND subject_seq = "15" AND used_flg = "0";';
 
 		var query = connection.query(sql);
 		query
@@ -94,8 +94,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  })
 		  //結果用
 		  .on('result', function(rows) {
+
 			  var url = new Object();
-			  url['count'] = rows['cnt']
+			 // url['count'] = rows['cnt']
 			  url['url'] = rows['div_url'];
 			  console.log(url);
 			  socket.emit('div_url', url);
