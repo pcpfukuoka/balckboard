@@ -1,6 +1,6 @@
 
 onAppReady(function(param) {
-	/*
+
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
@@ -11,14 +11,15 @@ onAppReady(function(param) {
 	    });
 
 	    $("test4").click(function(){
-	    	var i= 0;
+	    	var url_num = use_div_url.lengh;
 	    	$("#glayLayer").show();
 	    	$("#overLayer").html("<ul>");
-	    	for(i = 0;i > 10; i++){
+	    	for(i = 0;i < url_num; i++){
 	    		$("#overLayer").html("<li>");
 	    		$("#overLayer").html("<img src='"+ ｄｂから持ってきた配列のＵＲＬ+" class='bg_img'/>");
 	    		$("#overLayer").html("</li>");
 	    	};
+	    	$("#overLayer").show();
 	    	$("#overLayer").html("</ul>");
 	    });
 
@@ -39,7 +40,7 @@ onAppReady(function(param) {
 
 	    });
 	});
-	*/
+
 
 	var use_div_url = new Object();
 	var now_moving = 0;
