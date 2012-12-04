@@ -470,15 +470,23 @@ html, body, #container {
 .fadeIn{
 	display: none;
 }
+
 #glayLayer{
-    display:none;
     position:fixed;
-    （中略）
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:black;
+    opacity: 0.60;
+    filter:alpha(opacity=60);
 }
 #overLayer{
-    display:none;
-    position:fixed;
-    （中略）
+    position: fixed;
+    top:50%;
+    left:50%;
+    margin-top:-244px;
+    margin-left:-325px;
 }
 * html #glayLayer{
     position:absolute;
