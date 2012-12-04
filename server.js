@@ -77,7 +77,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		socket.emit('page_jump',command);
 
 	});
-	socket.on('div_url', function(command){
+	socket.on('div_url', function(){
 		var connection = mysql.createConnection({
 			  host     : 'localhost', //接続先ホスト
 			  user     : 'pcp',      //ユーザー名
