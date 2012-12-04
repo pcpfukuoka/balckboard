@@ -96,7 +96,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  .on('result', function(rows) {
 
 			  var url = new Object();
-			  url['url'] = rows['img_url'];
+			  url['img_url'] = rows['img_url'];
 			  console.log(url);
 			  socket.emit('div_url', url);
 
