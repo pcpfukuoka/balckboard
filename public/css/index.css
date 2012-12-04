@@ -470,3 +470,19 @@ html, body, #container {
 .fadeIn{
 	display: none;
 }
+#glayLayer{
+    display:none;
+    position:fixed;
+    （中略）
+}
+#overLayer{
+    display:none;
+    position:fixed;
+    （中略）
+}
+* html #glayLayer{
+    position:absolute;
+}
+* html #overLayer{
+    position: absolute;
+}
