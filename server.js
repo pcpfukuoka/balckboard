@@ -77,6 +77,37 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		socket.emit('page_jump',command);
 
 	});
+	socket.on('div_url', function(command){
+		var connection = mysql.createConnection({
+			  host     : 'localhost', //接続先ホスト
+			  user     : 'pcp',      //ユーザー名
+			  password : 'pcp2012',  //パスワード
+			  database : 'pcp2012'    //DB名
+			});
+		var sql = 'SELECT  COUNT(*) AS cnt  img_url FROM use_img WHERE teacher_seq = "15" AND subject_seq = "15" AND used_flg = "0";';
+
+		var query = connection.query(sql);
+		query
+		 //エラーログ
+		  .on('error', function(err) {
+		    console.log('err is: ', err );
+		  })
+		  //結果用
+		  .on('result', function(rows) {
+			  var url = new Object()();
+			  url['count'] = rows['cnt']
+			  url['url'] = rows['div_url'];
+			  console.log(url);
+			  socket.emit('div_url', url);
+
+		  })
+		  //終了ログ
+		  .on('end', function() {
+		    console.log('end');
+		    connection.end();
+		  });
+
+	});
 
 	//移動数をサーバー側に保持
 	socket.on('page_move', function(command){

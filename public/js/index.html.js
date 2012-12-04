@@ -1,6 +1,6 @@
 
 onAppReady(function(param) {
-
+	/*
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
@@ -10,13 +10,13 @@ onAppReady(function(param) {
 	        $("#overLayer").hide();
 	    });
 
-	    $("test3").click(function(){
+	    $("test4").click(function(){
 	    	var i= 0;
 	    	$("#glayLayer").show();
 	    	$("#overLayer").html("<ul>");
 	    	for(i = 0;i > 10; i++){
 	    		$("#overLayer").html("<li>");
-	    		$("#overLayer").html("<img src='"+ ｄｂから持ってきた配列のＵＲＬ+" class='bg_img'>");
+	    		$("#overLayer").html("<img src='"+ ｄｂから持ってきた配列のＵＲＬ+" class='bg_img'/>");
 	    		$("#overLayer").html("</li>");
 	    	};
 	    	$("#overLayer").html("</ul>");
@@ -34,11 +34,14 @@ onAppReady(function(param) {
 	        $("#overLayer").hide();
 	        $("#glayLayer").hide();
 	        use_div_url = divSrc;
+	        var bg_div = document.getElementById("chalkboard");
+	        bg_div.style.background = use_div_url;
 
 	    });
 	});
+	*/
 
-	var use_div_url;
+	var use_div_url = new Object();
 	var now_moving = 0;
 	var msg = modernizr([
 		'canvas', 'websockets',
@@ -655,6 +658,10 @@ onAppReady(function(param) {
 			}
 			fn(command.param);
 		}
+		socket.on('div_url',function(url){
+			use_div_url['div_url'] = url['div_url'];
+			use_div_url['count'] = url['count'];
+		});
 		socket.on('page_jump',function(){
 			document.location = "http://49.212.201.99/pcp2012/index.php";
 		});
@@ -665,6 +672,8 @@ onAppReady(function(param) {
 			COMMAND_OPS.page_move({
 				now_page : "aaaaaa"
 			}, true);
+
+			socket.emit('div_url',"aaaaaa");
 
 			if (!(commands instanceof Array)) {
 				return;
