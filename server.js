@@ -94,7 +94,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-			  var url = new Object()();
+			  var url = new Object();
 			  url['count'] = rows['cnt']
 			  url['url'] = rows['div_url'];
 			  console.log(url);
