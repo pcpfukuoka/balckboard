@@ -659,8 +659,8 @@ onAppReady(function(param) {
 			fn(command.param);
 		}
 		socket.on('div_url',function(url){
-			use_div_url['div_url'] = url['div_url'];
-			console.log(use_div_url['div_url']);
+			use_div_url['img_url'] = url['img_url'];
+			console.log(use_div_url['img_url']);
 		});
 		socket.on('page_jump',function(){
 			document.location = "http://49.212.201.99/pcp2012/index.php";
