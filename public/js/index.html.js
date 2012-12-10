@@ -299,7 +299,7 @@ onAppReady(function(param) {
 		{
 			if(share)
 			{
-				page_move({
+				enter({
 					type : "page_move",
 					param : param
 				});
@@ -668,7 +668,7 @@ onAppReady(function(param) {
 			$('#loadingMessage').hide();
 		});
 		socket.on('init', function(commands) {
-			COMMAND_OPS.page_move({
+			COMMAND_OPS.enter({
 				now_page : "aaaaaa"
 			}, true);
 
@@ -679,6 +679,14 @@ onAppReady(function(param) {
 				processCommand(commands[i]);
 			}
 		});
+
+		socket.on('enter', function(send){
+			now_moving = send['page_move'];
+			var div = document.getElementById("chalkboard");
+			div.style.background = send['div_url'];
+			console.log(send);
+		});
+
 		socket.on('now_page', function(send){
 			now_moving = send['page_move'];
 			var div = document.getElementById("chalkboard");
@@ -766,8 +774,8 @@ onAppReady(function(param) {
 			socket.emit('img', command);
 		};
 
-		page_move = function(command){
-			socket.emit('page_move',command);
+		enter = function(command){
+			socket.emit('enter',command);
 		};
 		save = function(command){
 			socket.emit('save', command);
