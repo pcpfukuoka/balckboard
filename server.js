@@ -266,10 +266,16 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  var now_page = max_page -(max_page-command.param.start.x -1);
 
 				  //戻るボタンを押したため移動数＋１
+				  console.log("command.param.start.x:");
+				  console.log(command.param.start.x);
+				  console.log("now_page:");
+				  console.log(now_page);
 				  command.param.start.x++;
 				  if(now_page < 1){
 					  page_move--;
 				  }
+				  console.log("now_page:");
+				  console.log(now_page);
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 
