@@ -295,7 +295,7 @@ onAppReady(function(param) {
 
 			}
 		},
-		page_move :function(param,share)
+		enter :function(param,share)
 		{
 			if(share)
 			{
