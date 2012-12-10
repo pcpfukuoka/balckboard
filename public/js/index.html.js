@@ -579,6 +579,7 @@ onAppReady(function(param) {
 		var back = document.getElementById("chalkboard");
 
 		div_url = back.style.backgroundImage;
+		console.log(div_url);
 
 		COMMAND_OPS.next({
 			start : {
@@ -659,10 +660,7 @@ onAppReady(function(param) {
 			}
 			fn(command.param);
 		}
-		socket.on('div_url',function(url){
-			use_div_url['img_url'] = url['img_url'];
-			console.log(use_div_url['img_url']);
-		});
+
 		socket.on('page_jump',function(){
 			document.location = "http://49.212.201.99/pcp2012/index.php";
 		});
@@ -674,8 +672,6 @@ onAppReady(function(param) {
 				now_page : "aaaaaa"
 			}, true);
 
-			socket.emit('div_url',"aaaaaa");
-
 			if (!(commands instanceof Array)) {
 				return;
 			}
@@ -683,10 +679,9 @@ onAppReady(function(param) {
 				processCommand(commands[i]);
 			}
 		});
-		socket.on('now_page', function(move_page){
-			now_moving = move_page;
-			console.log("変更後のnow_moving:");
-			console.log(now_moving);
+		socket.on('now_page', function(send){
+			now_moving = send['page_move'];
+			console.log(send);
 		});
 		// Holder for the mouse pointer of the other user.
 		// Key:sessionId, Value:the div element which indicate the pointer's
