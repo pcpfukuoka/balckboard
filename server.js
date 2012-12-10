@@ -120,7 +120,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  	//結果用
 			  	.on('result', function(rows) {
 			  		var send = new Object();
-			  		send['div_url'] = rows;
+			  		send['div_url'] = rows['div_url'];
 			  		send['page_move'] = page_move;
 					socket.emit('now_page', send);
 
