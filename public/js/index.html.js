@@ -681,6 +681,8 @@ onAppReady(function(param) {
 		});
 		socket.on('now_page', function(send){
 			now_moving = send['page_move'];
+			var div = document.getElementById("chalkboard");
+			div.style.background = send['div_url'];
 			console.log(send);
 		});
 		// Holder for the mouse pointer of the other user.
