@@ -346,12 +346,14 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  //現在のページ数を格納
 				  max_page = rows['page_num'];
+				  console.log(page_move);
 				  //現在表示しているページにカーソルをそろえる
 				  var now_page = max_page -(max_page - page_move -1);
 
 
 				  //進むボタンを押したため移動数＋１
 				  page_move++;
+				  console.log(page_move);
 				  if(now_page > max_page){
 					  page_move--;
 				  }
@@ -359,7 +361,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 
-				  console.log(sql2);
 					var query2 = connection.query(sql2);
 					query2
 					  //エラーログ
@@ -369,6 +370,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  //結果用
 					  .on('result', function(rows) {
 
+						 console.log(page_move);
 						 aaa= max_page-page_move -1;
 						 now_page = max_page -aaa;
 
