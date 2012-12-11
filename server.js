@@ -262,7 +262,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  .on('result', function(rows) {
 
 				  //現在のページ数を格納
-				  max_page = rows['page_num'];
+				  var max_page = rows['page_num'];
 				  //現在表示しているページにカーソルをそろえる
 				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
@@ -282,9 +282,9 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  })
 					  //結果用
 					  .on('result', function(rows) {
+						  socket.emit('log_test', max_page);
 						  var aaa= max_page-page_move -1;
 						  now_page = max_page -aaa;
-						  socket.emit('log_test', now_page);
 
 
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
