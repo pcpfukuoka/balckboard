@@ -748,7 +748,7 @@ onAppReady(function(param) {
 
 			//背景画像の設定
 			var div = document.getElementById("chalkboard");
-			div.style.background = use_div_url;
+			div.style.background = "url(../images/kokuban.jpg)";
 
 		});
 
