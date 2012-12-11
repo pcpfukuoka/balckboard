@@ -266,6 +266,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //現在表示しているページにカーソルをそろえる
 				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
+				  socket.emit('log_test', now_page);
 
 
 				  //戻るボタンを押したため移動数-１

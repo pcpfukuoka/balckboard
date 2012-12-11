@@ -278,7 +278,6 @@ onAppReady(function(param) {
 
 
 				//divのＵＲＬの変更
-				console.log(param.end.x);
 				var div = document.getElementById("chalkboard");
 				div.style.background = param.end.x;
 
@@ -579,7 +578,7 @@ onAppReady(function(param) {
 		var back = document.getElementById("chalkboard");
 
 		div_url = back.style.backgroundImage;
-		console.log(div_url);
+
 
 		COMMAND_OPS.next({
 			start : {
@@ -684,7 +683,6 @@ onAppReady(function(param) {
 			now_moving = send['page_move'];
 			var div = document.getElementById("chalkboard");
 			div.style.background = send['div_url'];
-			console.log(send);
 		});
 
 		socket.on('now_page', function(send){
