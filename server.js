@@ -355,9 +355,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  //進むボタンを押したため移動数＋１
 				  page_move++;
-				  if(now_page > max_page){
+				  if(now_page == max_page){
 					  page_move--;
-					  now_page--;
 				  }
 				  socket.emit('log_test',page_move);
 
