@@ -182,7 +182,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
 
-				  page_move= max_page + 1;
+				  page_move= max_page;
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 
