@@ -353,11 +353,12 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  console.log(page_move);
 				  console.log("now_page:");
 				  console.log(now_page);
-				  //戻るボタンを押したため移動数マイナス１
-				  page_move++;
+				  //進むボタンを押したため移動数マイナス１
+				  page_move--;
 				  if(now_page > max_page){
-					  page_move--;
+					  page_move++;
 				  }
+
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 
@@ -371,9 +372,12 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  .on('result', function(rows) {
 						 aaa= max_page-page_move -1;
 						 now_page = max_page -aaa;
+						 console.log("select:");
+						 console.log(now_page);
 
 
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+
 						 console.log("sql:");
 						 console.log(sql3);
 						 var query3 = connection.query(sql3);
