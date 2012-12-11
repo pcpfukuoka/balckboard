@@ -349,14 +349,12 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //現在表示しているページにカーソルをそろえる
 				  var now_page = max_page -(max_page - page_move -1);
 
-				  console.log("page_move:");
-				  console.log(page_move);
-				  console.log("now_page:");
-				  console.log(now_page);
-				  //進むボタンを押したため移動数マイナス１
-				  page_move--;
+				  console.log("max_page1:");
+				  console.log(max_page);
+				  //進むボタンを押したため移動数＋１
+				  page_move++;
 				  if(now_page > max_page){
-					  page_move++;
+					  page_move--;
 				  }
 
 
@@ -370,11 +368,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  })
 					  //結果用
 					  .on('result', function(rows) {
+						 console.log("max_page");
+						 console.log(max_page);
 						 aaa= max_page-page_move -1;
 						 now_page = max_page -aaa;
-						 console.log("select:");
-						 console.log(now_page);
-
 
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
 
