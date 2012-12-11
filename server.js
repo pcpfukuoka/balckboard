@@ -353,7 +353,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  socket.emit('log_test', page_move);
 				  //進むボタンを押したため移動数＋１
 				  page_move++;
-				  console.log(page_move);
 				  if(now_page > max_page){
 					  page_move--;
 				  }
