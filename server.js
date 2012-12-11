@@ -261,13 +261,13 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  //結果用
 			  .on('result', function(rows) {
 
-				  socket.emit('log_test',page_move);
+
 				  //現在のページ数を格納
 				  var max_page = rows['page_num'];
 				  //現在表示しているページにカーソルをそろえる
 				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
-
+				  socket.emit('log_test', now_page);
 				  //戻るボタンを押したため移動数-１
 				  page_move--;
 				  if(now_page = 1){
