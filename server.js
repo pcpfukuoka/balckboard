@@ -273,8 +273,10 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  page_move++;
 				  }
 
-				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
-					var query2 = connection.query(sql2);
+				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
+
+				 socket.emit('log_test',sql2);
+				 var query2 = connection.query(sql2);
 					query2
 					  //エラーログ
 					  .on('error', function(err) {
@@ -282,18 +284,19 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  })
 					  //結果用
 					  .on('result', function(rows) {
-						  socket.emit('log_test', max_page);
-						  var aaa= max_page-page_move -1;
-						  now_page = max_page -aaa;
+
+						var aaa= max_page-page_move -1;
+						now_page = max_page -aaa;
 
 
-						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+						var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+						socket.emit('log_test',sql3);
 
-						 var query3 = connection.query(sql3);
-						 query3
-						 //エラーログ
-						  .on('error', function(err) {
-						    console.log('err is: ', err );
+						var query3 = connection.query(sql3);
+						query3
+						//エラーログ
+						.on('error', function(err) {
+							console.log('err is: ', err );
 						  })
 						  //結果用
 						  .on('result', function(rows) {
