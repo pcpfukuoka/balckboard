@@ -269,9 +269,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  //戻るボタンを押したため移動数-１
 				  page_move--;
-				  if(now_page < 1){
+				  if(now_page = 1){
 					  page_move++;
-					  now_page = 1;
 				  }
 				  socket.emit('log_test',now_page);
 
