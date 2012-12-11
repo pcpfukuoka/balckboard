@@ -352,7 +352,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  max_page = rows['page_num'];
 				  //現在表示しているページにカーソルをそろえる
 				  var now_page = max_page -(max_page - page_move -1);
-				  socket.emit('log_test',now_page);
+
 				  //進むボタンを押したため移動数＋１
 				  page_move++;
 				  if(now_page > max_page){
