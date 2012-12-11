@@ -266,8 +266,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //現在表示しているページにカーソルをそろえる
 				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
-				  socket.emit('log_test', now_page);
-
 
 				  //戻るボタンを押したため移動数-１
 				  page_move--;
@@ -275,6 +273,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  page_move++;
 					  now_page = 1;
 				  }
+				  socket.emit('log_test',now_page);
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 					var query2 = connection.query(sql2);
@@ -305,7 +304,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 								commands = [];
 
 								storeCommand(command);
-								socket.emit('now_page', command.param.start.x);
+								socket.emit('now_page', page_move);
 								socket.broadcast.emit('img', command);
 								socket.emit('img', command);
 						  })
@@ -360,7 +359,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  page_move--;
 					  now_page--;
 				  }
-
+				  socket.emit('log_test',now_page);
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 
