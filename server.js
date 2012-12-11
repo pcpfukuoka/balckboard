@@ -243,7 +243,6 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		}
 		if(command.type == "turn")
 		{
-			socket.emit('log_test', page_move);
 			var connection = mysql.createConnection({
 				  host     : 'localhost', //接続先ホスト
 				  user     : 'pcp',      //ユーザー名
@@ -265,7 +264,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  //現在のページ数を格納
 				  max_page = rows['page_num'];
 				  //現在表示しているページにカーソルをそろえる
-				  var aaa= max_page-page_move;
+				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
 
 				  //戻るボタンを押したため移動数-１
@@ -285,7 +284,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					  .on('result', function(rows) {
 						  var aaa= max_page-page_move -1;
 						  now_page = max_page -aaa;
-
+						  socket.emit('log_test', now_page);
 
 
 						 var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
