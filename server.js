@@ -304,6 +304,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 								command.param.start.y = rows['canvas_url'];
 								commands = [];
 
+								command.type= "img";
+								command.param.start.x = "save";
 								storeCommand(command);
 								socket.emit('now_page', page_move);
 								socket.broadcast.emit('img', command);
@@ -390,6 +392,8 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 								command.param.start.y = rows['canvas_url'];
 								commands = [];
 
+								command.type= "img";
+								command.param.start.x = "save";
 								storeCommand(command);
 								socket.emit('now_page', page_move);
 								socket.broadcast.emit('img', command);
