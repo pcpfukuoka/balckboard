@@ -572,7 +572,7 @@ onAppReady(function(param) {
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-		var tes = document.getElementById("test");
+		var tes = document.getElementById("test2");
 
 		tes.id = "in_progress";
 		var canvas = document.getElementById("canvas");
@@ -601,7 +601,7 @@ onAppReady(function(param) {
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
-		var tes = document.getElementById("test");
+		var tes = document.getElementById("test3");
 
 		tes.id = "in_progress";
 
