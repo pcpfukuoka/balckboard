@@ -242,7 +242,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  });
 			socket.broadcast.emit('next',command);
 			socket.emit('next',command);
-
+			socket.emit('id_controle',command);
 		}
 		if(command.type == "turn")
 		{
@@ -304,11 +304,13 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 								command.param.start.y = rows['canvas_url'];
 								commands = [];
 
+
 								command.type= "img";
 								command.param.start.x = "save";
 								storeCommand(command);
 								socket.emit('now_page', page_move);
 								socket.broadcast.emit('img', command);
+
 								socket.emit('img', command);
 						  })
 						  //終了ログ
@@ -330,6 +332,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  });
 
 		}
+		socket.emit('id_controle',command);
 
 		if(command.type == "next")
 		{
@@ -392,6 +395,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 								command.param.start.y = rows['canvas_url'];
 								commands = [];
 
+
 								command.type= "img";
 								command.param.start.x = "save";
 								storeCommand(command);
@@ -418,6 +422,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  });
 
 		}
+		socket.emit('id_controle',command);
 	});
 
 	socket.on('disconnect', function() {

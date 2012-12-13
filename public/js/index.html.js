@@ -541,6 +541,9 @@ onAppReady(function(param) {
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
 
+		var tes = document.getElementById("test");
+
+		tes.id = "in_progress";
 
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
@@ -569,7 +572,9 @@ onAppReady(function(param) {
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
 
+		var tes = document.getElementById("test");
 
+		tes.id = "in_progress";
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
 
@@ -596,7 +601,9 @@ onAppReady(function(param) {
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
+		var tes = document.getElementById("test");
 
+		tes.id = "in_progress";
 
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
@@ -660,6 +667,21 @@ onAppReady(function(param) {
 			fn(command.param);
 		}
 
+		socket.on('id_controle',function(command){
+			var tes = document.getElementById("in_progress");
+
+			if(command.type=="turn"){
+
+
+				tes.id = "test";
+
+			}else if(command.type=="next"){
+				tes.id="test2";
+			}else if(command.type=="new_page"){
+				tes.id="test3";
+			}
+
+		});
 		socket.on('page_jump',function(){
 			document.location = "http://49.212.201.99/pcp2012/index.php";
 		});
