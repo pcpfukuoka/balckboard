@@ -227,7 +227,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-
+		//画面のリセット
 		reset : function(param,share)
 		{
 			ctx.clearRect(-1000, -1000, 10000, 10000);
@@ -239,7 +239,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-
+		//次へボタンを押した際の処理
 		next : function(param,share)
 		{
 			if(share)
@@ -250,7 +250,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-
+		//戻るボタンを押した際の処理
 		turn : function(param,share)
 		{
 
@@ -262,14 +262,15 @@ onAppReady(function(param) {
 				});
 			}
 		},
+
 		img :function(param,share)
 		{
 			if(share)
-				{
+			{
 
 				img({type : "img",param : param});
 
-				}
+			}
 			else if(param.start.x == "save")
 			{
 
@@ -285,15 +286,16 @@ onAppReady(function(param) {
 
 
 				//canvasに画像の描画
-				 var img1 = new Image();
-				  img1.src = param.start.y;
-				  /* 画像が読み込まれるのを待ってから処理を続行 */
-				  img1.onload = function() {
-				    can.drawImage(img1, 0, 0);
-				  };
+				var img1 = new Image();
+				img1.src = param.start.y;
+
+				img1.onload = function() {
+					can.drawImage(img1, 0, 0);
+				};
 
 			}
 		},
+
 		enter :function(param,share)
 		{
 			if(share)
@@ -304,6 +306,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
+		//ページの新規作成の処理
 		new_page :function(param,share)
 		{
 			if(share)
@@ -314,6 +317,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
+		//授業終了の際の処理
 		end_class :function(param,share)
 		{
 			if(share)
@@ -337,10 +341,9 @@ onAppReady(function(param) {
 		drawing = true;
         //筆を下した座標をprevに格納
 		var pos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
-
-        prevX = pos.x;
-        prevY = pos.y;
-        }, false);
+		prevX = pos.x;
+		prevY = pos.y;
+	}, false);
 
 	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
@@ -351,8 +354,6 @@ onAppReady(function(param) {
 		//posの位置を処理の開始位置（before）として設定
 		prevX = pos.x;
 		prevY = pos.y;
-		//黒板消しフラグがfalseの場合音を出す
-		//if(!eracing){ effects.play('chalkMouseDown'); }
 	});
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -361,10 +362,10 @@ onAppReady(function(param) {
 
 	//各種端末上がキャンバス上から筆を離した場合
 	document.addEventListener("touchend", function(e){
-        drawing = false;
-        e.stopPropagation();
+		drawing = false;
+		e.stopPropagation();
 
-        }, false);
+	}, false);
 
 	//キャンバス上から筆が離れた場合
 	canvas.mouseup(function(e) {
@@ -422,7 +423,7 @@ onAppReady(function(param) {
 						x : currentX,
 						y : currentY
 					}
-	    }, true);
+				}, true);
 			}
 			//beforeの座標の更新
 			prevX = currentX;
@@ -489,9 +490,8 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 
 	$("#colorPalette .color").bind('touchstart', function(e) {
-	  //消しゴムフラグをfalseにする
+		//黒板消しをfalseにする
 		eracing = false;
-		//今の色をcolorに格納
 		color = $(this).data("color");
 		canvas.css("cursor", "url(images/pointer_" + color
 				+ ".cur), pointer");
@@ -500,7 +500,7 @@ onAppReady(function(param) {
 	//チョークをクリックされた場合
 	$("#colorPalette .color").click(
 			function(e) {
-				//消しゴムフラグをfalseにする
+				//消しゴムをfalseにする
 				eracing = false;
 				//今の色をcolorに格納
 				color = $(this).data("color");
@@ -538,7 +538,7 @@ onAppReady(function(param) {
 	$("#test").click(function(e){
 		//戻る（テスト）をクリック
 		/////////////////////////////////////////////////////////////////////////////////////
-		//								画像を保存する処理								   //
+		//							現在の画像を保存する処理							   //
 		////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -567,7 +567,7 @@ onAppReady(function(param) {
 	$("#test2").click(function(e){
 		//進む（テスト）をクリック
 		/////////////////////////////////////////////////////////////////////////////////////
-		//								画像を保存する処理								   //
+		//								現在の画像を保存する処理						   //
 		////////////////////////////////////////////////////////////////////////////////////
 
 		var canvas = document.getElementById("canvas");
@@ -588,8 +588,8 @@ onAppReady(function(param) {
 			end : {
 				x : canvas.toDataURL(),
 				y : 10000
-			}},
-			true);
+			}
+		},true);
 	});
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
@@ -675,16 +675,18 @@ onAppReady(function(param) {
 				return;
 			}
 			for ( var i = 0, n = commands.length; i < n; i++) {
+				//server.jsに今まで格納してきた処理を実行し最新の状態にする
 				processCommand(commands[i]);
 			}
 		});
-
+		//入室した際に最新の背景を設定する
 		socket.on('enter', function(send){
 			now_moving = send['page_move'];
 			var div = document.getElementById("chalkboard");
 			div.style.background = send['div_url'];
 		});
 
+		//現在のページを格納する処理
 		socket.on('now_page', function(send){
 			now_moving = send;
 
@@ -712,9 +714,11 @@ onAppReady(function(param) {
 				end : {
 					x : 10000,
 					y : 10000
-				}},
-				true);
+				}
+			},true);
+
 		});
+
 		socket.on('command', function(aaa) {
 
 			// render mouse pointer
@@ -741,6 +745,7 @@ onAppReady(function(param) {
 			pointer.offset(cursorPos);
 			processCommand(aaa);
 		});
+
 		socket.on('next', function(command){
 			//画面のリセットをする
 			command.type = "reset";
@@ -753,9 +758,11 @@ onAppReady(function(param) {
 		});
 
 		socket.on('img', function(command){
+			//現在の線をすべて消去
 			command.type = "reset";
 			processCommand(command);
 
+			//画像を描画
 			command.type = "img";
 			command.param.start.x = "save";
 			processCommand(command);
@@ -773,6 +780,7 @@ onAppReady(function(param) {
 		enter = function(command){
 			socket.emit('enter',command);
 		};
+
 		save = function(command){
 			socket.emit('save', command);
 		};
