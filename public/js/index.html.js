@@ -1,5 +1,5 @@
 
-onAppReady(function(param) {
+$(function(param) {
 
 	//書き込みflagか書き込み不可flagを入れる
 	var draw_per= false;
