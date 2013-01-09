@@ -21,7 +21,7 @@ var page_move = 0;
 
 
 app.configure('development', function() {
-	app.use(express.static(__dirname + '/public'));
+	app.use(express.static(__dirname + '/public/index.php'));
 	app.use(express.errorHandler({
 		dumpExceptions : true,
 		showStack : true
@@ -29,7 +29,7 @@ app.configure('development', function() {
 });
 app.configure('production', function() {
 	var oneYear = 31557600000;
-	app.use(express.static(__dirname + '/public', {
+	app.use(express.static(__dirname + '/public/index.php', {
 		maxAge : oneYear
 	}));
 	app.use(express.errorHandler());
