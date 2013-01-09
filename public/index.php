@@ -1,0 +1,75 @@
+<?php
+	//$flag=$_POST['id'];
+	$flag=2;
+?>
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Japanese Chalkboard</title>
+	<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="shortcut icon" type="image/ico" href="images/favicon.ico">
+	<meta name="msapplication-task" content="Japanese Chalkboard">
+	<meta property="og:image" content="images/screenshot_small.png"/>
+	<meta property="og:title" content="Japanese Chalkboard (for IE10 Test Drive)"/>
+	<meta name="description" content="This is an example using HTML5 WebSocket. Multiple users can write this chalkboard at the same time.">
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="lib/js/modernizr-2.0.6.min.js"></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+
+
+
+</head>
+<body>
+
+<div id="container">
+    <div id="chalkboardAndOthers">
+		<div id="chalkboard" style="background: url(../images/kokuban.jpg);background-repeat:no-repeat">
+			<div id="monthOnBoard"></div>
+			<div id="dateOnBoard"></div>
+			<div id="loadingMessage">Loading. Please wait...</div>
+			<canvas id="canvas" width="710" height="460">
+				Your browser is not supported. Use modern browser (e.g. IE9 or later).
+			</canvas>
+		</div>
+		<ul id="colorPalette">
+			<li><div class="color" data-color="pink"></div>
+			<li><div class="color" data-color="yellow"></div>
+			<li><div class="color" data-color="green"></div>
+			<li><div class="color" data-color="blue"></div>
+			<li><div class="color" data-color="white"></div>
+		</ul>
+		<div id="eraser"></div>
+<?php
+	if($flag=="t"){
+?>
+		<input id="all" value="全クリア" type="button">
+		<input id="test" value="テスト(戻る)" type="button">
+ 		<input id="test2" value="テスト（次へ）"type="button">
+ 		<input id="test3" value="テスト（新規作成）"type="button">
+ 		<input id="test4" value="テスト（div変更）"type="button">
+ 		<br>
+ 		<input id="end" value="授業終了"type="button">
+<?php
+}
+?>
+
+	</div>
+</div> <!--! end of #container -->
+<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="lib/js/jquery-1.7.1.min.js"><\/script>')</script>
+<script src="lib/js/jquery.i18n.properties-min-1.0.9.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.html.js"></script>
+</body>
+<script>flg_change(<?=$flag ?>)</script>
+</html>

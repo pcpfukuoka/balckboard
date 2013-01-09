@@ -1,6 +1,16 @@
 
 onAppReady(function(param) {
 
+	//書き込みflagか書き込み不可flagを入れる
+	var draw_per= false;
+	function flg_change(flg){
+		if(flg==2){
+			draw_per=false;
+			console.log(draw_per);
+		}
+
+
+	}
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
@@ -72,12 +82,13 @@ onAppReady(function(param) {
 		yellow : ctx.createPattern(loadedImages[4], 'repeat')
 	};
 	//キャンバスの初期値を設定
+
 	var drawing = false;
 	var eracing = false;
 	var prevX = 0;
 	var prevY = 0;
 	var lineWidth = 4;
-	var color = "white";
+	var color = "whit00e";
 
 	// 現在の日付を黒板に書く
 	$(function() {
