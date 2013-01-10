@@ -5,7 +5,7 @@ onAppReady(function(param) {
 	var draw_per= false;
 
 
-	console.log(document.coockie);
+	console.log(getCookie("user_seq"));
 
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
@@ -685,7 +685,7 @@ onAppReady(function(param) {
 				//server.jsに今まで格納してきた処理を実行し最新の状態にする
 				processCommand(commands[i]);
 			}
-			socket.emit('cookie',cookie);
+
 		});
 		//入室した際に最新の背景を設定する
 		socket.on('enter', function(send){
