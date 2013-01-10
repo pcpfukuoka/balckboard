@@ -397,13 +397,15 @@ onAppReady(function(param) {
 
 	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
-		//描画フラグをtrueにする
-		drawing = true;
-		//キャンバス上の現在位置をposに格納
-		var pos = posOnCanvas(e.pageX, e.pageY);
-		//posの位置を処理の開始位置（before）として設定
-		prevX = pos.x;
-		prevY = pos.y;
+		if(draw_per){
+			//描画フラグをtrueにする
+			drawing = true;
+			//キャンバス上の現在位置をposに格納
+			var pos = posOnCanvas(e.pageX, e.pageY);
+			//posの位置を処理の開始位置（before）として設定
+			prevX = pos.x;
+			prevY = pos.y;
+		}
 	});
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -420,8 +422,10 @@ onAppReady(function(param) {
 
 	//キャンバス上から筆が離れた場合
 	canvas.mouseup(function(e) {
-		drawing = false;
-		e.stopPropagation();
+		if(draw_per){
+			drawing = false;
+			e.stopPropagation();
+		}
 	});
 
 	///////////////////////////////////////////////////////////////////////////////////
@@ -485,58 +489,62 @@ onAppReady(function(param) {
 
 	//カーソルの現在地が変わった場合
 	canvas.mousemove(function(e) {
-		//動いた位置をcurPosに格納
-		var curPos = posOnCanvas(e.pageX, e.pageY);
-		//動いた位置を最新の位置であるcurrentに格納
-		var currentX = curPos.x;
-		var currentY = curPos.y;
+		if(draw_per){
+			//動いた位置をcurPosに格納
+			var curPos = posOnCanvas(e.pageX, e.pageY);
+			//動いた位置を最新の位置であるcurrentに格納
+			var currentX = curPos.x;
+			var currentY = curPos.y;
 
-		COMMAND_OPS.mouseMove({
-			x : currentX,
-			y : currentY,
-			color : color,
-			eracing : eracing
-		}, true);
-		if (!drawing) {
-			//描画フラグがfalseの場合はなのもしない
-			return;
-		}
-		//黒板消しの場合
-		if (eracing) {
-			COMMAND_OPS.erase({
-				start : {
-					x : prevX,
-					y : prevY
-				},
-				end : {
-					x : currentX,
-					y : currentY
-				}
-			}, true);
-		//線を引く場合
-		} else {
-			COMMAND_OPS.drawLine({
+			COMMAND_OPS.mouseMove({
+				x : currentX,
+				y : currentY,
 				color : color,
-				start : {
-					x : prevX,
-					y : prevY
-				},
-				end : {
-					x : currentX,
-					y : currentY
-				}
-			}, true)
+				eracing : eracing
+			}, true);
+			if (!drawing) {
+				//描画フラグがfalseの場合はなのもしない
+				return;
+			}
+			//黒板消しの場合
+			if (eracing) {
+				COMMAND_OPS.erase({
+					start : {
+						x : prevX,
+						y : prevY
+					},
+					end : {
+						x : currentX,
+						y : currentY
+					}
+				}, true);
+			//線を引く場合
+			} else {
+				COMMAND_OPS.drawLine({
+					color : color,
+					start : {
+						x : prevX,
+						y : prevY
+					},
+					end : {
+						x : currentX,
+						y : currentY
+					}
+				}, true)
+			}
+			prevX = currentX;
+			prevY = currentY;
 		}
-		prevX = currentX;
-		prevY = currentY;
 	});
 
 
 	//画面上から筆が上げられた場合
 	$(document).mouseup(function(e) {
-		//描画フラグをfalseにする
-		drawing = false;
-		$("#colorPalette .color").last().click();
+		if(draw_per){
+			//描画フラグをfalseにする
+			drawing = false;
+			$("#colorPalette .color").last().click();
+		}
 	});
 	///////////////////////////////////////////////////////////////////////////////////
 	/** 				 ここから黒板の付随機能										**/
