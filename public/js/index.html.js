@@ -34,7 +34,7 @@ onAppReady(function(param) {
 	var user_seq=GetCookie('user_seq');
 	var flg=GetCookie('flg');
 
-	if(flag){
+	if(flg){
 		var e='<input id="all" value="全クリア" type="button">'
 		+'<input id="test" value="テスト(戻る)" type="button">'
  		+'<input id="test2" value="テスト（次へ）"type="button">'
@@ -42,7 +42,7 @@ onAppReady(function(param) {
  		+'<input id="test4" value="テスト（div変更）"type="button">'
  		+'<br>'
  		+'<input id="end" value="授業終了"type="button">';
-		$("body").append("e");
+		$("body").append(e);
 	}
 
 
