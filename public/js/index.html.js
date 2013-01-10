@@ -1,9 +1,6 @@
 
 onAppReady(function(param) {
 
-	/* 書き込みflagか書き込み不可flagを入れる */
-	var draw_per= false;
-
 	/* 指定したcookieを取得する関数 */
 	function GetCookie(name)
 	{
@@ -34,6 +31,10 @@ onAppReady(function(param) {
 	var user_seq=GetCookie('user_seq');
 	var flg=GetCookie('flg');
 
+	/* 書き込みflagか書き込み不可flagを入れる */
+	var draw_per= flg;
+
+	/* flgがtrueの場合、buttonを表示させる */
 	if(flg){
 		var e='<input id="all" value="全クリア" type="button">'
 		+'<input id="test" value="テスト(戻る)" type="button">'
@@ -385,11 +386,13 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 	//各種端末からキャンバス上に筆が下された場合
 	document.addEventListener("touchstart", function(e){
-		drawing = true;
-        //筆を下した座標をprevに格納
-		var pos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
-		prevX = pos.x;
-		prevY = pos.y;
+		if(draw_per){
+			drawing = true;
+			/* 筆を下した座標をprevに格納 */
+			var pos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
+			prevX = pos.x;
+			prevY = pos.y;
+		}
 	}, false);
 
 	//キャンバス上に筆が下された場合
@@ -409,9 +412,10 @@ onAppReady(function(param) {
 
 	//各種端末上がキャンバス上から筆を離した場合
 	document.addEventListener("touchend", function(e){
-		drawing = false;
-		e.stopPropagation();
-
+		if(draw_per){
+			drawing = false;
+			e.stopPropagation();
+		}
 	}, false);
 
 	//キャンバス上から筆が離れた場合
@@ -426,10 +430,11 @@ onAppReady(function(param) {
 
 	//各種端末の座標が移動した場合の処理
 	 document.addEventListener("touchmove", function(e){
-		 //画面をずらさないようにする
-		 event.preventDefault();
-		 //動いた位置（現在位置）をcurPosに格納
-			var curPos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
+		 if(draw_per){
+		 	/* 画面をずらさないようにする */
+		 	event.preventDefault();
+		 	/* 動いた位置（現在位置）をcurPosに格納 */
+		 	var curPos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
 			//動いた位置を最新の位置であるcurrentに格納
 			var currentX = curPos.x;
 			var currentY = curPos.y;
@@ -475,6 +480,7 @@ onAppReady(function(param) {
 			//beforeの座標の更新
 			prevX = currentX;
 			prevY = currentY;
+		 }
 		});
 
 	//カーソルの現在地が変わった場合
