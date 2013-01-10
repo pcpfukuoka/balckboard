@@ -29,12 +29,22 @@ onAppReady(function(param) {
 
 	    return result;
 	}
+	/* cookieを特定の文字列に分割しそれぞれに格納 */
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
 	var flg=GetCookie('flg');
-	console.log(subject_seq);
-	console.log(user_seq);
-	console.log(flg);
+
+	if(flag){
+		var e='<input id="all" value="全クリア" type="button">'
+		+'<input id="test" value="テスト(戻る)" type="button">'
+ 		+'<input id="test2" value="テスト（次へ）"type="button">'
+ 		+'<input id="test3" value="テスト（新規作成）"type="button">'
+ 		+'<input id="test4" value="テスト（div変更）"type="button">'
+ 		+'<br>'
+ 		+'<input id="end" value="授業終了"type="button">';
+		$("body").append("e");
+	}
+
 
 
 	$(function(){
