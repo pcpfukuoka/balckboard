@@ -52,14 +52,14 @@ onAppReady(function(param) {
 
 
 	$(function(){
-		/* 半透明レイヤー（galyLayer）とモーダルウィンドーの追加
+		/* 半透明レイヤー（galyLayer）とモーダルウィンドーの追加*/
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
 
 	    $("#glayLayer").click(function(){
 	        $(this).hide();
 	        $("#overLayer").hide();
 	    });
-	    */
+
 
 
 	    $("test4").click(function(){
