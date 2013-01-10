@@ -5,7 +5,7 @@ onAppReady(function(param) {
 	var draw_per= false;
 
 
-	console.log(getcookie("user_seq"));
+	console.log(document.cookie);
 
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
