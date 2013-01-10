@@ -1,16 +1,12 @@
 
-$(function(param) {
+onAppReady(function(param) {
 
 	//書き込みflagか書き込み不可flagを入れる
 	var draw_per= false;
-	function flg_change(flg){
-		if(flg==2){
-			draw_per=false;
-			console.log(draw_per);
-		}
 
 
-	}
+
+
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
@@ -24,7 +20,7 @@ $(function(param) {
 	    	var url_num = use_div_url.lengh;
 	    	$("#glayLayer").show();
 	    	$("#overLayer").html("<ul>");
-	    	for(i = 0;i < url_num; i++){
+	    	for(i=0;i<url_num; i++){
 	    		$("#overLayer").html("<li>");
 	    		$("#overLayer").html("<img src='"+ ｄｂから持ってきた配列のＵＲＬ+" class='bg_img'/>");
 	    		$("#overLayer").html("</li>");
@@ -88,7 +84,7 @@ $(function(param) {
 	var prevX = 0;
 	var prevY = 0;
 	var lineWidth = 4;
-	var color = "whit00e";
+	var color = "white";
 
 	// 現在の日付を黒板に書く
 	$(function() {
