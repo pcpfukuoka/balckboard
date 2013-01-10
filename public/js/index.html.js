@@ -1,11 +1,41 @@
 
 onAppReady(function(param) {
 
-	//書き込みflagか書き込み不可flagを入れる
+	/* 書き込みflagか書き込み不可flagを入れる */
 	var draw_per= false;
 
+	/* 指定したcookieを取得する関数 */
+	function GetCookie(name)
+	{
+	    var result = null;
 
-	console.log(document.cookie("user_seq"));
+	    var cookieName = name + '=';
+	    var allcookies = document.cookie;
+
+	    var position = allcookies.indexOf( cookieName );
+	    if( position != -1 )
+	    {
+	        var startIndex = position + cookieName.length;
+
+	        var endIndex = allcookies.indexOf( ';', startIndex );
+	        if( endIndex == -1 )
+	        {
+	            endIndex = allcookies.length;
+	        }
+
+	        result = decodeURIComponent(
+	            allcookies.substring( startIndex, endIndex ) );
+	    }
+
+	    return result;
+	}
+	var subject_seq=GetCookie('subject_seq');
+	var user_seq=GetCookie('user_seq');
+	var flg=GetCookie('flg');
+	console.log(subject_seq);
+	console.log(user_seq);
+	console.log(flg);
+
 
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
