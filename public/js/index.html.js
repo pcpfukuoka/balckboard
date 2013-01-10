@@ -29,6 +29,9 @@ onAppReady(function(param) {
 	/* cookieを特定の文字列に分割しそれぞれに格納 */
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
+	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
+
+	/* 入室した際に作成者か閲覧者かのflag*/
 	var flg=GetCookie('flg');
 
 	/* 書き込みflagか書き込み不可flagを入れる */
@@ -49,13 +52,15 @@ onAppReady(function(param) {
 
 
 	$(function(){
-		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
+		/* 半透明レイヤー（galyLayer）とモーダルウィンドーの追加
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
 
 	    $("#glayLayer").click(function(){
 	        $(this).hide();
 	        $("#overLayer").hide();
 	    });
+	    */
+
 
 	    $("test4").click(function(){
 	    	var url_num = use_div_url.lengh;
@@ -118,8 +123,8 @@ onAppReady(function(param) {
 		green : ctx.createPattern(loadedImages[3], 'repeat'),
 		yellow : ctx.createPattern(loadedImages[4], 'repeat')
 	};
-	//キャンバスの初期値を設定
 
+	/*キャンバスの初期値を設定 */
 	var drawing = false;
 	var eracing = false;
 	var prevX = 0;
@@ -127,7 +132,7 @@ onAppReady(function(param) {
 	var lineWidth = 4;
 	var color = "white";
 
-	// 現在の日付を黒板に書く
+	/* 現在の日付を黒板に書く*/
 	$(function() {
 		var now = new Date;
 		var month = now.getMonth() + 1;
@@ -208,7 +213,7 @@ onAppReady(function(param) {
 	 *            y position on screen
 	 * @returns {Object} Position object which contains x, y properties.
 	 */
-	//現在位置を相対的に設定
+	/* 現在位置を相対的に設定 */
 	function posOnCanvas(x, y) {
 		var canvasPos = canvas.offset();
 		return {
