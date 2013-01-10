@@ -1,7 +1,4 @@
-<?php
-	//$flag=$_POST['id'];
-	$flag=2;
-?>
+
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -47,9 +44,6 @@
 			<li><div class="color" data-color="white"></div>
 		</ul>
 		<div id="eraser"></div>
-<?php
-	if($flag=="t"){
-?>
 		<input id="all" value="全クリア" type="button">
 		<input id="test" value="テスト(戻る)" type="button">
  		<input id="test2" value="テスト（次へ）"type="button">
@@ -57,9 +51,7 @@
  		<input id="test4" value="テスト（div変更）"type="button">
  		<br>
  		<input id="end" value="授業終了"type="button">
-<?php
-}
-?>
+
 
 	</div>
 </div> <!--! end of #container -->
@@ -71,5 +63,4 @@
 <script src="js/common.js"></script>
 <script src="js/index.html.js"></script>
 </body>
-<script>flg_change(<?=$flag ?>)</script>
 </html>
