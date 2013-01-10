@@ -4,8 +4,8 @@ onAppReady(function(param) {
 	//書き込みflagか書き込み不可flagを入れる
 	var draw_per= false;
 
-	var cookie= document.coockie;
-	console.log(cookie);
+
+	console.log(document.coockie);
 
 	$(function(){
 		//半透明レイヤー（galyLayer）とモーダルウィンドーの追加
