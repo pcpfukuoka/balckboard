@@ -42,7 +42,7 @@ onAppReady(function(param) {
  		+'<input id="test4" value="テスト（div変更）"type="button">'
  		+'<br>'
  		+'<input id="end" value="授業終了"type="button">';
-		$("body").append(e);
+		$("#button").append(e);
 	}
 
 
