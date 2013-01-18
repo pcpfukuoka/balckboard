@@ -66,7 +66,7 @@ onAppReady(function(param) {
 
 	    	//一列ごとに配列に格納
 	    	var seq_rows =parsers["seq"].split("r");
-	    	var name_rows =prrsers["name"].split("r");
+	    	var name_rows =parsers["name"].split("r");
 
 	    	var seq_cols;
 	    	var name_cols;
