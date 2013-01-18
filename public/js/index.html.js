@@ -106,11 +106,14 @@ onAppReady(function(param) {
 	$(function(){
 		/* 半透明レイヤー（galyLayer）とモーダルウィンドーの追加*/
 	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
-
-	    $("#glayLayer").click(function(){
+	    $("glayLayer").hide();
+        $("#overLayer").hide();
+	    /*
+        $("#glayLayer").click(function(){
 	        $(this).hide();
 	        $("#overLayer").hide();
 	    });
+	    */
 
 	    $("test4").click(function(){
 	    	var url_num = use_div_url.lengh;
@@ -666,7 +669,8 @@ onAppReady(function(param) {
 		//							現在の画像を保存する処理							   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-
+		$("glayLayer").show();
+        $("#overLayer").show();
 
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
@@ -695,6 +699,8 @@ onAppReady(function(param) {
 		//								現在の画像を保存する処理						   //
 		////////////////////////////////////////////////////////////////////////////////////
 
+		$("glayLayer").show();
+        $("#overLayer").show();
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
 
@@ -722,7 +728,8 @@ onAppReady(function(param) {
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-
+		$("glayLayer").show();
+        $("#overLayer").show();
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
 
@@ -762,6 +769,8 @@ onAppReady(function(param) {
 	});
 
     $("white_par").click(function(){
+    	$("glayLayer").show();
+        $("#overLayer").show();
     	var user= $(this).data('id');
     	COMMAND_OPS.white_par({
 			color : color,
@@ -800,6 +809,9 @@ onAppReady(function(param) {
 				return;
 			}
 			fn(command.param);
+			$("glayLayer").hide();
+	        $("#overLayer").hide();
+
 		}
 
 		socket.on('page_jump',function(){
