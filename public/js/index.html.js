@@ -77,8 +77,8 @@ onAppReady(function(param) {
 	    	{
 	    		e=e+'<tr>';
 	    		//識別子ごとに配列を分割
-	    		seq_cols =seq_rows.split("n");
-		    	name_cols =name_rows.split("n");
+	    		seq_cols =seq_rows[i].split("n");
+		    	name_cols =name_rows[i].split("n");
 
 	    		for(j =0;j<=col_max;j++)
 	    		{
