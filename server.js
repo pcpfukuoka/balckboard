@@ -92,7 +92,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  database : 'pcp2012'    //DB名
 			});
 		//現在のページ数をとってくるＳＱＬ
-		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq ="'+command.param.seq_array.subject+'" ORDER BY page_num DESC LIMIT 1;';
 
 		var query = connection.query(sql);
 		query
@@ -110,7 +110,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  var now_page = max_page -aaa;
 
 
-			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = ' + now_page + ';';
+			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq ="'+command.param.seq_array.subject+'"AND page_num = ' + now_page + ';';
 
 			  var query2 = connection.query(sql2);
 			  	query2
@@ -257,79 +257,76 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			var query = connection.query(sql);
 			query
-			  //エラーログ
-			  .on('error', function(err) {
-			    console.log('err is: ', err );
-			  })
-			  //結果用
-			  .on('result', function(rows) {
-
-
-				  //現在のページ数を格納
-				  var max_page = rows['page_num'];
-				  //現在表示しているページにカーソルをそろえる
-				  var aaa= max_page-page_move -1;
-				  var now_page = max_page -aaa;
-				  //戻るボタンを押したため移動数-１
-				  page_move--;
-				  if(now_page == 1){
-					  page_move++;
-				  }
+				//エラーログ
+				.on('error', function(err) {
+					console.log('err is: ', err );
+				})
+				//結果用
+				.on('result', function(rows) {
+					//現在のページ数を格納
+					var max_page = rows['page_num'];
+					//現在表示しているページにカーソルをそろえる
+					var aaa= max_page-page_move -1;
+					var now_page = max_page -aaa;
+					//戻るボタンを押したため移動数-１
+					page_move--;
+					if(now_page == 1){
+						page_move++;
+					}
 
 				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
 				 socket.emit("log_test",sql2);
 				 var query2 = connection.query(sql2);
 					query2
-					  //エラーログ
-					  .on('error', function(err) {
-					    console.log('err is: ', err );
-					  })
-					  //結果用
-					  .on('result', function(rows) {
-
-						var aaa= max_page-page_move -1;
-						now_page = max_page -aaa;
-
-
-						var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
-						var query3 = connection.query(sql3);
-						query3
 						//エラーログ
 						.on('error', function(err) {
 							console.log('err is: ', err );
-						  })
-						  //結果用
-						  .on('result', function(rows) {
-								command.param.end.x = rows['div_url'];
-								command.param.start.y = rows['canvas_url'];
-								commands = [];
+						})
+						//結果用
+						.on('result', function(rows) {
+
+							var aaa= max_page-page_move -1;
+							now_page = max_page -aaa;
+
+							var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+							var query3 = connection.query(sql3);
+							query3
+							//エラーログ
+						.on('error', function(err) {
+							console.log('err is: ', err );
+						})
+						//結果用
+						.on('result', function(rows) {
+							command.param.end.x = rows['div_url'];
+							command.param.start.y = rows['canvas_url'];
+							commands = [];
 
 
-								command.type= "img";
-								command.param.start.x = "save";
-								storeCommand(command);
-								socket.emit('now_page', page_move);
-								socket.broadcast.emit('img', command);
+							command.type= "img";
+							command.param.start.x = "save";
+							storeCommand(command);
+							socket.emit('now_page', page_move);
+							socket.broadcast.emit('img', command);
 
-								socket.emit('img', command);
-						  })
-						  //終了ログ
-						  .on('end', function() {
+							socket.emit('img', command);
+						})
+						//終了ログ
+						.on('end', function() {
 							connection.end()
 						    console.log('end');
-						  });
+						});
 
-					  })
-					  //終了ログ
-					  .on('end', function() {
-					    console.log('end');
-					  });
-			  })
+					})
+					//終了ログ
+					.on('end', function() {
+						console.log('end');
+					});
+				})
 
-			  //終了ログ
-			  .on('end', function() {
-			    console.log('end');
-			  });
+				//終了ログ
+				.on('end', function() {
+					console.log('end');
+				});
 
 		}
 		socket.emit('id_controle',command);
