@@ -29,6 +29,9 @@ onAppReady(function(param) {
 	/* cookieを特定の文字列に分割しそれぞれに格納 */
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
+	var group_seq=GetCookie('group_seq');
+
+	var seq_array={subject:user_seq,subject:subject_seq};
 	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
 
 	/* 入室した際に作成者か閲覧者かのflag*/
@@ -47,6 +50,55 @@ onAppReady(function(param) {
  		+'<br>'
  		+'<input id="end" value="授業終了"type="button">';
 		$("#button").append(e);
+
+		//クラステーブルを生成する処理
+		$.post('../php/student_list.php', {
+	        id : group_seq
+	    },
+	    //戻り値として、user_seq受け取る
+	    function(rs) {
+
+	    	var parsers = JSON.parse(rs);
+
+	    	//縦と横の最大数を格納
+	    	var row_max=Number(parsers["row_max"]);
+	    	var col_max=Number(parsers["col_max"]);
+
+	    	//一列ごとに配列に格納
+	    	var seq_rows =parsers["seq"].split("r");
+	    	var name_rows =prrsers["name"].split("r");
+
+	    	var seq_cols;
+	    	var name_cols;
+
+	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C">';
+
+	    	for(i =0;i<=row_max;i++)
+	    	{
+	    		e=e+'<tr>';
+	    		//識別子ごとに配列を分割
+	    		seq_cols =parsers["seq"].split("n");
+		    	name_cols =prrsers["name"].split("n");
+
+	    		for(j =0;j<=col_max;j++)
+	    		{
+	    			if($seq_cols[j] == "null")
+	    			{
+	    				//空席の場合の処理
+	    				e=e+"<td class='sample'width='100'></td>";
+	    			}
+	    			else
+	    			{
+	    				//通常の座席の処理
+	    				e=e+'<td><input type="button" data-id="'+seq_cols[j]+'" id="Attendance_'+seq_cols[j]+'" class="white_par" value="'+name_cols[j]+'"></td>';
+	    			}
+	    		}
+	    		e=e+'</tr>';
+	    	}
+	    	e=e+'</table>';
+
+	    	$("#student_list").append(e);
+	    });
 	}
 
 
@@ -227,7 +279,7 @@ onAppReady(function(param) {
 	 *COMMAND_OPSはイベントごとに処理を格納する連想配列
 	 */
 	var COMMAND_OPS = {
-		//初期の状態
+		/* 初期の状態 */
 		clear: function(param, share) {
 			canvas[0].width = canvas[0].width;
 			if (share) {
@@ -237,19 +289,19 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//マウスが移動した場合
+		/* マウスが移動した場合 */
 		mouseMove : function(param, share) {
 			if (!share) {
-			//falseの場合何もしない
+			/* falseの場合何もしない */
 				return;
 			}
-			//trueの場合
+			/* trueの場合 */
 			sendCommand({
 				type : "mouseMove",
 				param : param
 			});
 		},
-		//黒板消し
+		/* 黒板消し */
 		erase : function(param, share) {
 			// Currently, start parameter is not used.
 			var end = param.end;
@@ -261,7 +313,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//線を引く
+		/* 線を引く */
 		drawLine : function(param, share) {
 			var start = param.start, end = param.end;
 			ctx.strokeStyle = LINE_PATTERNS[param.color];
@@ -280,7 +332,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//画面のリセット
+		/* 画面のリセット */
 		reset : function(param,share)
 		{
 			ctx.clearRect(-1000, -1000, 10000, 10000);
@@ -292,7 +344,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//次へボタンを押した際の処理
+		/* 次へボタンを押した際の処理 */
 		next : function(param,share)
 		{
 			if(share)
@@ -303,7 +355,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//戻るボタンを押した際の処理
+		/* 戻るボタンを押した際の処理 */
 		turn : function(param,share)
 		{
 
@@ -331,15 +383,15 @@ onAppReady(function(param) {
 				var can = canvas.getContext('2d');
 
 
-				//divのＵＲＬの変更
+				/* divのＵＲＬの変更 */
 				var div = document.getElementById("chalkboard");
 				div.style.background = param.end.x;
 
 
 
 
-				//canvasに画像の描画
-				var img1 = new Image();
+				/* canvasに画像の描画 */
+ 				var img1 = new Image();
 				img1.src = param.start.y;
 
 				img1.onload = function() {
@@ -359,7 +411,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//ページの新規作成の処理
+		/* ページの新規作成の処理 */
 		new_page :function(param,share)
 		{
 			if(share)
@@ -370,7 +422,7 @@ onAppReady(function(param) {
 				});
 			}
 		},
-		//授業終了の際の処理
+		/* 授業終了の際の処理 */
 		end_class :function(param,share)
 		{
 			if(share)
@@ -625,7 +677,7 @@ onAppReady(function(param) {
 			},
 			end : {
 				x : canvas.toDataURL(),
-				y : 10000
+				y : seq_array
 			}},
 			true);
 	});
@@ -653,7 +705,7 @@ onAppReady(function(param) {
 			},
 			end : {
 				x : canvas.toDataURL(),
-				y : 10000
+				y : seq_array
 			}
 		},true);
 	});
@@ -681,7 +733,7 @@ onAppReady(function(param) {
 			},
 			end : {
 				x : canvas.toDataURL("image/png"),
-				y : -10000
+				y : seq_array
 			}
 		}, true);
 
@@ -734,7 +786,7 @@ onAppReady(function(param) {
 		});
 		socket.on('init', function(commands) {
 			COMMAND_OPS.enter({
-				now_page : "aaaaaa"
+				seq_array : seq_array
 			}, true);
 
 			if (!(commands instanceof Array)) {
