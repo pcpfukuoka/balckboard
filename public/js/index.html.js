@@ -82,7 +82,7 @@ onAppReady(function(param) {
 
 	    		for(j =0;j<=col_max;j++)
 	    		{
-	    			if($seq_cols[j] == "null")
+	    			if(seq_cols[j] == "null")
 	    			{
 	    				//空席の場合の処理
 	    				e=e+"<td class='sample'width='100'></td>";
