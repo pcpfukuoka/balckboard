@@ -52,7 +52,7 @@ onAppReady(function(param) {
 		$("#button").append(e);
 
 		//クラステーブルを生成する処理
-		$.post('http://49.212.201.99/balckboard/public/php/student_list.php', {
+		$.post('../php/student_list.php', {
 	        id : group_seq
 	    },
 	    //戻り値として、user_seq受け取る
