@@ -73,14 +73,14 @@ onAppReady(function(param) {
 
 	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C">';
 
-	    	for(i =0;i<=row_max;i++)
+	    	for(i =0;i<row_max;i++)
 	    	{
 	    		e=e+'<tr>';
 	    		//識別子ごとに配列を分割
 	    		seq_cols =seq_rows[i].split("n");
 		    	name_cols =name_rows[i].split("n");
 
-	    		for(j =0;j<=col_max;j++)
+	    		for(j =0;j<col_max;j++)
 	    		{
 	    			if(seq_cols[j] == "null")
 	    			{
