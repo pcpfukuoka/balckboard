@@ -82,6 +82,13 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 	});
+	//描画許可を出す際の処理
+	socket.on('white_par', function(command){
+		//描く事が許可されたuser_seq
+		var par_user = command.param.start.x;
+		socket.broadcast.emit('white_par',par_user);
+	});
+
 
 	//移動数をサーバー側に保持
 	socket.on('enter', function(command){

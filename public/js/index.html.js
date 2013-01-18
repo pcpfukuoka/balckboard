@@ -112,8 +112,6 @@ onAppReady(function(param) {
 	        $("#overLayer").hide();
 	    });
 
-
-
 	    $("test4").click(function(){
 	    	var url_num = use_div_url.lengh;
 	    	$("#glayLayer").show();
@@ -432,8 +430,17 @@ onAppReady(function(param) {
 					param : param
 				});
 			}
+		},
+		white_par :function(param,share)
+		{
+			if(share)
+			{
+				white_par({
+					type : "white_par",
+					param : param.start.x
+				});
+			}
 		}
-
 
 	};
 	// UIEvent handling ==========================
@@ -753,6 +760,22 @@ onAppReady(function(param) {
 			}
 		}, true);
 	});
+
+    $("white_par").click(function(){
+    	var user= $(this).data('id');
+    	COMMAND_OPS.white_par({
+			color : color,
+			start : {
+				x : user,
+				y : 1000
+			},
+			end : {
+				x : 1000,
+				y : -10000
+			}
+		}, true);
+    });
+
 	/**
 	 * ここより下はサーバにデータを送る処理
 	 *
@@ -764,6 +787,7 @@ onAppReady(function(param) {
 	var next;
 	var save;
 	var end_class;
+	var white_par;
 
 	// Interaction with server using Socket.IO
 	(function() {
@@ -888,6 +912,17 @@ onAppReady(function(param) {
 
 
 		});
+
+		socket.on('white_par', function(par_user){
+			if(user_seq==par_user && draw_par==true){
+				//描けなくする
+				draw_par=false;
+			}else if(user_seq==par_user && draw_par==false){
+				//描けるようにする
+				draw_par=true;
+			}
+		});
+
 		socket.on('log_test', function(command){
 			console.log(command);
 		});
@@ -909,6 +944,9 @@ onAppReady(function(param) {
 		};
 		end_class = function(command) {
 			socket.emit('end_class', command);
+		};
+		white_par = function(command){
+			socket.emit('white_par',command);
 		};
 	})();
 
