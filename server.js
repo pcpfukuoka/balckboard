@@ -87,6 +87,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
 		socket.broadcast.emit('white_par',par_user);
+		socket.emit('log_test',par_user);
 	});
 
 
