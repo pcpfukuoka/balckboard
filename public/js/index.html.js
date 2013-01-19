@@ -946,6 +946,7 @@ onAppReady(function(param) {
 		});
 
 		socket.on('white_par', function(par_user){
+
 			if(user_seq==par_user && draw_par==true){
 				//描けなくする
 				draw_par=false;
