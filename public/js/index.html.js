@@ -773,7 +773,7 @@ onAppReady(function(param) {
 		}, true);
 	});
 
-    $("white_par").click(function(){
+    $(".white_par").click(function(){
     	$("glayLayer").show();
         $("#overLayer").show();
     	var user= $(this).data('id');
