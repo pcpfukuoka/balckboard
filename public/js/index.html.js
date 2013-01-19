@@ -96,7 +96,7 @@ onAppReady(function(param) {
 	    			else
 	    			{
 	    				//通常の座席の処理
-	    				e=e+'<td><input type="button" data-id="'+seq_cols[j]+'" id="Attendance_'+seq_cols[j]+'" class="white_par" value="'+name_cols[j]+'"></td>';
+	    				e=e+'<td><input type="button" data-id="'+seq_cols[j]+'"class="white_par" value="'+name_cols[j]+'"></td>';
 	    			}
 	    		}
 	    		e=e+'</tr>';
@@ -774,8 +774,6 @@ onAppReady(function(param) {
 	});
 
     $(".white_par").click(function(){
-    	$("glayLayer").show();
-        $("#overLayer").show();
     	var user= $(this).data('id');
     	COMMAND_OPS.white_par({
 			color : color,
