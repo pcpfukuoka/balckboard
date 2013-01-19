@@ -947,12 +947,12 @@ onAppReady(function(param) {
 
 		socket.on('white_par', function(par_user){
 
-			if(user_seq==par_user && draw_par==true){
+			if(user_seq==par_user && draw_per==true){
 				//描けなくする
-				draw_par=false;
-			}else if(user_seq==par_user && draw_par==false){
+				draw_per=false;
+			}else if(user_seq==par_user && draw_per==false){
 				//描けるようにする
-				draw_par=true;
+				draw_per=true;
 			}
 		});
 
