@@ -773,6 +773,22 @@ onAppReady(function(param) {
 		}, true);
 	});
 
+	$(document).on('click', '.white_par', function() {
+		var user= $(this).data('id');
+    	COMMAND_OPS.white_par({
+			color : color,
+			start : {
+				x : user,
+				y : 1000
+			},
+			end : {
+				x : 1000,
+				y : -10000
+			}
+		}, true);
+    });
+
+	/*
     $(".white_par").click(function(){
     	var user= $(this).data('id');
     	COMMAND_OPS.white_par({
@@ -787,6 +803,7 @@ onAppReady(function(param) {
 			}
 		}, true);
     });
+    */
 
 	/**
 	 * ここより下はサーバにデータを送る処理
