@@ -111,8 +111,9 @@ onAppReady(function(param) {
 
 	$(function(){
 		/* 半透明レイヤー（galyLayer）とモーダルウィンドーの追加*/
-	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");
-
+	    $("body").append("<div id='glayLayer'></div><div id='overLayer'></div>");7
+	    $("#glayLayer").hide();
+	    $("#overLayer").hide();
 
         $("#glayLayer").click(function(){
 	        $(this).hide();
