@@ -60,7 +60,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND end_flg="1";';
+		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "'+command.subject+'" AND end_flg="1";';
 
 		var query = connection.query(sql);
 		query

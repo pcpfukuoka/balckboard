@@ -31,7 +31,7 @@ onAppReady(function(param) {
 	var user_seq=GetCookie('user_seq');
 	var group_seq=GetCookie('group_seq');
 
-	var seq_array={subject:user_seq,subject:subject_seq};
+	var seq_array={user:user_seq,subject:subject_seq};
 	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
 
 	/* 入室した際に作成者か閲覧者かのflag*/
@@ -436,7 +436,7 @@ onAppReady(function(param) {
 			{
 				end_class({
 					type : "end_class",
-					param : param
+					param : param.end.y
 				});
 			}
 		},
@@ -769,7 +769,7 @@ onAppReady(function(param) {
 			},
 			end : {
 				x : 1000,
-				y : -10000
+				y : seq_array
 			}
 		}, true);
 	});
@@ -977,7 +977,7 @@ onAppReady(function(param) {
 			socket.emit('command', command);
 		};
 		end_class = function(command) {
-			socket.emit('end_class', command);
+			socket.emit('end_class', command.param);
 		};
 		white_par = function(command){
 			socket.emit('white_par',command);
