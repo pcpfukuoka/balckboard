@@ -285,7 +285,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 					}
 
 				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND  date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
-				 socket.emit("log_test",sql2);
+
 				 var query2 = connection.query(sql2);
 					query2
 						//エラーログ
