@@ -71,13 +71,13 @@ onAppReady(function(param) {
 	    	var seq_cols;
 	    	var name_cols;
 
-	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C">';
+	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 80%; top: 5%">';
 
 	    	//１列目（教卓を追加するs処理）
 	    	e=e +"<tr>"
-	    		+"<td class='sample'width='100'></td>"
-	    		+"<td class='sample'width='100'value='教卓'></td>"
-	    		+"<td class='sample'width='100'></td>"
+	    		+"<td class='sample'width='100'height='30'></td>"
+	    		+"<td class='sample'width='100'height='30'value='教卓'></td>"
+	    		+"<td class='sample'width='100'height='30'></td>"
 	    		+"</tr>";
 	    	for(i =0;i<row_max;i++)
 	    	{
