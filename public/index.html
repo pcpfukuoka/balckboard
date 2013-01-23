@@ -18,43 +18,41 @@
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/index.css">
 	<script src="lib/js/modernizr-2.0.6.min.js"></script>
-		 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-
-
-
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 </head>
+
 <body>
 
-<div id="container">
-    <div id="chalkboardAndOthers">
-		<div id="chalkboard" style="background: url(../images/kokuban.jpg);background-repeat:no-repeat">
-			<div id="monthOnBoard"></div>
-			<div id="dateOnBoard"></div>
-			<div id="loadingMessage">Loading. Please wait...</div>
-			<canvas id="canvas" width="710" height="460">
-				Your browser is not supported. Use modern browser (e.g. IE9 or later).
-			</canvas>
+	<div id="container">
+		<div id="chalkboardAndOthers">
+			<div id="chalkboard" style="background: url(../images/kokuban.jpg);background-repeat:no-repeat">
+				<div id="monthOnBoard"></div>
+				<div id="dateOnBoard"></div>
+				<div id="loadingMessage">Loading. Please wait...</div>
+				<canvas id="canvas" width="710" height="460">
+					Your browser is not supported. Use modern browser (e.g. IE9 or later).
+				</canvas>
+			</div>
+			<ul id="colorPalette">
+				<li><div class="color" data-color="pink"></div>
+				<li><div class="color" data-color="yellow"></div>
+				<li><div class="color" data-color="green"></div>
+				<li><div class="color" data-color="blue"></div>
+				<li><div class="color" data-color="white"></div>
+			</ul>
+			<div id="eraser"></div>
+			<div id="button"></div>
+			<div id="student_list"></div>
+
 		</div>
-		<ul id="colorPalette">
-			<li><div class="color" data-color="pink"></div>
-			<li><div class="color" data-color="yellow"></div>
-			<li><div class="color" data-color="green"></div>
-			<li><div class="color" data-color="blue"></div>
-			<li><div class="color" data-color="white"></div>
-		</ul>
-		<div id="eraser"></div>
-		<div id="button"></div>
-		<div id="student_list"></div>
+	</div> <!--! end of #container -->
+	<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+	<script>window.jQuery || document.write('<script src="lib/js/jquery-1.7.1.min.js"><\/script>')</script>
+	<script src="lib/js/jquery.i18n.properties-min-1.0.9.js"></script>
 
-	</div>
-</div> <!--! end of #container -->
-<script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
-<script>window.jQuery || document.write('<script src="lib/js/jquery-1.7.1.min.js"><\/script>')</script>
-<script src="lib/js/jquery.i18n.properties-min-1.0.9.js"></script>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/common.js"></script>
-<script src="js/index.html.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/index.html.js"></script>
 </body>
 </html>

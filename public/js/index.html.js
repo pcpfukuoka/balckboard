@@ -73,7 +73,7 @@ onAppReady(function(param) {
 
 	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 98%; top: 45%">';
 
-	    	//１列目（教卓を追加するs処理）
+	    	//１列目（教卓を追加する処理）
 	    	e=e +"<tr>"
 	    		+"<td class='sample'width='100'height='10'></td>"
 	    		+"<td class='sample'width='100'height='10'>教卓</td>"
@@ -675,8 +675,18 @@ onAppReady(function(param) {
 		//							現在の画像を保存する処理							   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-		$("glayLayer").show();
-        $("#overLayer").show();
+		/* 無効にするボタンを選択 */
+		var turn=document.getElementById("test");
+		var next=document.getElementById("test2");
+		var new_=document.getElementById("test3");
+		var lesson_end =document.getElementById("end");
+
+		/* 無効にする処理 */
+		turn.disabled=true;
+		next.disabled=true;
+		new_.disabled=true;
+		lesson_end.disabled=true;
+
 
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
@@ -705,8 +715,18 @@ onAppReady(function(param) {
 		//								現在の画像を保存する処理						   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-		$("glayLayer").show();
-        $("#overLayer").show();
+		/* 無効にするボタンを選択 */
+		var turn=document.getElementById("test");
+		var next=document.getElementById("test2");
+		var new_=document.getElementById("test3");
+		var lesson_end =document.getElementById("end");
+
+		/* 無効にする処理 */
+		turn.disabled=true;
+		next.disabled=true;
+		new_.disabled=true;
+		lesson_end.disabled=true;
+
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
 
@@ -730,12 +750,35 @@ onAppReady(function(param) {
 	});
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
+
+		/* 無効にするボタンを選択 */
+		var turn=document.getElementById("test");
+		var next=document.getElementById("test2");
+		var new_=document.getElementById("test3");
+		var lesson_end =document.getElementById("end");
+
+		/* 無効にする処理 */
+		turn.disabled=true;
+		next.disabled=true;
+		new_.disabled=true;
+		lesson_end.disabled=true;
+
 		/////////////////////////////////////////////////////////////////////////////////////
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-		$("glayLayer").show();
-        $("#overLayer").show();
+		/* 無効にするボタンを選択 */
+		var turn=document.getElementById("test");
+		var next=document.getElementById("test2");
+		var new_=document.getElementById("test3");
+		var lesson_end =document.getElementById("end");
+
+		/* 無効にする処理 */
+		turn.disabled=true;
+		next.disabled=true;
+		new_.disabled=true;
+		lesson_end.disabled=true;
+
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
 
