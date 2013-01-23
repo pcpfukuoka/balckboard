@@ -26,7 +26,6 @@ onAppReady(function(param) {
 
 	    return result;
 	}
-
 	/* cookieを特定の文字列に分割しそれぞれに格納 */
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
@@ -752,6 +751,12 @@ onAppReady(function(param) {
 	$("#test3").click(function(e){
 		//新規作成（テスト）をクリック
 
+
+
+		/////////////////////////////////////////////////////////////////////////////////////
+		//								画像を保存する処理								   //
+		////////////////////////////////////////////////////////////////////////////////////
+
 		/* 無効にするボタンを選択 */
 		var turn=document.getElementById("test");
 		var next=document.getElementById("test2");
@@ -763,11 +768,6 @@ onAppReady(function(param) {
 		next.disabled=true;
 		new_.disabled=true;
 		lesson_end.disabled=true;
-
-		/////////////////////////////////////////////////////////////////////////////////////
-		//								画像を保存する処理								   //
-		////////////////////////////////////////////////////////////////////////////////////
-
 
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
@@ -862,8 +862,10 @@ onAppReady(function(param) {
 				console.error('Unknown command type:' + command.type);
 				return;
 			}
+			fn(command.param);
 
-
+			setTimeout(example, 1000);
+			function example(){
 				/* 有効に戻すボタンを選択 */
 				var turn=document.getElementById("test");
 				var next=document.getElementById("test2");
@@ -875,8 +877,7 @@ onAppReady(function(param) {
 				next.disabled=false;
 				new_.disabled=false;
 				lesson_end.disabled=false;
-
-
+			}
 
 		}
 
