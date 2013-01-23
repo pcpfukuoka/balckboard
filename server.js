@@ -190,7 +190,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  var aaa= max_page-page_move -1;
 				  var now_page = max_page -aaa;
-				  socket.emit('log_test',now_page);
+
 				  page_move= max_page;
 
 				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND end_flg ="1" AND page_num = '+ now_page + ';';
@@ -314,6 +314,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 							command.param.start.x = "save";
 							storeCommand(command);
 							socket.emit('now_page', page_move);
+							socket.emit('log_test',now_page);
 							socket.broadcast.emit('img', command);
 
 							socket.emit('img', command);
