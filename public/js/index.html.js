@@ -863,9 +863,7 @@ onAppReady(function(param) {
 				return;
 			}
 
-			setTimeout(use_par, 1000);
 
-			function use_par(){
 				/* 有効に戻すボタンを選択 */
 				var turn=document.getElementById("test");
 				var next=document.getElementById("test2");
@@ -877,7 +875,7 @@ onAppReady(function(param) {
 				next.disabled=false;
 				new_.disabled=false;
 				lesson_end.disabled=false;
-			}
+
 
 
 		}
