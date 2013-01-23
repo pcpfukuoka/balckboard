@@ -71,7 +71,7 @@ onAppReady(function(param) {
 	    	var seq_cols;
 	    	var name_cols;
 
-	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 95%; top: 5%">';
+	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 98%; top: 45%">';
 
 	    	//１列目（教卓を追加するs処理）
 	    	e=e +"<tr>"
