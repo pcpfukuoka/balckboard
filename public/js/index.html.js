@@ -40,6 +40,24 @@ onAppReady(function(param) {
 	/* 書き込みflagか書き込み不可flagを入れる */
 	var draw_per=flg;
 
+	var color_='<ul id="colorPalette">'
+				+'<table border="1">'
+				+'<tr>'
+				+'<td><li><div class="color" data-color="pink"></div></td>'
+				+'<td><li><div class="color" data-color="yellow"></div></td>'
+				+'</tr>'
+				+'<tr>'
+				+'<td><li><div class="color" data-color="green"></div></td>'
+				+'<td><li><div class="color" data-color="blue"></div></td>'
+				+'</tr>'
+				+'<tr>'
+				+'<td><li><div class="color" data-color="white"></div></td>'
+				+'</tr>'
+				+'</table>'
+				+'</ul>';
+	$("body").append(color_);
+
+
 	/* flgがtrueの場合、buttonを表示させる */
 	if(flg){
 		var e='<input id="all" value="全クリア" type="button">'
