@@ -95,7 +95,8 @@ html, body, #container {
 	background: url(../images/chalk_pk.jpg) no-repeat left bottom;
 }
 #eraser {
-	background: url(../images/eraser.jpg) no-repeat;
+
+	background: url(../images/eraser.jpg);
 }
 .userPointer {
 	position: absolute;
