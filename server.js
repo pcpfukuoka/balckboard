@@ -314,7 +314,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 							command.param.start.x = "save";
 							storeCommand(command);
 							socket.emit('now_page', page_move);
-							socket.emit('log_test',now_page);
+
 							socket.broadcast.emit('img', command);
 
 							socket.emit('img', command);
@@ -406,6 +406,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 								command.param.start.x = "save";
 								storeCommand(command);
 								socket.emit('now_page', page_move);
+								socket.emit('log_test',command);
 								socket.broadcast.emit('img', command);
 								socket.emit('img', command);
 						  })
