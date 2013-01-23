@@ -767,17 +767,6 @@ onAppReady(function(param) {
 		//								画像を保存する処理								   //
 		////////////////////////////////////////////////////////////////////////////////////
 
-		/* 無効にするボタンを選択 */
-		var turn=document.getElementById("test");
-		var next=document.getElementById("test2");
-		var new_=document.getElementById("test3");
-		var lesson_end =document.getElementById("end");
-
-		/* 無効にする処理 */
-		turn.disabled=true;
-		next.disabled=true;
-		new_.disabled=true;
-		lesson_end.disabled=true;
 
 		var canvas = document.getElementById("canvas");
 		var  can = canvas.getContext('2d');
