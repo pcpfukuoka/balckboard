@@ -873,8 +873,18 @@ onAppReady(function(param) {
 				return;
 			}
 			fn(command.param);
-			$("glayLayer").hide();
-	        $("#overLayer").hide();
+			/* 有効に戻すボタンを選択 */
+			var turn=document.getElementById("test");
+			var next=document.getElementById("test2");
+			var new_=document.getElementById("test3");
+			var lesson_end =document.getElementById("end");
+
+			/* 有効にする処理 */
+			turn.disabled=false;
+			next.disabled=false;
+			new_.disabled=false;
+			lesson_end.disabled=false;
+
 
 		}
 
