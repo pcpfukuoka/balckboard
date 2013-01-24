@@ -120,7 +120,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  var now_page = max_page -aaa;
 
 
-			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg= "1" AND class_seq = "'+command.param.seq_array.group_seq+'" AND subject_seq ="'+command.param.seq_array.subject+'"AND pages_num = ' + now_page + ';';
+			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg= "1" AND class_seq = "'+command.param.seq_array.group_seq+'" AND subject_seq ="'+command.param.seq_array.subject+'"AND page_num = ' + now_page + ';';
 
 			  var query2 = connection.query(sql2);
 			  	query2
