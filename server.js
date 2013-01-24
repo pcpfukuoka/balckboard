@@ -283,7 +283,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 						page_move++;
 					}
 
-				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND  date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'command.param.end.y.seq_array.group_seq'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND page_num = '+ now_page + ';';
+				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND  date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND page_num = '+ now_page + ';';
 				 var query2 = connection.query(sql2);
 					query2
 						//エラーログ
