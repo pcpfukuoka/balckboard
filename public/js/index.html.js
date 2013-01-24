@@ -30,7 +30,7 @@ onAppReady(function(param) {
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
 	var group_seq=GetCookie('group_seq');
-	var room=GetCookie('room');
+	var room=$_POST['room'];
 
 	var seq_array={user:user_seq,subject:subject_seq,group_seq:group_seq};
 	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
@@ -875,7 +875,7 @@ onAppReady(function(param) {
 	// Interaction with server using Socket.IO
 	(function() {
 		var socket = io.connect(location.protocol + '//' + location.host
-				+ '/chalkboard');
+				+ '/'+room);
 		function processCommand(command) {
 			var fn = COMMAND_OPS[command.type];
 			if (!fn) {
