@@ -349,7 +349,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 			//現在のページ数をとってくるＳＱＬ
-			var sql = 'SELECT page_num FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'"  ORDER BY page_num DESC LIMIT 1;';
+			var sql = 'SELECT page_num FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'"  ORDER BY page_num DESC LIMIT 1;';
 
 			var query = connection.query(sql);
 			query
