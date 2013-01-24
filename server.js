@@ -60,7 +60,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 
 		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "'+command.subject+'" AND end_flg="1";';
+		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.seq_array.group_seq+'" AND subject_seq = "'+command.param.seq_array.subject+'" AND end_flg="1";';
 
 		var query = connection.query(sql);
 		query
@@ -102,7 +102,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  database : 'pcp2012'    //DB名
 			});
 		//現在のページ数をとってくるＳＱＬ
-		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND end_flg= "1" AND subject_seq ="'+command.param.seq_array.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.seq_array.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.seq_array.subject+'" ORDER BY page_num DESC LIMIT 1;';
 
 		var query = connection.query(sql);
 		query
@@ -120,7 +120,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 			  var now_page = max_page -aaa;
 
 
-			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg= "1" AND class_seq = "15" AND subject_seq ="'+command.param.seq_array.subject+'"AND page_num = ' + now_page + ';';
+			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg= "1" AND class_seq = "'+commnad.param.seq_array.group_seq+'" AND subject_seq ="'+command.param.seq_array.subject+'"AND page_num = ' + now_page + ';';
 
 			  var query2 = connection.query(sql2);
 			  	query2
@@ -174,7 +174,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 			//現在のページ数をとってくるＳＱＬ
-			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
+			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
 
 			var query = connection.query(sql);
 			query
@@ -193,7 +193,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 				  page_move= max_page;
 
-				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND end_flg ="1" AND page_num = '+ now_page + ';';
+				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND end_flg ="1" AND page_num = '+ now_page + ';';
 				  socket.emit('log_test',sql2);
 				  	var query2 = connection.query(sql2);
 					query2
@@ -221,7 +221,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			//////////////////////////////////////////////////////////////////////
 			//現在のページ数を格納
-			sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
+			sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'command.param.end.y.seq_array.group_seq'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
 
 			query = connection.query(sql);
 			query
@@ -235,7 +235,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  a++;
 
 				  //テーブルにデータのひな形の追加
-				  var sql2 = 'INSERT INTO board VALUES (0,now(),15,15,'+a+',0,0,1);';
+				  var sql2 = 'INSERT INTO board VALUES (0,now(),'+command.param.end.y.seq_array.group_seq+','+command.param.end.y.seq_array.subject+','+a+',0,0,1);';
 
 				  var query2 = connection.query(sql2);
 					  query2
@@ -262,7 +262,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 			//現在のページ数をとってくるＳＱＬ
-			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
+			var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
 
 			var query = connection.query(sql);
 			query
@@ -283,7 +283,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 						page_move++;
 					}
 
-				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND  date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
+				 var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND  date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'command.param.end.y.seq_array.group_seq'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND page_num = '+ now_page + ';';
 				 var query2 = connection.query(sql2);
 					query2
 						//エラーログ
@@ -296,7 +296,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 							var aaa= max_page-page_move -1;
 							now_page = max_page -aaa;
 
-							var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg="1" AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+							var sql3 = 'SELECT * FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg="1" AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND page_num = "'+ now_page + '";';
 							var query3 = connection.query(sql3);
 							query3
 							//エラーログ
@@ -349,7 +349,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  database : 'pcp2012'    //DB名
 				});
 			//現在のページ数をとってくるＳＱＬ
-			var sql = 'SELECT page_num FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15"  ORDER BY page_num DESC LIMIT 1;';
+			var sql = 'SELECT page_num FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'"  ORDER BY page_num DESC LIMIT 1;';
 
 			var query = connection.query(sql);
 			query
@@ -372,7 +372,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 				  }
 
 
-				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = '+ now_page + ';';
+				  var sql2 = 'UPDATE board SET div_url = "'+ command.param.start.y + '", canvas_url = "'+ command.param.end.x +'" WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND page_num = '+ now_page + ';';
 
 					var query2 = connection.query(sql2);
 					query2
@@ -387,7 +387,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 						 var aaa= max_page-page_move -1;
 						 now_page = max_page -aaa;
 
-						 var sql3 = 'SELECT * FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "15" AND subject_seq = "15" AND page_num = "'+ now_page + '";';
+						 var sql3 = 'SELECT * FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND page_num = "'+ now_page + '";';
 
 						 var query3 = connection.query(sql3);
 						 query3

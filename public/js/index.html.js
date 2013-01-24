@@ -30,8 +30,9 @@ onAppReady(function(param) {
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
 	var group_seq=GetCookie('group_seq');
+	var room=GetCookie('room');
 
-	var seq_array={user:user_seq,subject:subject_seq};
+	var seq_array={user:user_seq,subject:subject_seq,group_seq:group_seq};
 	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
 
 	/* 入室した際に作成者か閲覧者かのflag*/
