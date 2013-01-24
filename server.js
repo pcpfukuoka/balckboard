@@ -221,7 +221,7 @@ var sockets = io.of('/chalkboard').on('connection', function(socket) {
 
 			//////////////////////////////////////////////////////////////////////
 			//現在のページ数を格納
-			sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'command.param.end.y.seq_array.group_seq'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
+			sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.seq_array.group_seq+'" AND subject_seq = "'+command.param.end.y.seq_array.subject+'" AND end_flg="1" ORDER BY page_num DESC LIMIT 1;';
 
 			query = connection.query(sql);
 			query
