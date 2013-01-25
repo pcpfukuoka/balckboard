@@ -210,36 +210,8 @@ onAppReady(function(param) {
 	var lineWidth = 4;
 	var color = "white";
 
-	/* 現在の日付を黒板に書く*/
-	$(function() {
-		var now = new Date;
-		var month = now.getMonth() + 1;
-		var date = now.getDate();
-		$('#monthOnBoard').text(month);
-		$('#dateOnBoard').text(date);
-	});
 
-	var effects = {
-		_audio: {},
-		play: function(type){
-			if(!this._audio[type]){ return; }
-			if(this._audio[type].currentTime){ this._audio[type].currentTime = 0; }
-			this._audio[type].play();
-		},
-		stop: function(type){
-			if(!this._audio[type]){ return; }
-			this._audio[type].pause();
-		},
-		_init: function(){
-			this._audio.chalkMouseDown = new Audio();
-			this._audio.chalkMouseDown.src = 'audios/chalk.mp3';
-			this._audio.chimeStart = new Audio();
-			this._audio.chimes = new Audio();
-			this._audio.chimes.src = 'audios/chimes.mp3';
-		}
-	};
-	effects._init();
-	//effects.play('chimes');
+
 
 	/*
 	 * extra code

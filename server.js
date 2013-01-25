@@ -205,7 +205,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 		socket.broadcast.emit('command', command);
 
 		// mousemove以外をログとして保存
-		if (command.type !== 'mouseMove') {
+		if (command.type != 'mouseMove') {
 			storeCommand(command);
 		}
 
@@ -603,7 +603,7 @@ var sockets = io.of('/2').on('connection', function(socket) {
 		socket.broadcast.emit('command', command);
 
 		// mousemove以外をログとして保存
-		if (command.type !== 'mouseMove') {
+		if (command.type != 'mouseMove') {
 			storeCommand(command);
 		}
 
@@ -785,7 +785,6 @@ var sockets = io.of('/2').on('connection', function(socket) {
 				});
 
 		}
-		socket.emit('id_controle',command);
 
 		if(command.type == "next")
 		{
@@ -876,7 +875,6 @@ var sockets = io.of('/2').on('connection', function(socket) {
 			  });
 
 		}
-		socket.emit('id_controle',command);
 	});
 
 	socket.on('disconnect', function() {
