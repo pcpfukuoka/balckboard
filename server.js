@@ -91,7 +91,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 
 	socket.emit('init', commands1);
 	function storeCommand(command) {
-		if (commands1.length === commands_MAX) {
+		if (commands1.length == commands_MAX) {
 			commands1.shift();
 		}
 		commands1.push(command);
@@ -197,7 +197,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 		command.sessionId = socket.id;
 
 		// clearならば
-		if (command.type === 'clear') {
+		if (command.type == 'clear') {
 			commands1 = [];
 
 		}
@@ -489,7 +489,7 @@ var sockets = io.of('/2').on('connection', function(socket) {
 
 	socket.emit('init', commands2);
 	function storeCommand(command) {
-		if (commands2.length === commands_MAX) {
+		if (commands2.length == commands_MAX) {
 			commands2.shift();
 		}
 		commands2.push(command);
@@ -595,7 +595,7 @@ var sockets = io.of('/2').on('connection', function(socket) {
 		command.sessionId = socket.id;
 
 		// clearならば
-		if (command.type === 'clear') {
+		if (command.type == 'clear') {
 			commands2 = [];
 
 		}
