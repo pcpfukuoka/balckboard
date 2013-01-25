@@ -91,7 +91,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 
 	socket.emit('init', commands1);
 	function storeCommand(command) {
-		if (commands1.length == commands_MAX) {
+		if (commands1.length == COMMANDS_MAX) {
 			commands1.shift();
 		}
 		commands1.push(command);
@@ -489,7 +489,7 @@ var sockets = io.of('/2').on('connection', function(socket) {
 
 	socket.emit('init', commands2);
 	function storeCommand(command) {
-		if (commands2.length == commands_MAX) {
+		if (commands2.length == COMMANDS_MAX) {
 			commands2.shift();
 		}
 		commands2.push(command);
