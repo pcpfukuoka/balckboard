@@ -72,7 +72,7 @@ onAppReady(function(param) {
 
 		//クラステーブルを生成する処理
 		$.post('http://49.212.201.99/pcp2012/lib/student_list.php', {
-	        id : group_seq
+	        id : room
 	    },
 	    //戻り値として、user_seq受け取る
 	    function(rs) {
