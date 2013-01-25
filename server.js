@@ -36,6 +36,7 @@ var commands = [];
 
 var sockets = io.of('/1').on('connection', function(socket) {
 
+	console.log("1111111111111");
 	var commands = [];
 	var page_move = 0;
 	socket.emit('init', commands);
@@ -437,6 +438,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 });
 
 var sockets = io.of('/2').on('connection', function(socket) {
+	console.log("222222222222");
 	var commands = [];
 	var page_move = 0;
 	socket.emit('init', commands);
