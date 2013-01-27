@@ -506,7 +506,6 @@ var sockets = io.of('/2').on('connection', function(socket) {
 			  database : 'pcp2012'    //DB名
 			});
 
-
 		//end_flagを１にして使用させないようにする
 		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.group_seq+'" AND subject_seq = "'+command.subject+'" AND end_flg="1";';
 
@@ -905,7 +904,6 @@ var sockets = io.of('/3').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
 
 		//end_flagを１にして使用させないようにする
 		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.group_seq+'" AND subject_seq = "'+command.subject+'" AND end_flg="1";';
@@ -3299,10 +3297,9 @@ var sockets = io.of('/9').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
+		//現在のページを保存する
 		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.group_seq+'" AND subject_seq = "'+command.subject+'" AND end_flg="1";';
+		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.y.subject+'" AND end_flg="1";';
 
 		var query = connection.query(sql);
 		query

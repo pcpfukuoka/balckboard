@@ -427,7 +427,7 @@ onAppReady(function(param) {
 			{
 				end_class({
 					type : "end_class",
-					param : param.end.y
+					param : param
 				});
 			}
 		},
@@ -785,14 +785,18 @@ onAppReady(function(param) {
 	$("#end").click(function(e){
 		//授業終了ボタンをクリック
 
+		//divに設定されている背景画像を保存する処理
+		var back = document.getElementById("chalkboard");
+		div_url = back.style.backgroundImage;
+
 		COMMAND_OPS.end_class({
 			color : color,
 			start : {
-				x : 1000,
-				y : 1000
+				x : now_moving,
+				y : div_url
 			},
 			end : {
-				x : 1000,
+				x : canvas.toDataURL(),
 				y : seq_array
 			}
 		}, true);
@@ -1014,7 +1018,7 @@ onAppReady(function(param) {
 			socket.emit('command', command);
 		};
 		end_class = function(command) {
-			socket.emit('end_class', command.param);
+			socket.emit('end_class', command);
 		};
 		white_par = function(command){
 			socket.emit('white_par',command);
