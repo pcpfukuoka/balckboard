@@ -786,6 +786,8 @@ onAppReady(function(param) {
 		//授業終了ボタンをクリック
 
 		//divに設定されている背景画像を保存する処理
+		var canvas = document.getElementById("canvas");
+		var  can = canvas.getContext('2d');
 		var back = document.getElementById("chalkboard");
 		div_url = back.style.backgroundImage;
 
