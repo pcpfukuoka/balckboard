@@ -53,7 +53,7 @@ onAppReady(function(param) {
 				+'</tr>'
 				+'<tr>'
 				+'<td><li><div class="color" data-color="white"></div></td>'
-				+'<td><div id="eraser"></div></td>'
+				+'<td><div id="erased"></div></td>'
 				+'</tr>'
 				+'</table>'
 				+'</ul>';
