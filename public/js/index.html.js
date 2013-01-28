@@ -36,10 +36,6 @@ onAppReady(function(param) {
 
 	/* 入室した際に作成者か閲覧者かのflag*/
 	var flg=GetCookie('flg');
-	if(flg!=true){
-		flg=0;
-	}
-
 	var process=flg;
 
 	/* 書き込みflagか書き込み不可flagを入れる */
