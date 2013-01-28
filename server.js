@@ -121,7 +121,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 			  var aaa= max_page-page_move1 -1;
 			  var now_page = max_page -aaa;
 			  //現在のページを保存するＳＱＬ
-			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND ;';
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
 			  var query2 = connection.query(save_sql);
 			  	query2
 			  	//エラーログ
