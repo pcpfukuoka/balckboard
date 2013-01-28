@@ -36,13 +36,14 @@ onAppReady(function(param) {
 
 	/* 入室した際に作成者か閲覧者かのflag*/
 	var flg=GetCookie('flg');
+
 	var process=flg;
 
 	/* 書き込みflagか書き込み不可flagを入れる */
 	var draw_per=flg;
 
 	var color_='<ul id="colorPalette">'
-				+'<table border="1">'
+				+'<table border="0">'
 				+'<tr>'
 				+'<td><li><div class="color" data-color="pink"></div></td>'
 				+'<td><li><div class="color" data-color="yellow"></div></td>'
@@ -53,7 +54,7 @@ onAppReady(function(param) {
 				+'</tr>'
 				+'<tr>'
 				+'<td><li><div class="color" data-color="white"></div></td>'
-				+'<td><div id="erased"></div></td>'
+				+'<td><div id="eraser"></div></td>'
 				+'</tr>'
 				+'</table>'
 				+'</ul>';

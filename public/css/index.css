@@ -100,7 +100,7 @@ html, body, #container {
 	left: 600px;
 	width: 104px;
 	height: 47px;
-	background: url(../images/eraser.jpg) no-repeat;
+	background: url(../images/eraser_.png) no-repeat;
 }
 .userPointer {
 	position: absolute;
