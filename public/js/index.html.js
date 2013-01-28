@@ -62,7 +62,7 @@ onAppReady(function(param) {
 
 
 	/* flgがtrueの場合、buttonを表示させる */
-	if(flg){
+	if(flg==true){
 		var e='<input id="all" value="全クリア" type="button">'
 		+'<input id="test" value="テスト(戻る)" type="button">'
  		+'<input id="test2" value="テスト（次へ）"type="button">'
