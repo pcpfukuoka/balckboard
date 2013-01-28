@@ -36,6 +36,10 @@ onAppReady(function(param) {
 
 	/* 入室した際に作成者か閲覧者かのflag*/
 	var flg=GetCookie('flg');
+	if(flg!=true){
+		flg=0;
+	}
+
 	var process=flg;
 
 	/* 書き込みflagか書き込み不可flagを入れる */
@@ -451,7 +455,7 @@ onAppReady(function(param) {
 	///////////////////////////////////////////////////////////////////////////////////
 	//各種端末からキャンバス上に筆が下された場合
 	document.addEventListener("touchstart", function(e){
-		if(draw_per){
+		if(draw_per==true){
 			drawing = true;
 			/* 筆を下した座標をprevに格納 */
 			var pos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
@@ -462,7 +466,7 @@ onAppReady(function(param) {
 
 	//キャンバス上に筆が下された場合
 	canvas.mousedown(function(e) {
-		if(draw_per){
+		if(draw_per==true){
 			//描画フラグをtrueにする
 			drawing = true;
 			//キャンバス上の現在位置をposに格納
@@ -479,7 +483,7 @@ onAppReady(function(param) {
 
 	//各種端末上がキャンバス上から筆を離した場合
 	document.addEventListener("touchend", function(e){
-		if(draw_per){
+		if(draw_per==true){
 			drawing = false;
 			e.stopPropagation();
 		}
@@ -487,7 +491,7 @@ onAppReady(function(param) {
 
 	//キャンバス上から筆が離れた場合
 	canvas.mouseup(function(e) {
-		if(draw_per){
+		if(draw_per==true){
 			drawing = false;
 			e.stopPropagation();
 		}
@@ -499,7 +503,7 @@ onAppReady(function(param) {
 
 	//各種端末の座標が移動した場合の処理
 	 document.addEventListener("touchmove", function(e){
-		 if(draw_per){
+		 if(draw_per==true){
 		 	/* 画面をずらさないようにする */
 		 	event.preventDefault();
 		 	/* 動いた位置（現在位置）をcurPosに格納 */
@@ -554,7 +558,7 @@ onAppReady(function(param) {
 
 	//カーソルの現在地が変わった場合
 	canvas.mousemove(function(e) {
-		if(draw_per){
+		if(draw_per==true){
 			//動いた位置をcurPosに格納
 			var curPos = posOnCanvas(e.pageX, e.pageY);
 			//動いた位置を最新の位置であるcurrentに格納
@@ -605,7 +609,7 @@ onAppReady(function(param) {
 
 	//画面上から筆が上げられた場合
 	$(document).mouseup(function(e) {
-		if(draw_per){
+		if(draw_per==true){
 			//描画フラグをfalseにする
 			drawing = false;
 			$("#colorPalette .color").last().click();
@@ -862,7 +866,7 @@ onAppReady(function(param) {
 			}
 			fn(command.param);
 
-			if(process){
+			if(process==true){
 				setTimeout(example, 1000);
 				function example(){
 					/* 有効に戻すボタンを選択 */
@@ -995,8 +999,8 @@ onAppReady(function(param) {
 
 			if(user_seq==par_user && draw_per==true){
 				//描けなくする
-				draw_per=false;
-			}else if(user_seq==par_user && draw_per==false){
+				draw_per=0;
+			}else if(user_seq==par_user && draw_per==0){
 				//描けるようにする
 				draw_per=true;
 			}
