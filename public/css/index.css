@@ -96,10 +96,10 @@ html, body, #container {
 }
 #eraser {
 	position: absolute;
-	top: 472px;
-	left: 600px;
-	width: 104px;
-	height: 47px;
+	top: 550px;
+	left: 165px;
+	width: 53px;
+	height: 24px;
 	background: url(../images/eraser_.png) no-repeat;
 }
 .userPointer {

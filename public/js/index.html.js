@@ -54,10 +54,11 @@ onAppReady(function(param) {
 				+'</tr>'
 				+'<tr>'
 				+'<td><li><div class="color" data-color="white"></div></td>'
-				+'<td><div id="eraser"></div></td>'
+				+'<td></td>'
 				+'</tr>'
 				+'</table>'
-				+'</ul>';
+				+'</ul>'
+				+'<div id="eraser"></div>';
 	$("body").append(color_);
 
 
