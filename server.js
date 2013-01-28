@@ -108,6 +108,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 			});
 		//現在のページ数をとってくるＳＱＬ
 		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
 		  //エラーログ
@@ -131,7 +132,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 			  	//結果用
 			  	.on('result', function(rows) {
 			  	//end_flagを１にして使用させないようにする
-					var flag_change = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
 					var query3 = connection.query(flag_change);
 					query3
 					 //エラーログ
