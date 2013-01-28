@@ -36,6 +36,7 @@ onAppReady(function(param) {
 
 	/* 入室した際に作成者か閲覧者かのflag*/
 	var flg=GetCookie('flg');
+	var process=flg;
 
 	/* 書き込みflagか書き込み不可flagを入れる */
 	var draw_per=flg;
@@ -861,21 +862,22 @@ onAppReady(function(param) {
 			}
 			fn(command.param);
 
-			setTimeout(example, 1000);
-			function example(){
-				/* 有効に戻すボタンを選択 */
-				var turn=document.getElementById("test");
-				var next=document.getElementById("test2");
-				var new_=document.getElementById("test3");
-				var lesson_end =document.getElementById("end");
+			if(process){
+				setTimeout(example, 1000);
+				function example(){
+					/* 有効に戻すボタンを選択 */
+					var turn=document.getElementById("test");
+					var next=document.getElementById("test2");
+					var new_=document.getElementById("test3");
+					var lesson_end =document.getElementById("end");
 
-				/* 有効にする処理 */
-				turn.disabled=false;
-				next.disabled=false;
-				new_.disabled=false;
-				lesson_end.disabled=false;
+					/* 有効にする処理 */
+					turn.disabled=false;
+					next.disabled=false;
+					new_.disabled=false;
+					lesson_end.disabled=false;
+				}
 			}
-
 		}
 
 		socket.on('page_jump',function(){
