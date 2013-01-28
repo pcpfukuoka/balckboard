@@ -528,33 +528,60 @@ var sockets = io.of('/2').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move2 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -903,7 +930,6 @@ var sockets = io.of('/2').on('connection', function(socket) {
 		socket.broadcast.emit('leave', socket.id);
 	});
 });
-
 //group_seqが３番目の処理
 var sockets = io.of('/3').on('connection', function(socket) {
 
@@ -924,33 +950,60 @@ var sockets = io.of('/3').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move3 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -1319,34 +1372,60 @@ var sockets = io.of('/4').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move4 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -1715,34 +1794,60 @@ var sockets = io.of('/5').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move5 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -2111,34 +2216,60 @@ var sockets = io.of('/6').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move6 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -2487,7 +2618,7 @@ var sockets = io.of('/6').on('connection', function(socket) {
 		socket.broadcast.emit('leave', socket.id);
 	});
 });
-//group_seqが７番目の処理
+//group_Seqが７番目の処理
 var sockets = io.of('/7').on('connection', function(socket) {
 
 	socket.emit('init', commands7);
@@ -2507,35 +2638,60 @@ var sockets = io.of('/7').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move7 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -2904,35 +3060,60 @@ var sockets = io.of('/8').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move8 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -3301,33 +3482,60 @@ var sockets = io.of('/9').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-		//現在のページを保存する
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move9 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -3696,34 +3904,60 @@ var sockets = io.of('/10').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move10 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -4072,7 +4306,6 @@ var sockets = io.of('/10').on('connection', function(socket) {
 		socket.broadcast.emit('leave', socket.id);
 	});
 });
-
 //group_seqが１１番目の処理
 var sockets = io.of('/11').on('connection', function(socket) {
 
@@ -4093,34 +4326,60 @@ var sockets = io.of('/11').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move11 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -4469,7 +4728,7 @@ var sockets = io.of('/11').on('connection', function(socket) {
 		socket.broadcast.emit('leave', socket.id);
 	});
 });
-//group_seqが１２の処理
+//group_Seqが１２番目の処理
 var sockets = io.of('/12').on('connection', function(socket) {
 
 	socket.emit('init', commands12);
@@ -4489,34 +4748,60 @@ var sockets = io.of('/12').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move12 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -4885,34 +5170,60 @@ var sockets = io.of('/13').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move13 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -5261,7 +5572,7 @@ var sockets = io.of('/13').on('connection', function(socket) {
 		socket.broadcast.emit('leave', socket.id);
 	});
 });
-//group_seqが１４番目の処理
+//group_seqが１４の処理
 var sockets = io.of('/14').on('connection', function(socket) {
 
 	socket.emit('init', commands14);
@@ -5281,34 +5592,60 @@ var sockets = io.of('/14').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move14 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -5677,34 +6014,60 @@ var sockets = io.of('/15').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move15 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -6073,33 +6436,60 @@ var sockets = io.of('/16').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move16 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -6468,34 +6858,60 @@ var sockets = io.of('/17').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
-
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move17 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
@@ -6864,35 +7280,60 @@ var sockets = io.of('/18').on('connection', function(socket) {
 			  password : 'pcp2012',  //パスワード
 			  database : 'pcp2012'    //DB名
 			});
-
-
-		//end_flagを１にして使用させないようにする
-		var sql = 'UPDATE board SET end_flg = "2",canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+		//現在のページ数をとってくるＳＱＬ
+		var sql = 'SELECT page_num FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND end_flg= "1" AND subject_seq ="'+command.param.end.y.subject+'" ORDER BY page_num DESC LIMIT 1;';
+		socket.emit('log_test',sql);
 		var query = connection.query(sql);
 		query
-		 //エラーログ
+		  //エラーログ
 		  .on('error', function(err) {
 		    console.log('err is: ', err );
 		  })
 		  //結果用
 		  .on('result', function(rows) {
-			console.log("aaa");
-		  })
-		  //終了ログ
-		  .on('end', function() {
-		    console.log('end');
-		    connection.end();
+			  //現在のページ数を格納
+			  var max_page = rows['page_num'];
+			  var aaa= max_page-page_move18 -1;
+			  var now_page = max_page -aaa;
+			  //現在のページを保存するＳＱＬ
+			  var save_sql= 'UPDATE board SET canvas_url="'+command.param.end.x+'", div_url="'+command.param.start.y+'" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1" AND page_num = "'+now_page+'";';
+			  var query2 = connection.query(save_sql);
+			  	query2
+			  	//エラーログ
+			  	.on('error', function(err) {
+			  		console.log('err is: ', err );
+			  	})
+			  	//結果用
+			  	.on('result', function(rows) {
+			  	//end_flagを１にして使用させないようにする
+					var flag_change = 'UPDATE board SET end_flg = "2" WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND end_flg="1";';
+					var query3 = connection.query(flag_change);
+					query3
+					 //エラーログ
+					  .on('error', function(err) {
+					    console.log('err is: ', err );
+					  })
+					  //結果用
+					  .on('result', function(rows) {
+					  })
+					  //終了ログ
+					  .on('end', function() {
+					    console.log('end');
+					    connection.end();
+					  });
+					socket.broadcast.emit('page_jump',command);
+					socket.emit('page_jump',command);
+			  	})
+			  	//終了ログ
+			  	.on('end', function() {
+			  		console.log('end');
+			  	});
 		  });
-		socket.broadcast.emit('page_jump',command);
-		socket.emit('page_jump',command);
-
-
 	});
 	//描画許可を出す際の処理
 	socket.on('white_par', function(command){
 		//描く事が許可されたuser_seq
 		var par_user = command.param;
-
 		socket.broadcast.emit('white_par',par_user);
 
 	});
