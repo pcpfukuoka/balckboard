@@ -882,7 +882,8 @@ onAppReady(function(param) {
 		}
 
 		socket.on('page_jump',function(){
-			document.location = "http://49.212.201.99/pcp2012/index.php";
+			window.close();
+			//document.location = "http://49.212.201.99/pcp2012/index.php";
 		});
 		socket.on('connect', function(commands) {
 			$('#loadingMessage').hide();
