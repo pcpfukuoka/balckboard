@@ -64,12 +64,13 @@ onAppReady(function(param) {
 
 	/* flgがtrueの場合、buttonを表示させる */
 	if(flg==1){
-		var e='<input id="all" value="全クリア" type="button">'
-		+'<input class="button4" id="test" value="戻る" type="button">'
- 		+'<input class="button4 id="test2" value="次へ"type="button">'
- 		+'<input class="button4 id="test3" value="新規作成"type="button">'
- 		+'<br>'
- 		+'<input class="button4 id="end" value="授業終了"type="button">';
+		var e= '<table>'
+		+'<tr><td><input class="button4" id="all" value="全クリア" type="button"></td>'
+		+'<td><input class="button4" id="test" value="戻る" type="button"></td>'
+ 		+'<td><input class="button4 id="test2" value="次へ"type="button"></td>'
+ 		+'<td><input class="button4 id="test3" value="新規作成"type="button"></td>'
+ 		+'<td><input class="button4 id="end" value="授業終了"type="button"></td>'
+ 		+'</tr></table>';
 		$("#button").append(e);
 
 		//クラステーブルを生成する処理
