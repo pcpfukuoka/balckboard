@@ -1,0 +1,364 @@
+@CHARSET "UTF-8";
+
+/*青　メイン画面　上用*/
+.button1{
+	line-height:24px;
+	text-align:center;
+	font-size:18px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#87CEFA;
+	text-decoration:none;
+	border-color:#6495ED;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	border-radius:5px;
+	width:150px;
+}
+
+/*オンマウスのとき*/
+.button1:hover {
+	color: #000000;
+	background-color: #4169E1;  /* 背景色 */
+	border: inset 3px #6495ED;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:150px;
+
+
+}
+.button1:active {
+	color: #000000;
+}
+.button1:visited {
+	color:#000000;
+}
+
+/*ピンク 　権限管理メイン用*/
+.button2{
+	line-height:24px;
+	text-align:center;
+	font-size:15px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#FFC0CB;
+	text-decoration:none;
+	border-color:#FF69B4;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	width:130px;
+	border-radius:5px;
+
+}
+
+/*オンマウスのとき*/
+.button2:hover {
+	color: #000000;
+	background-color: #FF5192;  /* 背景色 */
+	border: inset 3px #FF0461;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:130px;
+}
+
+.button2:active {
+	color: #000000;
+}
+
+.button2:visited {
+	color:#000000;
+}
+
+/*オレンジ*/
+.button3{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#FFA500;
+	text-decoration:none;
+	border-color:#ff6600;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	border-radius:5px;
+	width:100px;
+
+}
+
+
+
+/* オンマウスのとき */
+.button3:hover {
+	color: #000000;
+	background-color: #ff6600;  /* 背景色 */
+	border: inset 3px #ff6600;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:100px;
+
+}
+
+.button3:active {
+	color: #000000;
+}
+
+.button3:visited {
+	color:#000000;
+	width:100px;
+}
+
+/* ロングボタン  オレンジ　権限管理メイン用*/
+.longbutton{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#FFA500;
+	text-decoration:none;
+	border-color:#ff6600;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	border-radius:5px;
+	width:120px;
+}
+
+/*オンマウスのとき*/
+.longbutton:hover {
+	color: #000000;
+	background-color: #ff6600;  /* 背景色 */
+	border: inset 3px #ff6600;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:120px;
+
+
+}
+/* クリックしてから離すまでのスタイル */
+.longbutton:active {
+	color: #000000;
+}
+/* 訪問済みリンクのスタイル
+.longbutton.visited {
+	color:#000000;
+}
+*/
+
+/* 灰色 */
+.button4{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#999999;
+	text-decoration:none;
+	border-color:#666666;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	width:100px;
+	border-radius:5px;
+}
+
+.button4:hover {
+	color: #000000;
+	background-color: #999999;  /* 背景色 */
+	border: inset 3px #9999cc;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:100px;
+}
+.button4:active {
+	color: #000000;
+}
+.button4:visited {
+	color: #000000;
+}
+
+
+
+/* 小さい灰色  */
+.minbutton{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#999999;
+	text-decoration:none;
+	border-color:#666666;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	width:70px;
+	border-radius:5px;
+}
+
+.minbutton:hover {
+	color: #000000;
+	background-color: #999999;  /* 背景色 */
+	border: inset 3px #9999cc;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:70px;
+}
+.minbutton:active {
+	color: #000000;
+}
+.minbutton:visited {
+	color: #000000;
+}
+
+/*座席表のボタン*/
+/*オレンジ*/
+.button5{
+	line-height:0px;
+	text-align:center;
+	font-size:10px;
+	font-weight:bold;
+	padding:0px;
+	background-color:#FFA500;
+	text-decoration:none;
+	border-color:#ff6600;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	border-radius:5px;
+	width:30px;
+	height:20px;
+
+}
+
+/* オンマウスのとき */
+.button5:hover {
+	color: #000000;
+	background-color: #ff6600;  /* 背景色 */
+	border: inset 3px #ff6600;  /* 枠の色 */
+	margin: 0px;
+	padding: 0px;
+	width:30px;
+
+}
+
+.button5:active {
+	color: #000000;
+}
+
+.button5:visited {
+	color:#000000;
+	width:50px;
+}
+
+/* 薄い灰色 */
+.button7{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#E6E6FA;
+	text-decoration:none;
+	border-color:#666666;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	width:70px;
+	border-radius:5px;
+}
+
+.button7:hover {
+	color: #000000;
+	background-color: #999999;  /* 背景色 */
+	border: inset 3px #9999cc;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:70px;
+}
+.button7:active {
+	color: #000000;
+}
+.button7:visited {
+	color: #000000;
+}
+
+/* 薄い灰色2 */
+.button8{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#E6E6FA;
+	text-decoration:none;
+	border-color:#666666;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	width:100px;
+	border-radius:5px;
+}
+
+.button8:hover {
+	color: #000000;
+	background-color: #999999;  /* 背景色 */
+	border: inset 3px #9999cc;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:100px;
+}
+.button8:active {
+	color: #000000;
+}
+.button8:visited {
+	color: #000000;
+}
+
+/* 明るい緑 */
+.button9{
+	line-height:24px;
+	text-align:center;
+	font-size:12px;
+	font-weight:bold;
+	padding:4px;
+	background-color:#CCFF66;
+	text-decoration:none;
+	border-color:#008000;
+	border-width:3px;
+	border-style:outset;
+	color:#000000;
+	display:block;
+	width:100px;
+	border-radius:5px;
+}
+
+.button9:hover {
+	color: #000000;
+	background-color: #00FF00;  /* 背景色 */
+	border: inset 3px #008000;  /* 枠の色 */
+	margin: 0px;
+	padding: 4px;
+	width:100px;
+}
+.button9:active {
+	color: #000000;
+}
+.button9:visited {
+	color: #000000;
+}

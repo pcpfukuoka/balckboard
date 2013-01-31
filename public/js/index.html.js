@@ -65,11 +65,11 @@ onAppReady(function(param) {
 	/* flgがtrueの場合、buttonを表示させる */
 	if(flg==1){
 		var e='<input id="all" value="全クリア" type="button">'
-		+'<input id="test" value="戻る" type="button">'
- 		+'<input id="test2" value="次へ"type="button">'
- 		+'<input id="test3" value="新規作成"type="button">'
+		+'<input class="button4" id="test" value="戻る" type="button">'
+ 		+'<input class="button4 id="test2" value="次へ"type="button">'
+ 		+'<input class="button4 id="test3" value="新規作成"type="button">'
  		+'<br>'
- 		+'<input id="end" value="授業終了"type="button">';
+ 		+'<input class="button4 id="end" value="授業終了"type="button">';
 		$("#button").append(e);
 
 		//クラステーブルを生成する処理
