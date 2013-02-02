@@ -19,12 +19,12 @@ html, body, #container {
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
-	width: 800px;
+	width: 900px;
 }
 #chalkboard {
 	position: relative;
-	width: 780px;
-	height: 540px;
+	width: 900px;
+	height: 700px;
 	padding-top: 20px;
 	background-repeat:no-repeat;
 
