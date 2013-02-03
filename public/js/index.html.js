@@ -94,7 +94,7 @@ onAppReady(function(param) {
 	    	var seq_cols;
 	    	var name_cols;
 
-	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 98%; top: 45%">';
+	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 99%; top: 45%">';
 
 	    	for(i =0;i<row_max;i++)
 	    	{
@@ -113,7 +113,7 @@ onAppReady(function(param) {
 	    			else
 	    			{
 	    				//通常の座席の処理
-	    				e=e+'<td><img src="../images/kokuban.jpg" data-id="'+seq_cols[j]+'"class="white_par" width="20" height="20"></td>';
+	    				e=e+'<td><img src="../images/kokuban.jpg" data-id="'+seq_cols[j]+'"class="white_par" width="30" height="30"></td>';
 	    				//e=e+'<td><input type="button" data-id="'+seq_cols[j]+'"class="white_par" value="'+name_cols[j]+'"></td>';
 	    			}
 	    		}
