@@ -94,7 +94,7 @@ onAppReady(function(param) {
 	    	var seq_cols;
 	    	var name_cols;
 
-	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 99%; top: 45%">';
+	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position:relative;; margin-left: auto;top: 45%">';
 
 	    	for(i =0;i<row_max;i++)
 	    	{
