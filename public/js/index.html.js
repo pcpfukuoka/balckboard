@@ -826,7 +826,7 @@ onAppReady(function(param) {
 	$("#autho").click(function(e){
 		//権限をクリック
 
-		window.open('http://49.212.201.99/pcp2012/Lesson/student_autho.php','student_autho');
+		window.open('http://49.212.201.99/pcp2012/Lesson/student_autho.php','student_autho', 'width=400, height=400, menubar=no, toolbar=no, scrollbars=no');
 	});
 
 	/*
