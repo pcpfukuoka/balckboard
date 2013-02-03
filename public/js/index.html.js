@@ -96,12 +96,6 @@ onAppReady(function(param) {
 
 	    	var  e='<table border="4" align="center" bgcolor="#FFE7CE" bordercolor="#DC143C" style="position: absolute; left: 98%; top: 45%">';
 
-	    	//１列目（教卓を追加する処理）
-	    	e=e +"<tr>"
-	    		+"<td class='sample'width='100'height='10'></td>"
-	    		+"<td class='sample'width='100'height='10'>教卓</td>"
-	    		+"<td class='sample'width='100'height='10'></td>"
-	    		+"</tr>";
 	    	for(i =0;i<row_max;i++)
 	    	{
 	    		e=e+'<tr>';
