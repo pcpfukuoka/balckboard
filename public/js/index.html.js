@@ -119,7 +119,8 @@ onAppReady(function(param) {
 	    			else
 	    			{
 	    				//通常の座席の処理
-	    				e=e+'<td><input type="button" data-id="'+seq_cols[j]+'"class="white_par" value="'+name_cols[j]+'"></td>';
+	    				e=e+'<td><img src="../images/kokuban.jpg" data-id="'+seq_cols[j]+'"class="white_par" width="20" height="20"></td>';
+	    				//e=e+'<td><input type="button" data-id="'+seq_cols[j]+'"class="white_par" value="'+name_cols[j]+'"></td>';
 	    			}
 	    		}
 	    		e=e+'</tr>';
