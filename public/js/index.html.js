@@ -825,7 +825,7 @@ onAppReady(function(param) {
 
 	$("#autho").click(function(e){
 		//権限をクリック
-		window.open('../php/student_autho_js.js','student_autho');
+		window.open('../php/student_autho.php','student_autho');
 	});
 
 	/*
