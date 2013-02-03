@@ -17,7 +17,7 @@ html, body, #container {
 }
 #chalkboardAndOthers {
 	position: relative;
-
+	margin-right: auto;
 	margin-left: auto;
 	width: 900px;
 }
