@@ -825,7 +825,8 @@ onAppReady(function(param) {
 
 	$("#autho").click(function(e){
 		//権限をクリック
-		window.open('http://49.212.201.99:3000/public/php/student_autho.php','student_autho');
+		$("#glayLayer").show();
+	    $("#overLayer").show();
 	});
 
 	/*
