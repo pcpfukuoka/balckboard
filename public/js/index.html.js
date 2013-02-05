@@ -30,6 +30,7 @@ onAppReady(function(param) {
 	var subject_seq=GetCookie('subject_seq');
 	var user_seq=GetCookie('user_seq');
 	var room=GetCookie('room');
+	var time_table=GetCookie('time_table');
 
 	var seq_array={user:user_seq,subject:subject_seq,group_seq:room};
 	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
