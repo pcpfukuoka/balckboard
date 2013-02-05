@@ -464,7 +464,7 @@ var sockets = io.of('/1').on('connection', function(socket) {
 						 var aaa= max_page-page_move1 -1;
 						 now_page = max_page -aaa;
 
-						 var sql3 = 'SELECT * FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND time_table="'command.param.end.y.time_table'" AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND page_num = "'+ now_page + '";';
+						 var sql3 = 'SELECT * FROM board WHERE end_flg="1" AND date = DATE_FORMAT(now(),"%Y-%m-%d") AND time_table="'+command.param.end.y.time_table+'" AND class_seq = "'+command.param.end.y.group_seq+'" AND subject_seq = "'+command.param.end.y.subject+'" AND page_num = "'+ now_page + '";';
 
 						 var query3 = connection.query(sql3);
 						 query3
