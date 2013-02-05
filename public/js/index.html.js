@@ -32,7 +32,7 @@ onAppReady(function(param) {
 	var room=GetCookie('room');
 	var time_table=GetCookie('time_table');
 
-	var seq_array={user:user_seq,subject:subject_seq,group_seq:room};
+	var seq_array={user:user_seq,subject:subject_seq,group_seq:room,time_table:time_table};
 	$("body").append('<input type="hidden"value='+user_seq+' id="user">');
 
 	/* 入室した際に作成者か閲覧者かのflag*/
