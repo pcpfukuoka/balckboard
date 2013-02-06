@@ -201,7 +201,6 @@ var sockets = io.of('/1').on('connection', function(socket) {
 
 
 			  var sql2 = 'SELECT div_url FROM board WHERE date = DATE_FORMAT(now(),"%Y-%m-%d") AND end_flg= "1" AND time_table="'+command.param.seq_array.time_table+'"AND class_seq = "'+command.param.seq_array.group_seq+'" AND subject_seq ="'+command.param.seq_array.subject+'"AND page_num = ' + now_page + ';';
-			  console.log(sql2);
 			  var query2 = connection.query(sql2);
 			  	query2
 			  	//エラーログ
