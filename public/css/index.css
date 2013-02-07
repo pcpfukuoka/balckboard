@@ -2,6 +2,13 @@ html, body, #container {
 	width: 100%;
 	height: 100%;
 }
+
+#student_list {
+	position:absolute;
+	left:10px;
+	top:300px;
+}
+
 #container {
 	background: url(../images/bg.jpg) repeat-x;
 	overflow: hidden;
@@ -20,6 +27,7 @@ html, body, #container {
 	margin-left: auto;
 	width: 900px;
 }
+
 #chalkboard {
 	position: relative;
 	width: 900px;
