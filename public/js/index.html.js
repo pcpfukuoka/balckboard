@@ -116,7 +116,7 @@ onAppReady(function(param) {
 	    				//通常の座席の処理
 	    				//e=e+'<td><img src="../images/kokuban.jpg" data-id="'+seq_cols[j]+'"class="white_par" width="35" height="35"></td>';
 	    				//e=e+'<td><input type="button" data-id="'+seq_cols[j]+'"class="white_par" value="'+name_cols[j]+'"></td>';
-	    				e=e+'<td><span class="white_par" data-id="'+seq_cols[j]+'">'+name_cols[j]+'</span></td>';
+	    				e=e+'<td><span class="white_par" data-id="'+seq_cols[j]+'"><label>'+name_cols[j]+'</label></span></td>';
 	    			}
 	    		}
 	    		e=e+'</tr>';
