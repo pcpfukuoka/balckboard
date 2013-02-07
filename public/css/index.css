@@ -3,7 +3,7 @@ html, body, #container {
 	height: 100%;
 }
 
-#student_list {
+#student_table {
 	position:absolute;
 	left:10px;
 	top:300px;
