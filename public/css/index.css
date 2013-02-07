@@ -31,9 +31,9 @@ html, body, #container {
 #chalkboard {
 	position: relative;
 	width: 900px;
-	height: 680px;
+	height: 700px;
 	padding-top: 20px;
-	background-repeat:no-repeat;
+	background-repeat : no-repeat;
 
 }
 #canvas {
