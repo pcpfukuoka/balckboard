@@ -381,12 +381,13 @@ onAppReady(function(param) {
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
 
+
 				/* divのＵＲＬの変更 */
 				var div = document.getElementById("chalkboard");
-				console.log(param.end.x);
-				div.removeAttribute("background");
-				div.setAttribute("background",param.end.x);
-				div.setAttribute("background-repeat", 'no-repeat');
+				div.style.background = param.end.x;
+
+
+
 
 				/* canvasに画像の描画 */
  				var img1 = new Image();
@@ -908,12 +909,7 @@ onAppReady(function(param) {
 		socket.on('enter', function(send){
 			now_moving = send['page_move'];
 			var div = document.getElementById("chalkboard");
-			//div.style.background = send['div_url'];
-
-
-			div.removeAttribute("background");
-			div.setAttribute("background",send['div_url']);
-			div.setAttribute("background-repeat", 'no-repeat');
+			div.style.background = send['div_url'];
 		});
 
 		//現在のページを格納する処理
@@ -1114,5 +1110,6 @@ onAppReady(function(param) {
 		'chime1.mp3', 'chime2.mp3', 'cat.mp3'
 	]
 });
+
 
 
