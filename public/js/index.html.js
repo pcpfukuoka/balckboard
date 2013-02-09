@@ -388,7 +388,6 @@ onAppReady(function(param) {
 		        //黒板をまずなくし、新規で黒板のタグを作成する
 		        var tag='<div id="chalkboard" style="background: '+param.end.x+';background-repeat:no-repeat">'
 		            +'<canvas id="canvas" width="900" height="700" style="cursor: url(http://49.212.201.99:3000/images/pointer_white.cur), pointer;">'
-		            +'Your browser is not supported. Use modern browser (e.g. IE9 or later).'
 		            +'</canvas>'
 		            +'</div>';
 		        $('#chalkboardAndOthers').append(tag);
