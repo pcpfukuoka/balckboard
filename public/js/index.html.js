@@ -383,8 +383,9 @@ onAppReady(function(param) {
 
 				/* divのＵＲＬの変更 */
 				var div = document.getElementById("chalkboard");
-				div.style.background = param.end.x;
-
+				div.removeAttribute("background");
+				div.setAttribute("background",param.end.x);
+				div.setAttribute("background-repeat", 'no-repeat');
 
 				/* canvasに画像の描画 */
  				var img1 = new Image();
