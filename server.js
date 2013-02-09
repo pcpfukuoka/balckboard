@@ -211,7 +211,6 @@ var sockets = io.of('/1').on('connection', function(socket) {
 			  	.on('result', function(rows) {
 			  		var send = new Object();
 			  		send['div_url'] = rows['div_url'];
-			  		send['page_move1'] = page_move1;
 					socket.emit('enter', send);
 
 			  	})

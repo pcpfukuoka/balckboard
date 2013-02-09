@@ -383,10 +383,14 @@ onAppReady(function(param) {
 
 
 				/* divのＵＲＬの変更 */
-				var div = document.getElementById("chalkboard");
-				div.style.background = param.end.x;
-
-
+				$('#chalkboardAndOthers').empty();
+				//黒板をまずなくし、新規で黒板のタグを作成する
+				var tag='<div id="chalkboard" style="background: '+param.end.x+';background-repeat:no-repeat">'
+						+'<canvas id="canvas" width="900" height="700">'
+						+'Your browser is not supported. Use modern browser (e.g. IE9 or later).'
+						+'</canvas>'
+						+'</div>';
+				$('#chalkboardAndOthers').append(tag);
 
 
 				/* canvasに画像の描画 */
