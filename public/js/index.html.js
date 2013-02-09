@@ -385,6 +385,7 @@ onAppReady(function(param) {
 				var div = document.getElementById("chalkboard");
 				div.style.background = param.end.x;
 
+
 				/* canvasに画像の描画 */
  				var img1 = new Image();
 				img1.src = param.start.y;
@@ -906,6 +907,11 @@ onAppReady(function(param) {
 			now_moving = send['page_move'];
 			var div = document.getElementById("chalkboard");
 			div.style.background = send['div_url'];
+
+
+			div.removeAttribute("background-position");
+			div.removeAttribute("background-repeat");
+			div.setAttribute("background-repeat", "no-repeat");
 		});
 
 		//現在のページを格納する処理
