@@ -378,18 +378,16 @@ onAppReady(function(param) {
 			else if(param.start.x == "save")
 			{
 
-				/* divのＵＲＬの変更 */
-				$('#chalkboardAndOthers').empty();
-				//黒板をまずなくし、新規で黒板のタグを作成する
-				var tag='<div id="chalkboard" style="background: '+param.end.x+';background-repeat:no-repeat">'
-						+'<canvas id="canvas" width="900" height="700">'
-						+'Your browser is not supported. Use modern browser (e.g. IE9 or later).'
-						+'</canvas>'
-						+'</div>';
-				$('#chalkboardAndOthers').append(tag);
-
 				var canvas = document.getElementById("canvas");
 				var can = canvas.getContext('2d');
+
+
+				/* divのＵＲＬの変更 */
+				var div = document.getElementById("chalkboard");
+				div.style.background = param.end.x;
+
+
+
 
 				/* canvasに画像の描画 */
  				var img1 = new Image();
@@ -1112,6 +1110,5 @@ onAppReady(function(param) {
 		'chime1.mp3', 'chime2.mp3', 'cat.mp3'
 	]
 });
-
 
 
