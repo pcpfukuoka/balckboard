@@ -378,10 +378,6 @@ onAppReady(function(param) {
 			else if(param.start.x == "save")
 			{
 
-				var canvas = document.getElementById("canvas");
-				var can = canvas.getContext('2d');
-
-
 				/* divのＵＲＬの変更 */
 				$('#chalkboardAndOthers').empty();
 				//黒板をまずなくし、新規で黒板のタグを作成する
@@ -392,6 +388,8 @@ onAppReady(function(param) {
 						+'</div>';
 				$('#chalkboardAndOthers').append(tag);
 
+				var canvas = document.getElementById("canvas");
+				var can = canvas.getContext('2d');
 
 				/* canvasに画像の描画 */
  				var img1 = new Image();
