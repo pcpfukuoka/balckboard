@@ -910,8 +910,8 @@ onAppReady(function(param) {
 
 
 			div.removeAttribute("background-position");
-			div.removeAttribute("background-repeat");
-			div.setAttribute("background-repeat", "no-repeat");
+			div.removeAttribute("backgroundRepeat");
+			div.setAttribute("background-repeat", 'no-repeat');
 		});
 
 		//現在のページを格納する処理
