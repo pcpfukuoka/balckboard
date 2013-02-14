@@ -71,7 +71,6 @@ onAppReady(function(param) {
  		+'<td><input class="button4" id="test2" value="次へ"type="button"></td>'
  		+'<td><input class="button4" id="test3" value="新規作成"type="button"></td>'
  		+'<td><input class="button4" id="end" value="授業終了"type="button"></td>'
- 		+'<td><input class="button4" id="autho" value="権限の付与"type="button"></td>'
  		+'</tr></table>';
 		$("#button").append(e);
 
