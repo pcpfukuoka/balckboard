@@ -499,8 +499,9 @@ onAppReady(function(param) {
 	//各種端末の座標が移動した場合の処理
 	 document.addEventListener("touchmove", function(e){
 		 /* 画面をずらさないようにする */
-		 	event.preventDefault();
+		 	
 		 if(draw_per==1){
+			 event.preventDefault();
 		 	/* 動いた位置（現在位置）をcurPosに格納 */
 		 	var curPos = posOnCanvas(e.touches[0].pageX, e.touches[0].pageY);
 			//動いた位置を最新の位置であるcurrentに格納
